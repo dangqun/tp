@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-
+use think\Request;
 return [
     // +----------------------------------------------------------------------
     // | 应用设置
@@ -143,7 +143,16 @@ return [
     ],
 
     // 视图输出字符串内容替换
-    'view_replace_str'       => [],
+    'view_replace_str'       => [
+        '__PUBLIC__'=>"/tp/public",
+        '__CSS__'=> "/tp/public/css",
+        '__IMG__'=>"/tp/public/image",
+        '__JS__'=>"/tp/public/js",
+        "__APP__"=>"/tp/public/index.php",// http://localhost/tp/public/index.phps
+        "__DOMAIN__"=> Request::instance()->domain(),//http://localhost/
+        "__URL__"=> Request::instance()->domain().Request::instance()->root(),//http://localhost/to/public/index.php
+        "__ADMIN__"=> Request::instance()->domain().Request::instance()->root()."/admin",//http://localhost/tp/public/index.php/admin
+    ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
     'dispatch_error_tmpl'    => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
@@ -227,7 +236,7 @@ return [
     // | 会话设置
     // +----------------------------------------------------------------------
 
-    'session'                => [
+    'sessions'                => [
         'id'             => '',
         // SESSION_ID的提交变量,解决flash上传跨域
         'var_session_id' => '',

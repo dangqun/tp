@@ -14,6 +14,10 @@ use think\Request;
 use think\Session;
 class Base extends Controller
 {
+    /**
+     * ajax请求输出结构
+     * @var array
+     */
     protected $result = [
         'code'=>200,
         'msg'=>'',
@@ -38,16 +42,27 @@ class Base extends Controller
      */
     protected $request = null;
 
+    /**
+     * 全局状态码
+     * @var array
+     */
     protected $status = [];
 
     public function __construct(Request $request = null)
     {
         parent::__construct($request);
-        $this->request = $request::instance();
-        $this->isApi = $this->request->isAjax();
+
+        $this->request = $request::instance();//请求信息赋值
+
+        $this->isApi = $this->request->isAjax();//判断是否为AJAX请求
+
         Session::prefix('dangqun');//设置session作用域
-        $status = require_once (APP_PATH.DS.'status.php');
-        $this->setStatus($status);
+
+        $status = require_once (APP_PATH.DS.'status.php');//引入状态码文件
+
+        $this->setStatus($status);//初始化状态码
+
+        $this->assign('title','党群');//全局标题设置
     }
 
     /**
