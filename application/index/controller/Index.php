@@ -8,7 +8,6 @@ class Index extends Base
 {
     public function index()
     {
-
         return view('index');
     }
 
@@ -29,4 +28,6 @@ class Index extends Base
 
 
     /***************************************************  APIf方法  *********************************************************************/
+
+
 }
