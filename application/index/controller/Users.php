@@ -1,5 +1,6 @@
 <?php
 /**
+ * 用户
  * Created by PhpStorm.
  * User: bin
  * Date: 2019/3/26
@@ -11,7 +12,6 @@ namespace app\index\controller;
 use app\index\controller\Base;
 use think\Db;
 use think\Loader;
-use think\Request;
 class Users extends Base
 {
 
@@ -40,7 +40,6 @@ class Users extends Base
      * 注册
      */
     public function register(){
-        echo $this->setCode();
         return view('register');
     }
 
@@ -59,16 +58,64 @@ class Users extends Base
      * 注册
      */
     public function apiRegister(){
+        $data = [
+            'mobile'=>$this->request->param('mobile'),
+            'password'=>$this->request->param('password'),
+            'repassword'=>$this->request->param('repassword')
+        ];
         $validate = Loader::validate('User');
-        if(!$validate->scene('register')->check($this->request)){
+        if(!$validate->scene('register')->check($data)){
+            $this->result['msg'] = $validate->getError();
             $this->result['error_code'] = 4001;
             $this->output();
             return;
         }
-        $data = [
-            'mobile'=>$this->request['mobile'],
-            'password'=>sha1($this->request['password']),
+        if(!$this->checkCode($this->request->param('mobile'),$this->request->param('code'))){
+            $this->result['msg'] = $this->codeMsg;
+            $this->output();
+            return;
+        }
+        $map = [
+            'mobile'=>$data['mobile']
         ];
+        $user = Loader::model('User');
+        if($user->isExist($map) != null){
+            $this->result['error_code'] = 1003;
+            $this->output();
+            return;
+        }
+        $user->mobile = $data['mobile'];
+        $user->password = sha1($data['password']);
+        $user->user_name = 'bin'.NOW_TIME;
+        $user->bulid_type = 1;
+        $user->create_time = NOW_TIME;
+        $result = $user->save();
+        if(empty($result)){
+            $this->result['error_code'] = 1004;
+            $this->output();
+            return;
+        }
+        $this->result['code'] = 200;
+        $this->result['msg'] = '注册成功!';
+        $this->output();
+    }
+
+    /**
+     * 获取验证码
+     */
+    public function apiGetCode(){
+        $data = ['mobile'=>$this->request->param('mobile')];
+        $validate = Loader::validate('User');
+        if(!$validate->scene('code')->check($data)){
+            $this->result['msg'] = $validate->getError();
+            $this->result['error_code'] = 4001;
+            $this->output();
+            return;
+        }
+        $code = $this->setCode($data['mobile']);
+        $this->result['code'] = 200;
+        $this->result['data'] = $code;
+        $this->output();
     }
 
     /**

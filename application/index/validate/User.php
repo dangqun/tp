@@ -47,12 +47,14 @@ class User extends Validate
             'name','password','token'
         ],//edit只验证name和age
         'register'=>[
-
+            'mobile','password','repassword'
         ],
         'login'=>[
             'mobile','password','repssword','token'
+        ],
+        'code'=>[
+            'mobile'
         ]
-
     ];
 
     /**

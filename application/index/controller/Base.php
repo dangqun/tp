@@ -86,7 +86,11 @@ class Base extends Controller
      */
     protected function output(){
         if(empty($this->result['msg'])){
-            $this->result['msg'] = $this->status[$this->result['error_code']];
+            if($this->result['code'] == 200){
+                $this->result['msg'] = $this->status[$this->result['code']];
+            }else{
+                $this->result['msg'] = isset($this->status[$this->result['error_code']]) ? $this->status[$this->result['error_code']] : '请求成功';
+            }
         }
         return json($this->result)->send();
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * 会话控制器
+ * 会话
  * Created by PhpStorm.
  * User: bin
  * Date: 2019/3/26
