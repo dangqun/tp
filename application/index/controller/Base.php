@@ -48,6 +48,12 @@ class Base extends Controller
      */
     protected $status = [];
 
+    /**
+     * 全局用户详情
+     * @var array
+     */
+    protected $userInfo = [];
+
     public function __construct(Request $request = null)
     {
         parent::__construct($request);
@@ -63,6 +69,11 @@ class Base extends Controller
         $this->setStatus($status);//初始化状态码
 
         $this->assign('title','党群');//全局标题设置
+
+        if(Session::has('user')){
+            $this->setLoginState(true);
+            $this->setUserInfo(Session::get('user'));
+        }
     }
 
 
@@ -125,6 +136,22 @@ class Base extends Controller
     public function setLoginState($loginState)
     {
         $this->loginState = $loginState;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUserInfo()
+    {
+        return $this->userInfo;
+    }
+
+    /**
+     * @param array $userInfo
+     */
+    public function setUserInfo($userInfo)
+    {
+        $this->userInfo = $userInfo;
     }
 
 

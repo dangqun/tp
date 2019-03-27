@@ -17,7 +17,7 @@ class User extends Validate
     protected $rule = [
         'name'=>'require|max:25',
         'email'=>'require|email',
-        'password'=>'require|length:8,12|confirm:repassword',
+        'password'=>'require|length:8,12',
         'repassword'=>'require|confirm:password',
         'mobile'=>'require|length:11|regex:mobile',
         'token'=>'token'
@@ -50,7 +50,7 @@ class User extends Validate
             'mobile','password','repassword'
         ],
         'login'=>[
-            'mobile','password','repssword','token'
+            'mobile','password'
         ],
         'code'=>[
             'mobile'

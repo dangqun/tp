@@ -22,6 +22,9 @@ class sessions extends Base
      * @return \think\response\View
      */
     public function login(){
+        if($this->isLoginState()){
+            $this->redirect('index/Index/index');
+        }
         return view('login');
     }
 
@@ -29,11 +32,14 @@ class sessions extends Base
      * 登录行为
      */
     public function loginAction(){
+        if($this->isLoginState()){
+            $this->result['error_code'] = 1004;
+            $this->output();
+            return;
+        }
         $data = [
-            'mobile'=>$this->request['mobile'],
-            'password'=>$this->request['password'],
-            'repassword'=>$this->request['repassword'],
-            'token'=>$this->request['token']
+            'mobile'=>$this->request->param('mobile'),
+            'password'=>$this->request->param('password')
         ];
         $validate = Loader::validate('User');//加载用户验证类
         if(!$validate->scene('login')->check($data)){//验证失败，返回错误信息
@@ -50,7 +56,7 @@ class sessions extends Base
             $this->output();
             return;
         }
-        if($user['password'] != md5($data['password'])){
+        if($user['password'] != sha1($data['password'])){
             $this->result['error_code'] = 1002;
             $this->output();
             return;

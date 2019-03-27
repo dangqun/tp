@@ -32,7 +32,8 @@ class Users extends Base
     public function show()
     {
         $this->isLogin();
-        $content = Db::table('activity')->field('user_name')->where('')->find();
+        $content = Db::name('user')->field('user_name')->find($this->userInfo['id']);
+        var_dump($content);
         return $this->fetch('show',['name'=>'bin']);
     }
 
