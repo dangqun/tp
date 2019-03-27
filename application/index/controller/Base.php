@@ -19,7 +19,7 @@ class Base extends Controller
      * @var array
      */
     protected $result = [
-        'code'=>200,
+        'code'=>400,
         'msg'=>'',
         'data'=>[]
     ];
@@ -34,7 +34,7 @@ class Base extends Controller
      * 是否登录
      * @var bool
      */
-    protected $isLogin = false;
+    protected $loginState = false;
 
     /**
      * 请求信息
@@ -65,20 +65,29 @@ class Base extends Controller
         $this->assign('title','党群');//全局标题设置
     }
 
+
     /**
      * 是否登录
      */
-    protected function isLogin(){
-        if(Session::has('id')){
-            $this->isLogin = true;
+    public function isLogin($api = false){
+        if($this->isLoginState()){
+            return true;
+        }
+        if($api){//api则输出JSON
+            $this->output();
+        }else{//页面则跳转至登录
+            $this->redirect('Sessions/login');
         }
     }
+
 
     /**
      * 输出
      */
     protected function output(){
-        $this->result['msg'] = $this->status[$this->result['code']];
+        if(empty($this->result['msg'])){
+            $this->result['msg'] = $this->status[$this->result['error_code']];
+        }
         return json($this->result)->send();
     }
 
@@ -97,6 +106,25 @@ class Base extends Controller
     {
         $this->status = $status;
     }
+
+    /**
+     * @return bool
+     */
+    public function isLoginState()
+    {
+        return $this->loginState;
+    }
+
+    /**
+     * @param bool $loginState
+     */
+    public function setLoginState($loginState)
+    {
+        $this->loginState = $loginState;
+    }
+
+
+
 
 
 }

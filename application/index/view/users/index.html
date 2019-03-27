@@ -1,2 +1,127 @@
 {layout name="layouts/default" /}
-index
+<div class="box j-flex j-flex-vtc personal">
+    <div class="flex scroll">
+        <div class="top-bg" id="content">
+        </div>
+        <div style="height: .5rem"></div>
+        <div class="margin-bottom1">
+            <div class="border">
+                <div class="more row-box">
+                    <span class="iconfont iconhuodong font-18" style="color: #f08865;"></span>
+                    <span>已报名活动</span>
+                </div>
+            </div>
+            <div class="border">
+                <div class="more row-box">
+                    <span class="iconfont icondingweiweizhi font-18" style="color: #76d8b1;"></span>
+                    <span>已签到活动</span>
+                </div>
+            </div>
+            <div>
+                <div class="row-box more">
+                    <span class="iconfont iconzuzhi font-18" style="color: #ed637a;"></span>
+                    <span>已加入组织</span>
+                </div>
+            </div>
+        </div>
+        <div class="margin-bottom1">
+            <div class="border">
+                <div class="more row-box">
+                    <span class="iconfont iconguanzhu font-18" style="color: #fbe84e;"></span>
+                    <span>我的关注</span>
+                </div>
+            </div>
+            <div>
+                <div class="more row-box">
+                    <span class="iconfont iconfuli font-18" style="color: #84b1f5;"></span>
+                    <span>兑换记录</span>
+                </div>
+            </div>
+        </div>
+        <div class="margin-bottom1">
+            <div>
+                <div class="row-box more">
+                    <span class="iconfont iconbangzhu font-18" style="color: #d2d2d2;"></span>
+                    <span>帮助中心</span>
+                </div>
+            </div>
+        </div>
+        <div onclick="App.logout();" class="margin-bottom1">
+            <div>
+                <div class="row-box">
+                    <span class="iconfont icontuichu font-18" style="color: #d2d2d2;"></span>
+                    <span>退出登录</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {include file="layouts/__nav"}
+</div>
+<script type="text/html" id="content-tpl">
+    <div style="height: .4rem;"></div>
+    <div style="padding: 0 .3rem">
+        {{# var imgUrl = "./" + d.img }}
+        <div style="width: .85rem;border-radius: .85rem;overflow: hidden;font-size: 0;margin: .05rem"><img src="{{ imgUrl }}"></div>
+        <div class="j-flex j-flex-center">
+            <div class="j-flex j-flex-vtc flex ">
+                <div><input type="text" name="name" value="{{ d.name }}" disabled="disabled" style="padding: 0;background: transparent;font-size: .16rem " onblur="App.enter()"></div>
+                <div class="small-size color-ccc">{{ d.intro || '您还未设置公益宣言哦~' }}</div>
+            </div>
+            <div>
+					<span class="iconfont iconxiugai font-40 green" onclick="App.edit()">
+            </div>
+        </div>
+    </div>
+    <div class="j-flex j-flex-center info-box">
+        <div class="j-flex j-flex-vtc flex j-flex-center">
+            <div class="font-18">{{ d.service }}</div>
+            <div>信用时数</div>
+        </div>
+        <div class="j-flex j-flex-vtc flex j-flex-center">
+            <div class="font-18">100</div>
+            <div>荣誉指数</div>
+        </div>
+        <div class="j-flex j-flex-vtc flex j-flex-center">
+            <div class="font-18">{{ d.score }}</div>
+            <div>公益币数</div>
+        </div>
+        <div class="j-flex j-flex-vtc flex j-flex-center">
+            <div class="font-18">{{ d.ranking }}</div>
+            <div>个人排名</div>
+        </div>
+    </div>
+</script>
+<script src="__PUBLIC__/static/plugin/zepto/zepto.min.js"></script>
+<script src="__PUBLIC__/static/plugin/layui/layui.js"></script>
+<script src="__PUBLIC__/static/plugin/layui/lay/modules/laytpl.js"></script>
+<script src="__PUBLIC__/static/js/base.js"></script>
+<script type="text/javascript">
+    var App={};
+    App.init=function(){
+        $("#nav-mine").addClass("active");
+        Fnajax("?ctl=my&act=api_info",{},function(json){
+            layui.laytpl($("#content-tpl").html()).render(json.data, function(html) {
+                $("#content").html(html);
+            })
+        })
+    }
+
+    App.logout=function(){
+        Fnajax("?ctl=api&act=loginOut",{},function(json){
+            if(json.code==200){
+                location.reload();
+            }
+        })
+    }
+
+    App.edit=function(){
+        $("input[name='name']").removeAttr("disabled");
+        var v=$("input[name='name']").val()
+        $("input[name='name']").val("").focus().val(v);
+    }
+    App.enter=function(){
+        $("input[name='name']").attr("disabled","disabled");
+    }
+    App.init();
+</script>
