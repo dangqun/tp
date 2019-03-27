@@ -16,6 +16,7 @@ use think\Session;
 
 class sessions extends Base
 {
+    use \Code;
 
     /**
      * 登录页面
@@ -73,6 +74,24 @@ class sessions extends Base
     public function logOut(){
         Session::delete('user');//清除缓存
         $this->success('登出成功！','Sessions/login');
+    }
+
+    /**
+     * 获取验证码
+     */
+    public function apiGetCode(){
+        $data = ['mobile'=>$this->request->param('mobile')];
+        $validate = Loader::validate('User');
+        if(!$validate->scene('code')->check($data)){
+            $this->result['msg'] = $validate->getError();
+            $this->result['error_code'] = 4001;
+            $this->output();
+            return;
+        }
+        $code = $this->setCode($data['mobile']);
+        $this->result['code'] = 200;
+        $this->result['data'] = $code;
+        $this->output();
     }
 
 }

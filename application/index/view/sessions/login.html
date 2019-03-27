@@ -83,7 +83,7 @@
         LoginApp.getCode = function (obj) {
             if (/^1[34578]\d{9}$/.test($("input[name='register-phone']").val())) {
                 if ($(obj).html() == "获取验证码") {
-                    Fnajax("?ctl=api&act=getCode", {mobile: $("input[name='register-phone']").val()}, function (json) {
+                    Fnajax("{:url('index/Sessions/apiGetCode')}", {mobile: $("input[name='register-phone']").val()}, function (json) {
                         LoginApp.code = json.data;
                         $(obj).css({"pointer-events": "none", "color": "#ccc"});
                         var time = 60;

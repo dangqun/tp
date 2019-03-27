@@ -33,7 +33,6 @@ class Users extends Base
     {
         $this->isLogin();
         $content = Db::name('user')->field('user_name')->find($this->userInfo['id']);
-        var_dump($content);
         return $this->fetch('show',['name'=>'bin']);
     }
 
@@ -101,23 +100,7 @@ class Users extends Base
         $this->output();
     }
 
-    /**
-     * 获取验证码
-     */
-    public function apiGetCode(){
-        $data = ['mobile'=>$this->request->param('mobile')];
-        $validate = Loader::validate('User');
-        if(!$validate->scene('code')->check($data)){
-            $this->result['msg'] = $validate->getError();
-            $this->result['error_code'] = 4001;
-            $this->output();
-            return;
-        }
-        $code = $this->setCode($data['mobile']);
-        $this->result['code'] = 200;
-        $this->result['data'] = $code;
-        $this->output();
-    }
+
 
     /**
      * 用户详情
