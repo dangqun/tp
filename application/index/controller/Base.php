@@ -54,6 +54,18 @@ class Base extends Controller
      */
     protected $userInfo = [];
 
+    /**
+     * 页码
+     * @var int
+     */
+    protected $page = 1;
+
+    /**
+     * 请求量
+     * @var int
+     */
+    protected $size = 10;
+
     public function __construct(Request $request = null)
     {
         parent::__construct($request);
@@ -74,6 +86,8 @@ class Base extends Controller
             $this->setLoginState(true);
             $this->setUserInfo(Session::get('user'));
         }
+
+        $this->setPageSize();//设置页码和请求量
     }
 
 
@@ -85,6 +99,7 @@ class Base extends Controller
             return true;
         }
         if($api){//api则输出JSON
+            $this->result['msg'] = '请先登录！';
             $this->output();
         }else{//页面则跳转至登录
             $this->redirect('Sessions/login');
@@ -104,6 +119,15 @@ class Base extends Controller
             }
         }
         return json($this->result)->send();
+    }
+
+    protected function setPageSize(){
+        if($this->request->has('page')){
+            $this->page = $this->request->param('page');
+        }
+        if($this->request->has('size')){
+            $this->size = $this->request->param('size');
+        }
     }
 
     /**

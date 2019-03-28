@@ -101,6 +101,68 @@ class Users extends Base
     }
 
 
+    /**
+     * 用户关注
+     */
+    public function apiGetCollection(){
+        if(!$this->isLogin(true)) return;
+        $user = Loader::model('User');
+        $content = $user->find($this->userInfo['id']);
+        $list = $content->collection;
+        if(empty($list)){
+            $this->result['error_code'] = '3001';
+            $this->output();
+            return;
+        }
+        $uids = [];
+        foreach($list as $k=>$v){
+            $uids[] = $v->uid;
+        }
+        $map = [
+            'id'=>['in',$uids]
+        ];
+        $userList = $user->field('id,user_name,img')->where($map)->select();
+        if(empty($userList)){
+            $this->result['error_code'] = '3001';
+            $this->output();
+            return;
+        }
+        $this->result['code'] = 200;
+        $this->result['data'] = $userList;
+        $this->output();
+    }
+
+    /**
+     * 用户粉丝
+     */
+    public function apiGetFans(){
+        if(!$this->isLogin(true)) return;
+        $user = Loader::model('User');
+        $content = $user->find($this->userInfo['id']);
+        $list = $content->fans;
+        if(empty($list)){
+            $this->result['error_code'] = '3001';
+            $this->output();
+            return;
+        }
+        $uids = [];
+        foreach($list as $k=>$v){
+            $uids[] = $v->parent_uid;
+        }
+        $map = [
+            'id'=>['in',$uids]
+        ];
+        $userList = $user->field('id,user_name,img')->where($map)->select();
+        if(empty($userList)){
+            $this->result['error_code'] = '3001';
+            $this->output();
+            return;
+        }
+        $this->result['code'] = 200;
+        $this->result['data'] = $userList;
+        $this->output();
+    }
+
 
     /**
      * 用户详情
