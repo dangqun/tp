@@ -33,7 +33,7 @@ class Users extends Base
     {
         $this->isLogin();
         $content = Db::name('user')->field('user_name')->find($this->userInfo['id']);
-        return $this->fetch('show',['name'=>'bin']);
+        return $this->fetch('show',['content'=>$content]);
     }
 
     /**

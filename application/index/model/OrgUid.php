@@ -12,6 +12,8 @@ use think\Model;
 class OrgUid extends Model
 {
 
+
+
     public function org(){
         return $this->belongsTo('Org','oid','id')->field('id,name');
     }

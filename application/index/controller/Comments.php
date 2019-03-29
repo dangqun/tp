@@ -61,7 +61,6 @@ class Comments extends Base
         if($this->request->has('parent')){
             $data['parent'] = $this->request->param('parent');
         }
-        echo 1;
         $result = Comment::create($data);
         var_dump($result);
     }

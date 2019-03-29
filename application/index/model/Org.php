@@ -14,12 +14,16 @@ use think\Model;
 class Org extends Model
 {
 
+    public function volunteer(){
+        return $this->hasMany('user','org','id')->field('id,org');
+    }
+
     public function user(){
-        return $this->hasOne('OrgUid','id','oid')->field('id,uid');
+        return $this->hasOne('OrgUid','oid','id')->field('id,uid');
     }
 
     public function parents(){
-        return $this->hasOne('OrgParent','id','oid')->field('id,parent');
+        return $this->hasOne('OrgParent','oid','id')->field('id,parents');
     }
 
 }

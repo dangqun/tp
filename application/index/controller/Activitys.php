@@ -32,7 +32,7 @@ class Activitys extends  Base
      */
     public function apiGetList(){
         $model = Loader::model('Activity');
-        $list = $model->field('id,oid,uid,title,img')->with('org')->where('status','=','0')->page($this->page)->limit($this->size)->select();
+        $list = $model->field('id,oid,uid,title,img')->with('org')->where('status','=','1')->page($this->page)->limit($this->size)->select();
         if(empty($list)){
             $this->result['error_code'] = 3001;
             $this->output();
@@ -41,6 +41,13 @@ class Activitys extends  Base
         $this->result['code'] = 200;
         $this->result['data'] = $list;
         $this->output();
+    }
+
+    /**
+     * 活动详情
+     */
+    public function apiGetContent(){
+
     }
 
     /**
@@ -136,6 +143,9 @@ class Activitys extends  Base
             'end_time'=>$this->request->param('end_time'),
             'content'=>$this->request->param('content'),
             'details'=>$this->request->param('details'),
+            'lng'=>$this->request->param('lng'),
+            'lat'=>$this->request->param('lat'),
+            'range'=>$this->request->param('range'),
             'create_time'=>NOW_TIME
         ];
         $data['uid'] = $this->userInfo['id'];
