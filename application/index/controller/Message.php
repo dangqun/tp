@@ -156,10 +156,6 @@ class Message
         $this->log($data);
     }
 
-    /**
-     * 群发
-     * @return array|bool
-     */
     private function setDataAll(){
         if(!is_array($this->from)){
             return false;
