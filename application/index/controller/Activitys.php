@@ -9,9 +9,9 @@
 namespace app\index\controller;
 
 
-use app\index\model\Org;
 use app\index\model\OrgUid;
 use think\Db;
+use Exception;
 use think\Loader;
 
 class Activitys extends  Base
@@ -31,8 +31,15 @@ class Activitys extends  Base
      * 获取活动列表
      */
     public function apiGetList(){
-        $model = Loader::model('Activity');
-        $list = $model->field('id,oid,uid,title,img')->with('org')->where('status','=','1')->page($this->page)->limit($this->size)->select();
+        try{
+            $model = Loader::model('Activity');
+            $list = $model->field('id,oid,uid,title,img')->with('org')->where('status','=','1')->page($this->page)->limit($this->size)->select();
+        }catch (Exception $e){
+            $this->result['error_code'] = 10000;
+            $this->result['error_msg'] = $e->getMessage();
+            $this->output();
+            return;
+        }
         if(empty($list)){
             $this->result['error_code'] = 3001;
             $this->output();
@@ -47,7 +54,128 @@ class Activitys extends  Base
      * 活动详情
      */
     public function apiGetContent(){
+        if(!$this->request->has('id')){
+            $this->result['error_code'] = 3002;
+            $this->output();
+            return;
+        }
+        $id = $this->request->param('id');
+        $model = Loader::model('Activity');
+        $info = $model->field('id,oid,uid,title,img')->find($id);
+        if(empty($info)){
+            $this->result['error_code'] = 5007;
+            $this->output();
+            return;
+        }
+        $info->org;
+        $info->user;
+        $info = $info->toArray();
+        $join = $this->getJoinUser($id);
+        if($join != false){
+            $info['join'] = collection($join)->toArray();
+        }
+        $this->result['code'] = 200;
+        $this->result['data'] = $info;
+        $this->output();
+    }
 
+    /**
+     * 活动报名
+     */
+    public function apiJoin(){
+        if(!$this->isLogin(true)){
+            return;
+        }
+        if(!$this->request->has('id')){
+            $this->result['error_code'] = 5008;
+            $this->output();
+            return;
+        }
+        $model = Loader::model('ActivityJoin');
+        $map = [];
+        $map['uid'] = $this->userInfo['id'];
+        $map['aid'] = $this->request->param('id');
+        $map['del'] = 0;
+        $is = $model->field('id')->where($map)->find();
+        if(!empty($is)){
+            $this->result['error_code'] = 5010;
+            $this->output();
+            return;
+        }
+        $data = [];
+        $data['uid'] = $this->userInfo['id'];
+        $data['aid'] = $this->request->param('id');
+        $data['create_time'] = time();
+        $result = $model->insert($data);
+        if(empty($result)){
+            $this->result['error_code'] = 5009;
+            $this->output();
+            return;
+        }
+        $this->result['code'] = 200;
+        $this->output();
+    }
+
+    /**
+     * 取消报名
+     */
+    public function apiUnJoin(){
+        if(!$this->isLogin(true)){
+            return;
+        }
+        if(!$this->request->has('id')){
+            $this->result['error_code'] = 5008;
+            $this->output();
+            return;
+        }
+        $model = Loader::model('ActivityJoin');
+        $map = [];
+        $map['uid'] = $this->userInfo['id'];
+        $map['aid'] = $this->request->param('id');
+        $map['del'] = 0;
+        $is = $model->field('id')->where($map)->find();
+        if(empty($is)){
+            $this->result['error_code'] = 5011;
+            $this->output();
+            return;
+        }
+        $data = [
+            'del'=>NOW_TIME
+        ];
+        $result = $model->where($is)->update($data);
+        if(empty($result)){
+            $this->result['error_code'] = 5009;
+            $this->output();
+            return;
+        }
+        $this->result['code'] = 200;
+        $this->output();
+    }
+
+
+    /**
+     * 报名用户数据
+     */
+    private function getJoinUser($id = 0){
+        if(empty($id)){
+            return false;
+        }
+        $model = Loader::model('ActivityJoin');
+        $map = [
+            'aid'=>$id,
+            'status'=>1,
+            'del'=>0
+        ];
+        $list = $model->field('id,aid,uid')->with('user')->where($map)->order('id DESC')->page($this->page)->limit($this->size)->select();
+        if(empty($list)){
+            return false;
+        }
+        $data = [];
+        $list = collection($list)->toArray();
+        foreach($list as $k=>$v){
+            $data[] = $v['user'];
+        }
+        return $data;
     }
 
     /**
@@ -124,7 +252,7 @@ class Activitys extends  Base
      * 新增
      */
     public function apiAdd(){
-        if($this->isLogin(true) !== true){
+        if(!$this->isLogin(true)){
             return;
         }
         $validate = Loader::validate('Activity');

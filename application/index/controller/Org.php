@@ -129,4 +129,19 @@ class Org extends Base
         $this->output();
     }
 
+    /**
+     * 退出组织
+     */
+    public function apiOut(){
+        if($this->isLogin(true)) return;
+        if(!$this->request->has('id')){
+            $this->result['error_code'] = 3002;
+            $this->output();
+            return;
+        }
+        $id = intval($this->request->param('id'));
+        $uid = $this->userInfo['id'];
+
+    }
+
 }

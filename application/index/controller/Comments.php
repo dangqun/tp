@@ -37,10 +37,36 @@ class Comments extends Base
     }
 
     /**
+     * 评论列表-类型
+     */
+    public function apiListType(){
+        $type = $this->request->has('type') ? intval($this->request->param('type')) : 0;
+        $list = Comment::field('id,uid,content,img')->with('user,like')->where(['type'=>$type])->page($this->page)->limit($this->size)->select();
+        if(empty($list)){
+            $this->result['error_code'] = '3001';
+            $this->output();
+            return;
+        }
+        $this->result['code'] = 200;
+        $this->result['data'] = $list;
+        $this->output();
+    }
+
+    /**
      * 发布评论
      */
     public function apiAdd(){
         if($this->isLogin(true) !== true){
+            return;
+        }
+        if(!$this->request->has('id')){
+            $this->result['error_code'] = 3002;
+            $this->output();
+            return;
+        }
+        if(!$this->request->has('type')){
+            $this->result['error_code'] = 3002;
+            $this->output();
             return;
         }
         $validate = Loader::validate('Comment');
@@ -49,8 +75,8 @@ class Comments extends Base
             $this->output();
             return;
         }
-
         $data = [
+            'obj_id'=>$this->request->param('id'),
             'uid'=>$this->userInfo['id'],
             'content'=>$this->request->param('content'),
             'create_time'=>NOW_TIME
@@ -62,7 +88,27 @@ class Comments extends Base
             $data['parent'] = $this->request->param('parent');
         }
         $result = Comment::create($data);
-        var_dump($result);
+        if(empty($result)){
+            $this->result['error_code'] = 7001;
+            $this->output();
+            return;
+        }
+        $this->result['code'] = 200;
+        $this->output();
+    }
+
+    /**
+     * 点赞
+     */
+    public function apiLike(){
+
+    }
+
+    /**
+     * 取消点赞
+     */
+    public function apiCancelLike(){
+
     }
 
 }

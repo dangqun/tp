@@ -39,4 +39,8 @@ class Activity extends Model
         return $this->belongsTo('Org','oid','id')->field('id,name');
     }
 
+    public function user(){
+        return $this->belongsTo('user','uid','id')->field('id,user_name');
+    }
+
 }
