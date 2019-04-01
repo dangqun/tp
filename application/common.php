@@ -10,3 +10,10 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+function getImgUrl($img){
+    if(empty($img)){
+        return '';
+    }
+    $url = request()->domain(). '/public/'.$img;
+    return $url;
+}

@@ -20,6 +20,9 @@ class Comment extends Model
     }
 
     public function getImgAttr($value){
+        if(empty($value)){
+            return;
+        }
         $value = json_decode($value,true);
         return $value;
     }

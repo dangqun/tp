@@ -11,6 +11,7 @@ namespace app\index\controller;
 
 
 use app\index\model\Comment;
+use app\index\model\CommentLike;
 use think\Loader;
 
 class Comments extends Base
@@ -31,13 +32,14 @@ class Comments extends Base
             $this->output();
             return;
         }
+        $list = $this->doImg($list);
         $this->result['code'] = 200;
         $this->result['data'] = $list;
         $this->output();
     }
 
     /**
-     * 评论列表-类型
+     * 评论列表-类型查询
      */
     public function apiListType(){
         $type = $this->request->has('type') ? intval($this->request->param('type')) : 0;
@@ -47,9 +49,32 @@ class Comments extends Base
             $this->output();
             return;
         }
+        $list = $this->doImg($list);
         $this->result['code'] = 200;
         $this->result['data'] = $list;
         $this->output();
+    }
+
+    /**
+     * 列表-处理图片
+     * @param array $data
+     * @return array
+     */
+    private function doImg($data = []){
+        if(empty($data)){
+            return $data;
+        }
+        foreach($data as $k=>$v){
+            if(empty($v['img'])){
+                continue;
+            }
+            $imgs = $v->img;
+            foreach($imgs as $m=>$n){
+                $imgs[$m] = getImgUrl($n);
+            }
+            $data[$k]->img = json_encode($imgs);
+        }
+        return $data;
     }
 
     /**
@@ -101,14 +126,105 @@ class Comments extends Base
      * 点赞
      */
     public function apiLike(){
-
+        if($this->isLogin(true)) return;
+        if($this->request->has('id')){
+            $this->result['msg'] = 3001;
+            $this->output();
+            return;
+        }
+        $id = intval($this->request->param('id'));
+        $is = Comment::find($id);
+        if(empty($is)){
+            $this->result['msg'] = 7001;
+            $this->output();
+            return;
+        }
+        $isLike = CommentLike::find(['uid'=>$this->userInfo['id'],'cid'=>$id]);
+        if(!empty($isLike)){
+            $this->result['error_code'] = 7004;
+            $this->output();
+            return;
+        }
+        $data = [];
+        $data['cid'] = $id;
+        $data['uid'] = $this->userInfo['id'];
+        $data['create_time'] = NOW_TIME;
+        $result = Comment::create($data);
+        if($result == false){
+            $this->result['error_code'] = 7002;
+            $this->output();
+            return;
+        }
+        $this->result['code'] = 200;
+        $this->output();
     }
 
     /**
      * 取消点赞
      */
     public function apiCancelLike(){
+        if($this->isLogin(true)) return;
+        if($this->request->has('id')){
+            $this->result['msg'] = 3001;
+            $this->output();
+            return;
+        }
+        $id = intval($this->request->param('id'));
+        $is = Comment::find($id);
+        if(empty($is)){
+            $this->result['msg'] = 7001;
+            $this->output();
+            return;
+        }
+        $isLike = CommentLike::find(['uid'=>$this->userInfo['id'],'cid'=>$id]);
+        if(empty($isLike)){
+            $this->result['error_code'] = 7003;
+            $this->output();
+            return;
+        }
+        $data = [];
+        $data['cid'] = $id;
+        $data['uid'] = $this->userInfo['id'];
+        $data['create_time'] = NOW_TIME;
+        $result = Comment::create($data);
+        if($result == false){
+            $this->result['error_code'] = 7002;
+            $this->output();
+            return;
+        }
+        $this->result['code'] = 200;
+        $this->output();
+    }
 
+    /**
+     * 删除
+     */
+    public function del(){
+        if($this->isLogin(true))return;
+        if($this->request->has('id')){
+            $this->result['error_code'] = 3001;
+            $this->output();
+            return;
+        }
+        $id = $this->request->param('id');
+        $info = Comment::find($id);
+        if(empty($info)){
+            $this->result['error_code'] = 7001;
+            $this->output();
+            return;
+        }
+        if($this->userInfo['id'] != $info['uid']){
+            $this->result['error_code'] = 7005;
+            $this->output();
+            return;
+        }
+        $result = Comment::delete($info['id']);
+        if($result == false){
+            $this->result['error_code'] = 3003;
+            $this->output();return;
+        }
+        $this->result['code'] = 200;
+        $this->output();
     }
 
 }
