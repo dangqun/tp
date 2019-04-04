@@ -19,6 +19,15 @@ class sessions extends Base
     use \Code;
 
     /**
+     * 前置操作
+     * @var array
+     */
+    protected $beforeActionList = [
+        'init',
+        'initLogin'=>['except'=>'login,loginOut']
+    ];
+
+    /**
      * 登录页面
      * @return \think\response\View
      */
@@ -27,6 +36,14 @@ class sessions extends Base
             $this->redirect('index/Index/index');
         }
         return view('login');
+    }
+
+    /**
+     * 登出
+     */
+    public function logOut(){
+        Session::delete('user');//清除缓存
+        $this->success('登出成功！','Sessions/login');
     }
 
     /**
@@ -67,13 +84,7 @@ class sessions extends Base
         $this->output();
     }
 
-    /**
-     * 登出
-     */
-    public function logOut(){
-        Session::delete('user');//清除缓存
-        $this->success('登出成功！','Sessions/login');
-    }
+
 
     /**
      * 获取验证码

@@ -25,12 +25,16 @@ trait Assessment
         if(!$this->check()){
             return '参数错误';
         }
-        $this->rule();
+        $this->rule();//获取积分规则
+        //生成新增数据
         $data = [];
         $data['uid'] = $this->uid;
         $data['create_time'] = NOW_TIME;
         $data['score'] = $this->rule['add'][$this->typeStr]['once'];
-        $this->score = $data['score'];
+
+
+        $this->score = $data['score'];//设置类变量的值
+        //查询已获得积分
         $map = [];
         $map['uid'] = $this->uid;
         if(!empty($this->type)){
@@ -49,6 +53,7 @@ trait Assessment
         ];
         $is = Db::name('score')->where($map)->sum('score');
         if(!empty($is)){
+            //判断还可获得多少积分
             if($is >= $this->rule['add'][$this->typeStr]['limit']){
                 return '积分达到上限';
             }
@@ -57,6 +62,7 @@ trait Assessment
                 $data['score'] = $this->score - $surplusScore;
             }
         }
+        //新增积分
         $result = Db::name('score')->insert($data);
         if(empty($result)){
             return false;

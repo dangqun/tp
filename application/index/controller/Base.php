@@ -10,10 +10,14 @@ namespace app\index\controller;
 
 
 use think\Controller;
+use think\exception\HttpResponseException;
 use think\Request;
+use think\Response;
 use think\Session;
 class Base extends Controller
 {
+    use \WeChat;
+
     /**
      * ajax请求输出结构
      * @var array
@@ -66,12 +70,25 @@ class Base extends Controller
      */
     protected $size = 10;
 
+    /**
+     * 前置操作
+     * @var array
+     */
+    protected $beforeActionList = [
+        'init',
+        'initLogin'
+    ];
+
     public function __construct(Request $request = null)
     {
         parent::__construct($request);
-
         $this->request = $request::instance();//请求信息赋值
+    }
 
+    /**
+     * 初始化
+     */
+    protected function init(){
         $this->isApi = $this->request->isAjax();//判断是否为AJAX请求
 
         Session::prefix('dangqun');//设置session作用域
@@ -80,14 +97,25 @@ class Base extends Controller
 
         $this->setStatus($status);//初始化状态码
 
-        $this->assign('title','党群');//全局标题设置
+        $this->assign('title','党群');//全局标题设置=
 
+        $this->setPageSize();//设置页码和请求量
+
+    }
+
+    /**
+     * 初始化登录信息
+     */
+    protected function initLogin(){
         if(Session::has('user')){
             $this->setLoginState(true);
             $this->setUserInfo(Session::get('user'));
+        }else if(!$this->isWeiXinBrowser() && !$this->request->isAjax()){
+            $weLogin = $this->weLogin();
+            if($weLogin == false){
+                $this->redirect('Errors/index');
+            }
         }
-
-        $this->setPageSize();//设置页码和请求量
     }
 
 
@@ -127,6 +155,20 @@ class Base extends Controller
         }
         if($this->request->has('size')){
             $this->size = $this->request->param('size');
+        }
+    }
+
+    /**
+     * 是否为微信
+     * @return bool
+     */
+    protected function isWeiXinBrowser()
+    {
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+        if (strpos($user_agent, 'MicroMessenger') === false) {
+            return false;
+        } else {
+            return true;
         }
     }
 

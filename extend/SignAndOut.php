@@ -26,16 +26,20 @@ trait SignAndOut
             $this->output();
             return;
         }
+        //验证活动
         $info = $this->validateActivity($id);
         if(!$info instanceof \app\index\model\Activity){
             return;
         }
+        //判断距离
         $range = $this->distance($lat,$lng,$info->lat,$info->lng);
         if($range > $info->range){
             $this->result['error_code'] =  5014;
             $this->output();
             return;
         }
+
+        //查询签到次数
         $map = [
             'uid'=>$this->userInfo['id'],
             'create_time'=>[
@@ -48,6 +52,7 @@ trait SignAndOut
             $is = Db::name('activity_sign')->where($map)->count('id');
         }catch(DbException $e){
             $this->result['error_code'] = 10000;
+            $this->result['error_msg'] = $e->getMessage();
             $this->output();
             return;
         }
@@ -56,11 +61,14 @@ trait SignAndOut
             $this->output();
             return;
         }
+
+        //查询签到信息
         $map['aid'] = $id;
         try{
             $is = Db::name('activity_sign')->where($map)->order('id DESC')->find();
         }catch(DbException $e){
             $this->result['error_code'] = 10000;
+            $this->result['error_msg'] = $e->getMessage();
             $this->output();
             return;
         }
@@ -69,6 +77,8 @@ trait SignAndOut
             $this->output();
             return;
         }
+
+        //插入签到数据
         $data = [];
         $data['uid'] = $this->userInfo['id'];
         $data['aid'] = $id;
@@ -80,6 +90,7 @@ trait SignAndOut
             $result = Db::name('activity_sign')->insert($data);
         }catch(DbException $e){
             $this->result['error_code'] = 10000;
+            $this->result['error_msg'] = $e->getMessage();
             $this->output();
             return;
         }
@@ -100,6 +111,7 @@ trait SignAndOut
      * @param int $lng
      * @param int $lat
      * @throws \think\exception\PDOException
+     * @throws \think\Exception
      */
     public function signOut($id,$lng = 0,$lat = 0){
         if(empty($id)){
@@ -107,16 +119,19 @@ trait SignAndOut
             $this->output();
             return;
         }
+        //验证活动
         $info = $this->validateActivity($id);
         if(!$info instanceof \app\index\model\Activity){
             return;
         }
+        //判断距离
         $range = $this->distance($lat,$lng,$info->lat,$info->lng);
         if($range > $info->range){
             $this->result['error_code'] =  5014;
             $this->output();
             return;
         }
+        //查询签到信息
         $map = [
             'aid'=>$id,
             'uid'=>$this->userInfo['id']
@@ -125,6 +140,7 @@ trait SignAndOut
             $is = Db::name('activity_sign')->where($map)->order('id DESC')->find();
         }catch(DbException $e){
             $this->result['error_code'] = 10000;
+            $this->result['error_msg'] = $e->getMessage();
             $this->output();
             return;
         }
@@ -138,6 +154,8 @@ trait SignAndOut
             $this->output();
             return;
         }
+
+        //修改签到信息,记录签退时间
         $data = [];
         $data['sign_out'] = NOW_TIME;
         $data['status'] = 2;
@@ -146,6 +164,7 @@ trait SignAndOut
             $result = Db::name('activity_sign')->where('id','=',$is['id'])->update($data);
         }catch(DbException $e){
             $this->result['error_code'] = 10000;
+            $this->result['error_msg'] = $e->getMessage();
             $this->output();
             return;
         }
@@ -155,6 +174,8 @@ trait SignAndOut
             $this->output();
             return;
         }
+
+        //增加党员积分
         $result = $this->score();
         if($result == false){
             $this->result['error_code'] = 400;
@@ -223,7 +244,7 @@ trait SignAndOut
     }
 
     /**
-     * 党员计分
+     * 党员计分，并生成日志流水
      */
     protected function score(){
         $this->typeStr = 'activity';
