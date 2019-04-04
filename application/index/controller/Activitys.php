@@ -18,7 +18,7 @@ use think\Loader;
 class Activitys extends Base
 {
 
-    use \Upload,\Sign;
+    use \Upload,\SignAndOut;
 
     public function index()
     {
@@ -29,8 +29,14 @@ class Activitys extends Base
     /************************************************ api分割线 *******************************************************/
 
     public function test(){
-        $this->sign();
+        if (!$this->isLogin(true)) return;
+        $this->sign($this->request->param('id'));
     }
+    public function test1(){
+        if (!$this->isLogin(true)) return;
+        $this->signOut($this->request->param('id'));
+    }
+
 
     /**
      * 获取活动列表

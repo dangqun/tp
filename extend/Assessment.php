@@ -30,6 +30,7 @@ trait Assessment
         $data['uid'] = $this->uid;
         $data['create_time'] = NOW_TIME;
         $data['score'] = $this->rule['add'][$this->typeStr]['once'];
+        $this->score = $data['score'];
         $map = [];
         $map['uid'] = $this->uid;
         if(!empty($this->type)){
@@ -57,11 +58,10 @@ trait Assessment
             }
         }
         $result = Db::name('score')->insert($data);
-
-        if($result){
-            return true;
+        if(empty($result)){
+            return false;
         }
-        return false;
+        return true;
     }
 
 

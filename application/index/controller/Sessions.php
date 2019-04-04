@@ -64,7 +64,6 @@ class sessions extends Base
         }
         Session::set('user',$user);//登录成功设置用户信息缓存
         $this->result['code'] = 200;
-        $this->result['error_code'] = 1000;
         $this->output();
     }
 
