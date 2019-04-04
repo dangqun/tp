@@ -144,12 +144,12 @@ return [
 
     // 视图输出字符串内容替换
     'view_replace_str'       => [
-        '__PUBLIC__'=>"/public",
-        '__CSS__'=> "/public/css",
-        '__IMG__'=>"/public/image",
-        '__JS__'=>"/public/js",
-        "__APP__"=>"/public/index.php",// http://localhost/tp/public/index.php
-        '__UPLOAD__'=>"/public/uploads",
+        '__PUBLIC__'=>"/tp/public",
+        '__CSS__'=> "/tp/public/css",
+        '__IMG__'=>"/tp/public/image",
+        '__JS__'=>"/tp/public/js",
+        "__APP__"=>"/tp/public/index.php",// http://localhost/tp/public/index.php
+        '__UPLOAD__'=>"/tp/public/uploads",
         "__DOMAIN__"=> Request::instance()->domain(),//http://localhost/
         "__URL__"=> Request::instance()->domain().Request::instance()->root(),//http://localhost/to/public/index.php
         "__ADMIN__"=> Request::instance()->domain().Request::instance()->root()."/admin",//http://localhost/tp/public/index.php/admin

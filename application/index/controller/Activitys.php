@@ -18,7 +18,7 @@ use think\Loader;
 class Activitys extends Base
 {
 
-    use \Upload;
+    use \Upload,\Sign;
 
     public function index()
     {
@@ -28,6 +28,9 @@ class Activitys extends Base
 
     /************************************************ api分割线 *******************************************************/
 
+    public function test(){
+        $this->sign();
+    }
 
     /**
      * 获取活动列表
