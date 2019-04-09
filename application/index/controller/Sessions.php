@@ -18,14 +18,6 @@ class sessions extends Base
 {
     use \Code;
 
-    /**
-     * 前置操作
-     * @var array
-     */
-    protected $beforeActionList = [
-        'init',
-        'initLogin'=>['except'=>'login,loginOut']
-    ];
 
     /**
      * 登录页面

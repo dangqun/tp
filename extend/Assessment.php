@@ -32,8 +32,7 @@ trait Assessment
         $data['create_time'] = NOW_TIME;
         $data['score'] = $this->rule['add'][$this->typeStr]['once'];
 
-
-        $this->score = $data['score'];//设置类变量的值
+        $this->score = $data['score'];//设置类成员变量的值
         //查询已获得积分
         $map = [];
         $map['uid'] = $this->uid;

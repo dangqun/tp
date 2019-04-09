@@ -10,6 +10,7 @@ namespace app\index\controller;
 
 
 use think\Controller;
+use think\Debug;
 use think\exception\HttpResponseException;
 use think\Request;
 use think\Response;
@@ -89,6 +90,8 @@ class Base extends Controller
      * 初始化
      */
     protected function init(){
+        $this->begin('初始化公用信息');
+
         $this->isApi = $this->request->isAjax();//判断是否为AJAX请求
 
         Session::prefix('dangqun');//设置session作用域
@@ -101,26 +104,46 @@ class Base extends Controller
 
         $this->setPageSize();//设置页码和请求量
 
+
+        $this->end('初始化公用信息结束');
     }
 
     /**
      * 初始化登录信息
      */
     protected function initLogin(){
+
+        $this->begin('初始化登录信息');
+
         if(Session::has('user')){
             $this->setLoginState(true);
             $this->setUserInfo(Session::get('user'));
-        }else if(!$this->isWeiXinBrowser() && !$this->request->isAjax()){
+        }else if($this->isWeiXinBrowser() && !$this->request->isAjax()){
             $weLogin = $this->weLogin();
             if($weLogin == false){
                 $this->redirect('Errors/index');
             }
         }
+
+        $this->end('初始化登录信息结束');
+    }
+
+    protected function begin($msg){
+        $this->s($msg);
+        Debug::remark('begin');
+    }
+
+    protected function end($msg){
+        Debug::remark('end');
+        $this->s($msg);
+        $this->f();
     }
 
 
     /**
      * 是否登录
+     * @param bool $api
+     * @return bool
      */
     public function isLogin($api = false){
         if($this->isLoginState()){
@@ -146,9 +169,13 @@ class Base extends Controller
                 $this->result['msg'] = isset($this->status[$this->result['error_code']]) ? $this->status[$this->result['error_code']] : '请求成功';
             }
         }
+        $this->end('apiGetContent接口获取数据结束并输出');
         return json($this->result)->send();
     }
 
+    /**
+     * 设置页码/请求量
+     */
     protected function setPageSize(){
         if($this->request->has('page')){
             $this->page = $this->request->param('page');
@@ -171,6 +198,31 @@ class Base extends Controller
             return true;
         }
     }
+
+    /**
+     * 输出内容
+     */
+    protected function s($content = null){
+        echo $content . "<br/>\r\n";
+    }
+
+    protected function f(){
+        echo "执行时间：".Debug::getRangeTime('begin','end')."s<br/>\r\n";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * @return array

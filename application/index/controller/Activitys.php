@@ -43,6 +43,8 @@ class Activitys extends Base
      */
     public function apiGetList()
     {
+        $this->begin('进入apiGetList接口开始获取数据');
+
         $model = Loader::model('Activity');
         $list = $model->field('id,oid,uid,title,img')->with('org')->where('status', '=', '1')->page($this->page)->limit($this->size)->select();
         if (empty($list)) {
@@ -63,6 +65,8 @@ class Activitys extends Base
      */
     public function apiGetContent()
     {
+        $this->begin('进入apiGetContent接口开始获取数据');
+
         if (!$this->request->has('id')) {
             $this->result['error_code'] = 3002;
             $this->output();
@@ -86,6 +90,8 @@ class Activitys extends Base
         $this->result['code'] = 200;
         $this->result['data'] = $info;
         $this->output();
+
+
     }
 
     /**
