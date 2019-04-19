@@ -1,0 +1,34 @@
+/*header*/
+header{ position: fixed;left:0;top:0;width:100%; min-width:320px;height:49px;background:#fff;border-bottom:1px solid #f0f0f0;z-index:500}
+header h1{text-align:center;font-size:17px;height:49px;line-height:49px;color:#000}
+header a{position:absolute;left:0;top:0;display:block;height:49px;line-height:49px;padding-left:15px;font-size:15px;color:#000}
+header a i{display:inline-block;margin-left:5px;vertical-align:1px;width:10px;height:10px;border:1px solid #000;border-top:0;border-right:0;transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg)}
+/*end-header*/
+
+section{padding-top: 50px;}
+.nav{width: 100%;height: 22px;padding: 8px 0; background-color: #f0f0f0;}
+.nav li{width: 20%; height: 20px;float: left;display: block;text-align: center;font-size: 12px;line-height:20px;}
+.nav li a{display:inline-block;width: 55px;height: 20px;color: #8f8f8f;border: 1px #f0f0f0 solid;}
+.nav li.cur a{display:inline-block;width: 55px;height:20px;background-color: #fff;border:1px #eee solid;border-radius: 3px;color: #e0431b;}
+
+
+.item{background-color: #fff;padding-top:10px;margin-bottom: 60px;}
+.item .title{margin-left: 10px;}
+.item ul li{border-bottom: #f1f1f1 1px solid;padding: 0 10px;}
+.item ul li:nth-child(1) .images{padding-top:0;}
+.titleLeft{position: absolute;left: 0;top: 0;text-align: justify;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2; height: 37px;overflow: hidden;font-size: 14px;color: #000;font-weight: 600;}
+
+
+
+/*图片网格2*/
+.images{overflow: hidden;width: 100%;padding: 10px 0;position: relative;}
+.images .infoTwo{position: relative;float: left;padding: 0;margin: 0;border-style: solid;border-color: transparent;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+.images .infoTwo:nth-child(1){width: 60%;padding-top:22.5%;font-style: 12px;}
+.images .infoTwo:nth-child(2){width: 40%;padding-left: 10px}
+.info{display: block;-webkit-margin-before: 0em;-webkit-margin-after: 0em;-webkit-margin-start: 40px;-webkit-margin-end: 40px;}
+.images .infoTwo .img{width: 100%;padding-top: 60%;position: relative;display: block;background-size: cover;background-position: 50% 50%;background-color: #eee;}
+.images .from{position: absolute;bottom: 0;width: 100%;height: 16px;color: #828181;}
+.images .from span:nth-of-type(1){font-size: 12px;}
+.images .from span:nth-of-type(2){position: relative;float: right;padding-left: 13px;}
+.images .from span:nth-of-type(2):before{content: "";display: block;height: 10px;width: 12px;position: absolute;left: 0px;top:4px;background: url(../images/index/yanjing.png) no-repeat center;background-size: 10px auto; }
+.images .from span:nth-of-type(2):after{content: "人";}

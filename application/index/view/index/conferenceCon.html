@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no" searchtype="map">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/conferenceCon.css">
+    <title></title>
+</head>
+<body>
+    <header>
+        <a href="javascript:history.back(-1)"><i></i></a>
+        <h1></h1>
+    </header>
+    <section>
+        <ul class="table clearfix">
+            <li>主持人<input type="text"></li>
+            <li>应到会人数<input type="text"></li>
+            <li>记录人<input type="text"></li>
+            <li>实到会人数<input type="text"></li>
+        </ul>
+        <ul class="items clearfix">
+            <li class="time"><a><i></i>会议时间<span>2019年4月16日10点00分</span></a></li>
+            <li class="address"><a><i></i>浙江省温州市瓯海区</a></li>
+            <li class="detailed jt_r"><a><i></i><input type="text" placeholder="请输入详细地址"></a></li>
+        </ul>
+        <div class="record">
+            <h1>会议记录</h1>
+            <textarea placeholder="输入会议内容" class="content"></textarea>
+        </div>
+        <div class="vote">
+            <h1>本次会议如有表决请记录</h1>
+            <i class="add"></i>
+            <p>本次会议应到正式党员<input type="text">人，实到<input type="text">人</p>
+            <div class="list">
+                <ul class="voteList clearfix">
+                    <li>表决事项一：<input type="text"></li>
+                    <li>
+                        <span>同意票数<input type="text"></span>
+                        <span>不同意票数<input type="text"></span>
+                        <span>弃权票数<input type="text"></span>
+                    </li>
+                    <li>表决结果：<input type="text" placeholder="通过或不通过"></li>
+                </ul>
+            </div>
+        </div>
+        <a class="btn">记录完毕</a>
+    </section>
+</body>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+    
+    ini();
+    //初始方法
+    function ini(){
+        //title名
+        var type=getQueryString("list");
+        if(type=="1"){
+            $("title").text("村（社区）支部委员会会议");
+            $("header h1").text("村（社区）支部委员会会议");
+        }else if(type=="2"){
+            $("title").text("村（社区）党员活动（会议）");
+            $("header h1").text("村（社区）党员活动（会议）");
+        }else if(type=="3"){
+            $("title").text("村（社区）支委员和村委员联席会议");
+            $("header h1").text("村（社区）支委员和村委员联席会议");
+        }else if(type=="4"){
+            $("title").text("村（居）民代表会议");
+            $("header h1").text("村（居）民代表会议");
+        }
+
+        $('.add').click(function(){
+            var l=$(".list .voteList").length;
+            if(l<10){
+                var num=["一","二","三","四","五","六","七","八","九","十"];
+                var item='<ul class="voteList clearfix">'
+                        +'<li>表决事项'+num[l]+'：<input type="text"></li>'
+                        +'<li>'
+                        +'<span>同意票数<input type="text"></span>'
+                        +'<span>不同意票数<input type="text"></span>'
+                        +'<span>弃权票数<input type="text"></span>'
+                        +'</li>'
+                        +'<li>表决结果：<input type="text" placeholder="通过或不通过"></li>'
+                        +'</ul>';
+                $(".list").append(item);
+            }else{
+                alert("表决事项最多十条");
+            } 
+        });
+    }
+
+
+    //获取url参数
+    console.log(getQueryString("type"));
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        var q = window.location.pathname.substr(1).match(reg_rewrite);
+        if(r != null){
+            return unescape(r[2]);
+        }else if(q != null){
+            return unescape(q[2]);
+        }else{
+            return null;
+        }
+    }
+</script>
+</html>

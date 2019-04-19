@@ -1,0 +1,23 @@
+html,body{background-color: #fff;}
+/*header*/
+header{ position: fixed;left:0;top:0;width:100%; min-width:320px;height:49px;background:#fff;z-index:500}
+header h1{text-align:center;font-size:17px;height:49px;line-height:49px;color:#000;font-weight: 600;}
+header a{position:absolute;left:0;top:0;display:block;height:49px;line-height:49px;padding-left:15px;font-size:15px;color:#000}
+header a i{display:inline-block;margin-left:5px;vertical-align:1px;width:10px;height:10px;border:1px solid #000;border-top:0;border-right:0;transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg)}
+/*end-header*/
+section{padding-top: 50px;}
+h1{color: #000;}
+.list{}
+.list li{padding: 10px;border-bottom: 1px #d0d0d0 solid;line-height: 20px;}
+.list li input{width: 100%;border: none;}
+input::-webkit-input-placeholder {color: #cacacc;}
+
+.upload{padding: 10px;}
+.upload li{width: 100px;height: 100px;float: left;background-color: #eee;margin-right: 10px;margin-top: 10px;}
+.upload li:last-child{margin-right: 0;}
+.upload li img{width: 100%;height: 100%}
+.upload li>input{width: 100%;height: 100%;opacity:0;}
+.upload li.file{background: url(../images/file.png) no-repeat;background-size: 100px auto;}
+.upload li.add_img{background: url(../images/add_img.png) no-repeat;background-size: 100px auto;}
+
+a.btn{width: 150px;height: 30px;background-color: #e0431b;margin:50px auto;display:block;color: #fff;text-align: center;font-size: 16px;line-height: 30px;border-radius: 30px;}

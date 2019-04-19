@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no" searchtype="map">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/active.css">
+    <title>发起活动</title>
+</head>
+<body>
+    <header>
+        <h1>发起活动</h1>
+        <a class="right"></a>
+    </header>
+    <section>
+        <div class="item">
+            <a href="conferenceType.html"><p>会议类型<br/><span>不同会议记录表</span></p></a>
+            <a href="volunteer.html?type=1"><p>志愿服务<br/><span>不同会议记录表</span></p></a>
+            <a href="volunteer.html?type=2"><p>红色细胞<br/><span>扫码签到模式</span></p></a>
+            <a href="volunteer.html?type=3"><p>微心愿<br/><span>认领微心愿活动</span></p></a>
+        </div>
+    </section>
+    <div id="cover" style="display: none;"></div>
+    <ul class="m_nav">
+        <li><a href="partyHeadlines.html"><div class="img"></div></a></li>
+        <li><a href="goods.html"><div class="img"></div></a></li>
+        <li><a href="activeList.html"><div class="img"></div></a></li>
+        <p></p>
+    </ul>
+    <footer>
+        <div style="padding:0 10px;">
+            <a href="index.html"><i></i></a>
+            <a href="publicWelfare.html"><i></i></a>
+            <a class="midle"><i></i></a>
+            <a href="active.html" class="cur"><i></i></a>
+            <a href="my.html"><i></i></a>
+        </div>
+    </footer>
+</body>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/lazyload/jquery.lazyload.js"></script>
+<script>
+//图片懒加载
+    $(".lazy").lazyload({
+        placeholder : "",
+        effect: "fadeIn",
+        threshold : 200
+    }).removeClass('lazy').addClass('lazyloaded');
+
+    $('footer .midle i').click(function(){
+        $('.m_nav').animate({bottom: '0'}, 200);
+        $("#cover").show();
+        $('.m_nav p').click(function(){
+            $('.m_nav').stop().animate({bottom: '-140px'}, 200);
+            $("#cover").hide();
+        });
+    });
+</script>
+</html>

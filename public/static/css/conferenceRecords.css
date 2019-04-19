@@ -1,0 +1,20 @@
+html,body{background-color: #fff}
+/*header*/
+header{ position: fixed;left:0;top:0;width:100%; min-width:320px;height:49px;background:#fff;z-index:500}
+header h1{text-align:center;font-size:17px;height:49px;line-height:49px;color:#000}
+header a{position:absolute;left:0;top:0;display:block;height:49px;line-height:49px;padding-left:15px;font-size:15px;color:#000}
+header a i{display:inline-block;margin-left:5px;vertical-align:1px;width:10px;height:10px;border:1px solid #000;border-top:0;border-right:0;transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg)}
+/*end-header*/
+
+section{padding-top: 50px;}
+
+.item{}
+.item li{padding:10px 15px 10px 30px;border-bottom:1px #d2d2d2 solid;}
+.item li h1{position: relative;}
+.item li h1 i{display: block; width: 15px;height: 15px;background:url(../images/jt_b.png) no-repeat center; background-size: 15px auto;position: absolute;left: -18px;top: 2px;}
+.item li h1 span{color: #000;font-weight: 600;width: 68%;display: inline-block;}
+.item li h1 em{font-style: normal;float: right;color: #797979;font-size: 12px;}
+.item li p{padding-top: 6px;font-size: 12px;line-height: 16px;}
+.item li p>span:first-child{color: #e0431b;border-bottom: 1px #e0431b solid;}
+.item li p>span.edit{float: right;padding: 0 10px;color: #e0431b;border:1px #e0421b solid; border-radius: 10px;}
+.item li p>span.see{float: right;padding: 0 10px;background-color: #e0431b;border:1px #e0421b solid; border-radius: 10px;margin-left: 15px;color: #fff;}

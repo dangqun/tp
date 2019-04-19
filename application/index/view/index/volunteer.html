@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no" searchtype="map">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/volunteer.css">
+    <title></title>
+</head>
+<body>
+    <header>
+        <a href="javascript:history.back(-1)"><i></i></a>
+        <h1></h1>
+    </header>
+    <section>
+        <div class="top">
+            <div class="infoOne"><span class="img lazy" data-original="images/add_img.jpg"></span></div>
+            <input type="file" class="add_img">
+        </div>
+        <ul class="userlink">
+            <li class="title"><a><input type="text" placeholder="请输入活动标题"></a></li>
+            <li class="content"><a><input type="text" placeholder="请输入活动详情"></a></li>
+            <li class="center"><a>温州市瓯海党群服务中心</a></li>
+            <li class="num"><a><input type="text" placeholder="请输入招募人数"></a></li>
+        </ul>
+        <ul class="userlink">
+            <li class="begin"><a>活动开始时间<span>2019年4月17日14点00分</span></a></li>
+            <li class="end"><a>活动结束时间<span>2019年4月17日17点00分</span></a></li>
+            <li class="address jt_r"><a>活动区域</a></li>
+            <li class="range jt_r"><a>签到范围</a></li>
+            <div class="sign">
+                <li><a><i></i>选取签到点</a></li>
+                <li><a>签到范围</a></li>
+            </div>
+            <li class="address"><a>新增签到点</a><i class="add"></i></li>
+        </ul>
+        <ul class="userlink">
+            <li class="name"><a>微小益</a></li>
+            <li class="tel"><a>123456789</a></li>
+            <li style="padding-left: 30px;">
+                <a>是否群发消息
+                    <em class="setDefault"><i></i></em>
+                    <input type="hidden" id="setDefault" name="default" value="1">
+                </a>
+            </li>
+            <li style="padding-left: 30px;">
+                <a>是否测试活动
+                    <em class="setDefault"><i></i></em>
+                    <input type="hidden" id="setDefault" name="default" value="1">
+                </a>
+            </li>
+        </ul>
+        <div class="agreement">
+            <input type="checkbox">
+            <a>我已同意，并已阅读<span>《红色细胞项目发布者须知》</span></a>
+        </div>
+        <a class="btn">提交申请</a>
+    </section>
+</body>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/lazyload/jquery.lazyload.js"></script>
+<script>
+//图片懒加载
+    $(".lazy").lazyload({
+        placeholder : "",
+        effect: "fadeIn",
+        threshold : 200
+    }).removeClass('lazy').addClass('lazyloaded');
+    //复选按钮
+    var x = $(".setDefault")
+     x.on("click tap",
+        function() {
+            var a = $(this);
+            a.hasClass("locked") ? (a.removeClass("locked"),$("#setDefault").val(1)): (a.addClass("locked"),$("#setDefault").val(0))
+        });
+    $(".agreement input").click(function(){
+        if(this.checked==true){
+            $(".btn").addClass("cur");
+        }else{
+            $(".btn").removeClass("cur");
+        }
+    });
+    ini();
+    //初始方法
+    function ini(){
+        var type=getQueryString("type");
+        if(type=="1"){
+            $("title").text("志愿服务");
+            $("header h1").text("志愿服务");
+        }else if(type=="2"){
+            $("title").text("红色细胞");
+            $("header h1").text("红色细胞");
+        }else if(type=="3"){
+            $("title").text("微心愿");
+            $("header h1").text("微心愿");
+        }
+    }
+
+
+    //获取url参数
+    console.log(getQueryString("type"));
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        var q = window.location.pathname.substr(1).match(reg_rewrite);
+        if(r != null){
+            return unescape(r[2]);
+        }else if(q != null){
+            return unescape(q[2]);
+        }else{
+            return null;
+        }
+    }
+</script>
+</html>

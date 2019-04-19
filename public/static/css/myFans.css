@@ -1,0 +1,20 @@
+html,body{background-color: #ffffff;}
+/*header*/
+header{ position: fixed;left:0;top:0;width:100%; min-width:320px;height:49px;background:#fff;z-index:500}
+header h1{text-align:center;font-size:17px;height:49px;line-height:49px;color:#000;font-weight: 600;}
+header a{position:absolute;left:0;top:0;display:block;height:49px;line-height:49px;padding-left:15px;font-size:15px;color:#000}
+header a i{display:inline-block;margin-left:5px;vertical-align:1px;width:10px;height:10px;border:1px solid #000;border-top:0;border-right:0;transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg)}
+/*end-header*/
+section{padding-top: 50px;}
+
+/*内容*/
+.item{margin-top:10px;background:#fff}
+.item>a{ display:block; height:80px; box-sizing:border-box; width:100%; padding:15px 80px 15px 25px; position:relative;border-bottom: 1px #e5e5e5 solid;}
+.item>a img{border-radius: 25px;width: 50px;height: 50px; display:inline-block;vertical-align: middle}
+.item i{display: inline-block;vertical-align: middle;width:1px;height:100%;}
+.item>a>span{ display:inline-block;vertical-align: middle;font-size:14px; padding-left:10px; color:#000;line-height: 16px;}
+.item>a>span .text{ display:inline-block;max-width:140px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;font-weight: 600;}
+.item>a>span>em{ display:block;font-style: normal; color:#7e7e7e;font-size: 11px;}
+.item>a>span>em>span{padding-left: 10px;}
+
+.item>a>.cancel{ display:inline-block;width:70px; height:20px;border:1px solid #b2b2b2; text-align:center; line-height:20px; color:#3f3f3f;border-radius:10px;position:absolute; right:25px; top:30px;}

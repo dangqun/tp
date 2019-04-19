@@ -1,0 +1,54 @@
+/*header*/
+header{width: 100%;height: 150px;background:url(../images/my/top.jpg) no-repeat;background-size:100% 100%;}
+.top{width: 100%;height: 121px;background-color: #fff;box-shadow: 0px 2px 5px 1px #f7c5c4;}
+.top .img{width: 100%;height: 70px;position: relative;}
+.top .img p{text-align: center;padding-top: 42px;}
+.top .img p b{color: #000;}
+.top .img img{width: 70px;height: 70px;margin-left: 5px; margin-top: 4px;border: 3px #fff solid;border-radius: 70px;box-shadow: 0px 2px 5px 1px #f7c5c4;position: absolute;left: 50%;top: -43px;margin-left: -38px;}
+
+
+.top ul{height: 32px;margin: 0 10px; border-top: 1px #d2d2d2 solid;padding: 8px 0 10px 0;}
+.top ul li{width: 33.333%;float: left;text-align: center;font-size: 12px;}
+.top ul li a{color: #8c8c8c;}
+.top ul li b{color: #000;font-size: 14px;}
+
+section{padding-bottom:65px;}
+
+.userlink{background-color: #fff;margin-bottom: 10px;padding-left: 20px;}
+.userlink li{margin-left:32px;height:44px;line-height:44px;position:relative;border-bottom:1px solid #ececec;overflow:visible}
+.userlink li::after{content:"";position:absolute;right:22px;top:16px;width:10px;height:10px;border:1px solid #cacaca;border-bottom:0;border-left:none;-webkit-transform:rotate(45deg)}
+.userlink li a{display:block;height:44px;line-height:44px;color:#000;font-size:15px}
+.userlink li a span{float:right;color:#ccc;font-size:12px;padding-right:40px}
+.userlink li i{display:inline-block;width:20px;height:20px;-webkit-border-radius:10px;line-height:20px;text-align:center;position:absolute;right:50px;top:12px;font-style:normal;font-size:12px;color:#fff;background:#fe6771}
+.userlink li:last-child{border-bottom:0}
+.userlink li::before{content:"";position:absolute;top:0px;left:-32px;width:32px;height:44px;}
+.userlink:first-child li:nth-child(1)::before{background:url(../images/my/ic_1.png) no-repeat center;background-size:16px auto;}
+.userlink:first-child li:nth-child(2)::before{background:url(../images/my/ic_3.png) no-repeat center;background-size:16px auto;}
+.userlink:first-child li:nth-child(3)::before{background:url(../images/my/ic_4.png) no-repeat center;background-size:16px auto;}
+.userlink:nth-child(2) li:nth-child(1)::before{background:url(../images/my/ic_5.png) no-repeat center;background-size:16px auto;}
+.userlink:nth-child(2) li:nth-child(2)::before{background:url(../images/my/ic_6.png) no-repeat center;background-size:16px auto;}
+
+ul.m_nav{width: 100%;height: 140px;background-color: #fff;position: fixed;left:0; bottom:-140px; z-index:600;}
+ul.m_nav li{width: 33.33%;float: left;display: block;}
+ul.m_nav li .img{width: 100%;height:100px}
+ul.m_nav li:nth-child(1) .img{background: url(../images/index/m_nav1.png) center no-repeat;background-size:auto 75px;}
+ul.m_nav li:nth-child(2) .img{background: url(../images/index/m_nav2.png) center no-repeat;background-size:auto 75px;}
+ul.m_nav li:nth-child(3) .img{background: url(../images/index/m_nav3.png) center no-repeat;background-size:auto 75px;}
+ul.m_nav p{width: 30px;height: 30px;position: absolute;left: 50%;bottom: 10px;margin-left: -15px; background: url(../images/index/close.png) center no-repeat;background-size:auto 18px;}
+#cover{width: 100%;height: 100%;position:fixed;left:0;top:0;background-color:rgba(0,0,0,0.7);z-index: 510;}
+
+/*底部导航*/
+footer{height: 42px;padding-top:8px;width: 100%;min-width:320px; background: #fff; position:fixed; left:0; bottom:0; z-index:500}
+footer a{ display: block; width: 20%; float: left;position: relative;}
+footer a i{ display: block; width: 28px; height: 34px; margin: 0 auto;}
+footer a:first-child i{background: url(../images/index/foot_1.png) center no-repeat;background-size: 28px auto;}
+footer a:nth-child(2) i{background: url(../images/index/foot_2.png) center no-repeat;background-size: 28px auto;}
+footer a:nth-child(4) i{background: url(../images/index/foot_3.png) center no-repeat;background-size: 28px auto;}
+footer a:last-child i{background: url(../images/index/foot_4.png) center no-repeat;background-size: 28px auto;}
+footer a.midle{margin-top:-30px; }
+footer a.midle i{width: 60px; height:60px; background: url(../images/index/dang.png) center no-repeat;background-size: 60px auto;}
+
+footer a:first-child.cur i{background: url(../images/index/foot_1_c.png) center no-repeat;background-size: 28px auto;}
+footer a:nth-child(2).cur i{background: url(../images/index/foot_2_c.png) center no-repeat;background-size: 28px auto;}
+footer a:nth-child(4).cur i{background: url(../images/index/foot_3_c.png) center no-repeat;background-size: 28px auto;}
+footer a:last-child.cur i{background: url(../images/index/foot_4_c.png) center no-repeat;background-size: 28px auto;}

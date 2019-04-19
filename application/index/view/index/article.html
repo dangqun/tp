@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no" searchtype="map">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/article.css">
+    <title>党群头条</title>
+</head>
+<body>
+    <header>
+        <a href="javascript:history.back(-1)"><i></i></a>
+        <h1>党群头条</h1>
+    </header>
+    <div class="item" style="padding-top: 50px;">
+        <h1 class="title">瓯海区打造“城市15分钟党群服务圈”绘就一张红色地图</h1>
+        <name>
+            <i></i>
+            <img src="images/my/head.png">
+            <span>
+                <span class="text">小凡</span>
+                <em>2019年4月16号<span>13:26</span></em>
+            </span>
+            <a class="gz"><b>+</b><span>关注</span></a>
+        </name>
+        <div class="infoOne">
+            <span class="img lazy" data-original="images/publicWelfare/1.jpg"></span>
+        </div>
+        <div class="content">
+            <p>温州，一座有温度的城市，应该是现代化，但也不乏人情味的。这是瓯海区构建“城市15分钟党群服务圈”的最初心和落脚点。<p>
+            <p>如今，在快速崛起的瓯海城市新区，一个以区、镇街、社区、新领域新业态四级党群服务中心为枢纽，以党群之家、党群微家为延伸，以居家养老中心、居民中心等为补充的“城市15分钟党群服务圈”正逐渐从蓝图变为现实。不久的将来，最多15分钟，瓯海居民就能到就近的“红色阵地”，享受优质、贴心的党群服务。
+            </p>
+            <p>作为浙江省第二届最具发展潜力的“十大新城”，瓯海正以城市基层党建为主抓手，浓墨重彩地绘就一张“红色地图”，为城市的建设与发展注入速度、力度和温度。
+            </p>
+        </div>
+    </div>
+</body>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/lazyload/jquery.lazyload.js"></script>
+<script>
+//图片懒加载
+    $(".lazy").lazyload({
+        placeholder : "",
+        effect: "fadeIn",
+        threshold : 200
+    }).removeClass('lazy').addClass('lazyloaded');
+
+    $(".gz").click(function(){
+        if($(this).hasClass("cur")){
+            $(".gz").removeClass("cur");
+            $(".gz").html("<b>+</b><span>关注</span>")
+        }else{
+            $(".gz").addClass("cur");
+            $(".gz").html("<span>已关注</span>")
+        }
+    });   
+</script>
+</html>

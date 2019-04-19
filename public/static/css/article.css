@@ -1,0 +1,34 @@
+html,body{background-color: #fff;}
+/*header*/
+header{ position: fixed;left:0;top:0;width:100%; min-width:320px;height:49px;background:#fff;z-index:500}
+header h1{text-align:center;font-size:17px;height:49px;line-height:49px;color:#000;font-weight: 600;}
+header a{position:absolute;left:0;top:0;display:block;height:49px;line-height:49px;padding-left:15px;font-size:15px;color:#000}
+header a i{display:inline-block;margin-left:5px;vertical-align:1px;width:10px;height:10px;border:1px solid #000;border-top:0;border-right:0;transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg)}
+/*end-header*/
+
+h1.title{font-size: 18px;padding: 10px 25px 0 25px;color: #000;font-weight: 600;letter-spacing:2px;}
+
+/*内容*/
+.item{margin-top:10px;background:#fff}
+.item>name{ display:block; height:80px; box-sizing:border-box; width:100%; padding:15px 80px 15px 25px; position:relative}
+.item>name img{border-radius: 25px;width: 50px;height: 50px; display:inline-block;vertical-align: middle}
+.item i{display: inline-block;vertical-align: middle;width:1px;height:100%;}
+.item>name>span{ display:inline-block;vertical-align: middle;font-size:14px; padding-left:10px; color:#000;line-height: 16px;}
+.item>name>span .text{ display:inline-block;max-width:140px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;font-weight: 600;}
+.item>name>span>em{ display:block;font-style: normal; color:#7e7e7e;font-size: 11px;}
+.item>name>span>em>span{padding-left: 10px;}
+
+.item>name>a{ display:inline-block;width:50px; height:20px;border:1px solid #e0431b; text-align:center; line-height:20px; color:#e0431b;border-radius: 3px;}
+.item>name>a b{ vertical-align: middle;font-size:20px; padding-right:3px; display: inline-block;margin-top: -5px;}
+.item>name>a.gz{position:absolute; right:25px; top:30px;font-weight:600; }
+.item>name>a.gz b{background-position:-308px -6px;}
+.item>name>a.gz.cur{transition:all 0.3s;border:1px solid #ccc;color:#ccc;}
+
+@media(min-width:375px){
+	.item>name>span .text{ display:inline-block;max-width:200px;}
+}
+
+.infoOne{display: block;-webkit-margin-before: 0em;-webkit-margin-after: 0em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;padding: 0 10px;}
+.infoOne .img{width: 100%;padding-top:50%;position: relative;display: block;background-size: cover;background-position: 50% 50%;background-color: #eee;border-radius: 3x;}
+.content{padding: 10px;text-align: justify;color: #000}
+.content>p{text-indent:2em;line-height: 24px;letter-spacing:1px;}

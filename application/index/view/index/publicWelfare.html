@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no" searchtype="map">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="css/publicWelfare.css">
+    <title>公益秀</title>
+</head>
+<body>
+    <header>
+        <h1>公益秀</h1>
+        <a class="right"></a>
+    </header>
+    <section>
+        <!-- <ul class="nav">
+            <li class="cur">正在进行</li>
+            <li>已结束行动</li>
+            <li>公益类型</li>
+        </ul> -->
+        <!-- 轮播图 -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="images/publicWelfare/img.jpg"></div>
+                <div class="swiper-slide"><img src="images/publicWelfare/img.jpg"></div>
+                <div class="swiper-slide"><img src="images/publicWelfare/img.jpg"></div>
+                <div class="swiper-slide"><img src="images/publicWelfare/img.jpg"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <script src="js/swiper.min.js"></script>
+        <script>
+        var Swiper1 = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            spaceBetween: 0,
+            centeredSlides: true,
+            autoplay: 2500,
+            autoplayDisableOnInteraction: false,
+            loop: true
+        });
+        </script>
+        <!-- end-轮播图 -->
+
+        <ul class="item">
+            <li>
+                <a href="article.html">
+                    <div class="title"><img src="images/publicWelfare/touxiang.png"><span>温州市瓯海区服务中心</span></div>
+                    <div class="infoOne"><span class="img lazy" data-original="images/publicWelfare/1.jpg"></span></div>
+                    <p class="ellipsis">中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>
+                    <div class="liBottom">
+                        <span class="ellipsis"><i></i>2019/4/15</span>
+                        <span class="ellipsis" class="ellipsis"><i></i>温州市瓯海党群</span>
+                        <span class="ellipsis"><i></i>20/30人</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <div class="title"><img src="images/publicWelfare/touxiang.png"><span>温州市瓯海区服务中心</span></div>
+                <div class="infoOne"><span class="img lazy" data-original="images/publicWelfare/1.jpg"></span></div>
+                <p class="ellipsis">中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>
+                <div class="liBottom">
+                    <span class="ellipsis"><i></i>2019/4/15</span>
+                    <span class="ellipsis" class="ellipsis"><i></i>温州市瓯海党群</span>
+                    <span class="ellipsis"><i></i>20/30人</span>
+                </div>
+            </li>
+            <li>
+                <div class="title"><img src="images/publicWelfare/touxiang.png"><span>温州市瓯海区服务中心</span></div>
+                <div class="infoOne"><span class="img lazy" data-original="images/publicWelfare/1.jpg"></span></div>
+                <p class="ellipsis">中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>
+                <div class="liBottom">
+                    <span class="ellipsis"><i></i>2019/4/15</span>
+                    <span class="ellipsis" class="ellipsis"><i></i>温州市瓯海党群</span>
+                    <span class="ellipsis"><i></i>20/30人</span>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <div id="cover" style="display: none;"></div>
+    <ul class="m_nav">
+        <li><a href="partyHeadlines.html"><div class="img"></div></a></li>
+        <li><a href="goods.html"><div class="img"></div></a></li>
+        <li><a href="activeList.html"><div class="img"></div></a></li>
+        <p></p>
+    </ul>
+    <footer>
+        <div style="padding:0 10px;">
+            <a href="index.html"><i></i></a>
+            <a href="publicWelfare.html" class="cur"><i></i></a>
+            <a class="midle"><i></i></a>
+            <a href="active.html"><i></i></a>
+            <a href="my.html"><i></i></a>
+        </div>
+    </footer>
+</body>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/lazyload/jquery.lazyload.js"></script>
+<script>
+//图片懒加载
+    $(".lazy").lazyload({
+        placeholder : "",
+        effect: "fadeIn",
+        threshold : 200
+    }).removeClass('lazy').addClass('lazyloaded');
+
+    $('footer .midle i').click(function(){
+        $('.m_nav').animate({bottom: '0'}, 200);
+        $("#cover").show();
+        $('.m_nav p').click(function(){
+            $('.m_nav').stop().animate({bottom: '-140px'}, 200);
+            $("#cover").hide();
+        });
+    });
+</script>
+</html>

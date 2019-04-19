@@ -1,0 +1,28 @@
+/* base*/
+@charset "utf-8";html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0}
+html,body,form,fieldset,p,div,h1,h2,h3,h4,h5,h6{-webkit-text-size-adjust:none}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;clear:both}
+body{font-family: Arial,"Microsoft YaHei","PingFang SC","Helvetica Neue",Helvetica,STHeitiSC-Light,sans-serif;-webkit-text-size-adjust:none;color:#666;background:#f0f0f0;-webkit-text-size-adjust:none;min-width:320px;font-size:14px}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+form{display:inline}
+textarea{resize:none}
+table{border-collapse:collapse;border-spacing:0}
+ul,ol{list-style:none}
+input,select,button{font-size:100%;vertical-align:middle;outline:0}
+button,input[type="button"],input[type="reset"],input[type="submit"]{cursor:pointer;-webkit-appearance:button;-moz-appearance:button}
+input:focus:-moz-placeholder,input:focus::-webkit-input-placeholder,textarea:focus:-moz-placeholder,textarea:focus::-webkit-input-placeholder{color:transparent}
+button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}
+a{text-decoration:none;cursor: pointer;}
+a:hover{text-decoration:none}
+img{vertical-align:middle;font-size:0;border:0;-ms-interpolation-mode:bicubic}
+.fl{float:left}
+.fr{float:right}
+.hide{display:none !important}
+.show{display:block !important}
+.ellipsis{white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.break{word-break:break-all;word-wrap:break-word}
+.clearfix:after{content:'\0020';display:block;height:0;clear:both}
+.clearfix{*zoom:1}
+a,input,textarea{-webkit-tap-highlight-color:rgba(0,0,0,0);tap-highlight-color:rgba(0,0,0,0);outline:0}
+.ellipsis{text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}/*超出指定宽度隐藏*/
+

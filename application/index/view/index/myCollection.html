@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no" searchtype="map">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/myCollection.css">
+    <title>收藏</title>
+</head>
+<body>
+    <header>
+        <a href="javascript:history.back(-1)"><i></i></a>
+        <h1>收藏</h1>
+    </header>
+    <section>
+        <ul class="nav">
+            <li class="cur"><a>全 部</a></li>
+            <li><a>头 条</a></li>
+            <li><a>活 动</a></li>
+            <li><a>商 城</a></li>
+            <li><a>会 议</a></li>
+        </ul>
+        <div class="item">
+            <ul>
+                <li>
+                    <a href="article.html"></a>
+                    <div class="images">
+                        <div class="infoTwo"><span class="img lazy" data-original="images/index/img_3.jpg"></span></div>
+                        <div class="infoTwo">
+                            <p class="titleLeft ellipsis">这里是图文左右分布这里是图文左右分布这里是图文左右分布这里是图文左右分布</p>
+                            <div class="from">
+                                <span>2017年4月26日</span>
+                                <span class="cancel">取消收藏</span>
+                            </div>
+                        </div> 
+                    </div> 
+                </li>
+                <li>
+                    <a href="#"></a>
+                    <div class="images">
+                        <div class="infoTwo"><span class="img lazy" data-original="images/index/img_4.jpg"></span></div>
+                        <div class="infoTwo">
+                            <p class="titleLeft ellipsis">这里是图文左右分布这里是图文左右分布这里是图文左右分布这里是图文左右分布</p>
+                            <div class="from">
+                                <span>2017年4月22日</span>
+                                <span class="cancel">取消收藏</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="item" style="display: none;"></div>
+        <div class="item" style="display: none;">3</div>
+        <div class="item" style="display: none;">4</div>
+        <div class="item" style="display: none;">5</div>
+        <div class="null" style="display: none;"><img src="images/null.png"></div>
+    </section>
+</body>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/lazyload/jquery.lazyload.js"></script>
+<script>
+//图片懒加载
+    $(".lazy").lazyload({
+        placeholder : "",
+        effect: "fadeIn",
+        threshold : 200
+    }).removeClass('lazy').addClass('lazyloaded');
+
+    $(".nav li").click(function(){
+        var e=$(this).index();
+        $(".nav li").eq(e).addClass("cur").siblings().removeClass("cur");
+        $(".item").eq(e).show().siblings(".item").hide();
+        var h=$(".item").eq(e).html();
+        if(h==""){
+            $(".null").show()
+        }else{
+            $(".null").hide()
+        }
+    });
+    $(".cancel").click(function(){
+        $(this).parents("li").remove();
+    });
+</script>
+</html>
