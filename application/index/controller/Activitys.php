@@ -30,6 +30,7 @@ class Activitys extends Base
 
 
     public function test(){
+        echo 1;
         if (!$this->isLogin(true)) return;
         $this->sign($this->request->param('id'));
     }
