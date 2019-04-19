@@ -103,6 +103,7 @@ class Org extends Base
             $this->output();
             return;
         }
+
         $data = [];
         $data['org'] = $org->id;
         $model->startTrans();
