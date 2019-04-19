@@ -90,6 +90,7 @@ class Base extends Controller
      * 初始化
      */
     protected function init(){
+        $this->begin('初始化公用信息');
 
         $this->isApi = $this->request->isAjax();//判断是否为AJAX请求
 
@@ -102,12 +103,18 @@ class Base extends Controller
         $this->assign('title','党群');//全局标题设置=
 
         $this->setPageSize();//设置页码和请求量
+
+
+        $this->end('初始化公用信息结束');
     }
 
     /**
      * 初始化登录信息
      */
     protected function initLogin(){
+
+        $this->begin('初始化登录信息');
+
         if(Session::has('user')){
             $this->setLoginState(true);
             $this->setUserInfo(Session::get('user'));
@@ -117,6 +124,8 @@ class Base extends Controller
                 $this->redirect('Errors/index');
             }
         }
+
+        $this->end('初始化登录信息结束');
     }
 
     protected function begin($msg){
@@ -160,6 +169,7 @@ class Base extends Controller
                 $this->result['msg'] = isset($this->status[$this->result['error_code']]) ? $this->status[$this->result['error_code']] : '请求成功';
             }
         }
+        $this->end('apiGetContent接口获取数据结束并输出');
         return json($this->result)->send();
     }
 
@@ -199,6 +209,20 @@ class Base extends Controller
     protected function f(){
         echo "执行时间：".Debug::getRangeTime('begin','end')."s<br/>\r\n";
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * @return array

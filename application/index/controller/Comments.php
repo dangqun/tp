@@ -199,7 +199,7 @@ class Comments extends Base
     /**
      * 删除
      */
-    public function apiDel(){
+    public function del(){
         if($this->isLogin(true))return;
         if($this->request->has('id')){
             $this->result['error_code'] = 3001;
