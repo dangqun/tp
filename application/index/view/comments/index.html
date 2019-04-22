@@ -1,2 +1,76 @@
-{layout name="layouts/default" /}
-comments_index
+{include file="layouts/__header" /}
+<link rel="stylesheet" href="__CSS__/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/publicWelfare.css">
+<title>公益秀</title>
+</head>
+<body>
+<header>
+    <h1>公益秀</h1>
+    <a class="right"></a>
+</header>
+<section>
+    <!-- <ul class="nav">
+        <li class="cur">正在进行</li>
+        <li>已结束行动</li>
+        <li>公益类型</li>
+    </ul> -->
+    <!-- 轮播图 -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="__IMG__/publicWelfare/img.jpg"></div>
+            <div class="swiper-slide"><img src="__IMG__/publicWelfare/img.jpg"></div>
+            <div class="swiper-slide"><img src="__IMG__/publicWelfare/img.jpg"></div>
+            <div class="swiper-slide"><img src="__IMG__/publicWelfare/img.jpg"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <!-- end-轮播图 -->
+
+    <ul class="item">
+        <li>
+            <a href="article.html">
+                <div class="title"><img src="__IMG__/publicWelfare/touxiang.png"><span>温州市瓯海区服务中心</span></div>
+                <div class="infoOne"><span class="img lazy" data-original="__IMG__/publicWelfare/1.jpg"></span></div>
+                <p class="ellipsis">中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>
+                <div class="liBottom">
+                    <span class="ellipsis"><i></i>2019/4/15</span>
+                    <span class="ellipsis" class="ellipsis"><i></i>温州市瓯海党群</span>
+                    <span class="ellipsis"><i></i>20/30人</span>
+                </div>
+            </a>
+        </li>
+        <li>
+            <div class="title"><img src="__IMG__/publicWelfare/touxiang.png"><span>温州市瓯海区服务中心</span></div>
+            <div class="infoOne"><span class="img lazy" data-original="__IMG__/publicWelfare/1.jpg"></span></div>
+            <p class="ellipsis">中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>
+            <div class="liBottom">
+                <span class="ellipsis"><i></i>2019/4/15</span>
+                <span class="ellipsis" class="ellipsis"><i></i>温州市瓯海党群</span>
+                <span class="ellipsis"><i></i>20/30人</span>
+            </div>
+        </li>
+        <li>
+            <div class="title"><img src="__IMG__/publicWelfare/touxiang.png"><span>温州市瓯海区服务中心</span></div>
+            <div class="infoOne"><span class="img lazy" data-original="__IMG__/publicWelfare/1.jpg"></span></div>
+            <p class="ellipsis">中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>
+            <div class="liBottom">
+                <span class="ellipsis"><i></i>2019/4/15</span>
+                <span class="ellipsis" class="ellipsis"><i></i>温州市瓯海党群</span>
+                <span class="ellipsis"><i></i>20/30人</span>
+            </div>
+        </li>
+    </ul>
+</section>
+{include file="layouts/__footer" /}
+<script>
+    var Swiper1 = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false,
+        loop: true
+    });
+</script>
+</html>

@@ -11,6 +11,10 @@ class Index extends Base
         return view('index');
     }
 
+    public function test(){
+        return $this->fetch('welfare');
+    }
+
     /***************************************************  APIf方法  *********************************************************************/
 
 

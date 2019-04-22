@@ -12,7 +12,6 @@ namespace app\index\controller;
 
 use app\index\model\OrgUid;
 use think\Db;
-use Exception;
 use think\Loader;
 
 class Activitys extends Base
@@ -20,17 +19,34 @@ class Activitys extends Base
 
     use \Upload,\SignAndOut;
 
+    /**
+     * 首页
+     * @return mixed
+     */
     public function index()
     {
         return $this->fetch('index');
     }
 
+    /**
+     * 发起活动
+     * @return mixed
+     */
+    public function add(){
+        return $this->fetch('active');
+    }
+
+    /**
+     * 活动管理
+     */
+    public function manage(){
+        return $this->fetch('activeList');
+    }
 
     /************************************************ api分割线 *******************************************************/
 
 
     public function test(){
-        echo 1;
         if (!$this->isLogin(true)) return;
         $this->sign($this->request->param('id'));
     }
@@ -45,8 +61,6 @@ class Activitys extends Base
      */
     public function apiGetList()
     {
-        $this->begin('进入apiGetList接口开始获取数据');
-
         $model = Loader::model('Activity');
         $list = $model->field('id,oid,uid,title,img')->with('org')->where('status', '=', '1')->page($this->page)->limit($this->size)->select();
         if (empty($list)) {
@@ -67,8 +81,6 @@ class Activitys extends Base
      */
     public function apiGetContent()
     {
-        $this->begin('进入apiGetContent接口开始获取数据');
-
         if (!$this->request->has('id')) {
             $this->result['error_code'] = 3002;
             $this->output();

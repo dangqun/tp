@@ -18,6 +18,14 @@ class sessions extends Base
 {
     use \Code;
 
+    /**
+     * 前置操作
+     * 无需登录
+     * @var array
+     */
+    protected $beforeActionList = [
+        'isLogin'=>['only'=>'']
+    ];
 
     /**
      * 登录页面

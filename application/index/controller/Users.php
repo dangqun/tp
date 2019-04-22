@@ -1,4 +1,5 @@
 <?php
+namespace app\index\controller;
 /**
  * 用户
  * Created by PhpStorm.
@@ -6,9 +7,6 @@
  * Date: 2019/3/26
  * Time: 19:42
  */
-
-namespace app\index\controller;
-
 use app\index\controller\Base;
 use think\Db;
 use think\Loader;
@@ -26,6 +24,10 @@ class Users extends Base
         return view('index');
     }
 
+    public function score(){
+        return $this->fetch('pioneerIndex');
+    }
+
     /**
      * 个人资料
      */
@@ -34,6 +36,34 @@ class Users extends Base
         $this->isLogin();
         $content = Db::name('user')->field('user_name')->find($this->userInfo['id']);
         return $this->fetch('show',['content'=>$content]);
+    }
+
+    /**
+     * 党员信息
+     */
+    public function info(){
+        return $this->fetch('information');
+    }
+
+    /**
+     * 关注
+     */
+    public function follow(){
+        return $this->fetch('myConcern');
+    }
+
+    /**
+     * 收藏
+     */
+    public function collection(){
+        return $this->fetch('myCollection');
+    }
+
+    /**
+     * 粉丝
+     */
+    public function fans(){
+        return $this->fetch('myFans');
     }
 
     /**

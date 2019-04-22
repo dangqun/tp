@@ -77,7 +77,8 @@ class Base extends Controller
      */
     protected $beforeActionList = [
         'init',
-        'initLogin'
+        'initLogin',
+        //'isLogin'
     ];
 
     public function __construct(Request $request = null)
@@ -140,7 +141,7 @@ class Base extends Controller
         if($this->isLoginState()){
             return true;
         }
-        if($api){//api则输出JSON
+        if($api || $this->request->isAjax()){//api则输出JSON
             $this->result['msg'] = '请先登录！';
             $this->output();
         }else{//页面则跳转至登录
