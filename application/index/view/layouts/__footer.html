@@ -1,1 +1,49 @@
+<div id="cover" style="display: none;"></div>
+<ul class="m_nav">
+    <li><a href="headlines"><div class="img"></div></a></li>
+    <li><a href="goods"><div class="img"></div></a></li>
+    <li><a href="activeList"><div class="img"></div></a></li>
+    <p></p>
+</ul>
+<footer>
+    <div style="padding:0 10px;">
+        <a href="index"><i></i></a>
+        <a href="welfare"><i></i></a>
+        <a class="midle"><i></i></a>
+        <a href="active"><i></i></a>
+        <a href="my"><i></i></a>
+    </div>
+</footer>
+</body>
+<script src="__JS__/jquery-1.8.3.min.js"></script>
+<script src="__JS__/jquery.lazyload.js"></script>
+<script src="__JS__/swiper.min.js"></script>
+<script>
+    var title = $("title").text();
+    if(title=="党群"){
+        $("footer a").eq(0).addClass("cur");
+    }else if(title=="公益秀"){
+        $("footer a").eq(1).addClass("cur");
+    }else if(title=="发起活动"){
+        $("footer a").eq(3).addClass("cur");
+    }else if(title=="个人中心"){
+        $("footer a").eq(4).addClass("cur");
+    }
 
+
+    //图片懒加载
+    $(".lazy").lazyload({
+        placeholder : "",
+        effect: "fadeIn",
+        threshold : 200
+    }).removeClass('lazy').addClass('lazyloaded');
+
+    $('footer .midle i').click(function(){
+        $('.m_nav').animate({bottom: '0'}, 200);
+        $("#cover").show();
+        $('.m_nav p').click(function(){
+            $('.m_nav').stop().animate({bottom: '-140px'}, 200);
+            $("#cover").hide();
+        });
+    });
+</script>

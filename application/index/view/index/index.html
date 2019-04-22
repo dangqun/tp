@@ -1,87 +1,78 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,minimal-ui">
-    <meta name="format-detection" content="telephone=no" searchtype="map">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="shortcut icon" type="image/x-icon" href="/public/logo.ico" media="screen" />
-    <link rel="stylesheet" href="__CSS__/base.css">
+{include file="layouts/__header" /}
     <link rel="stylesheet" href="__CSS__/swiper.min.css">
     <link rel="stylesheet" type="text/css" href="__CSS__/index.css">
     <title>党群</title>
 </head>
 <body>
-    <header>
-        <div class="search">
-            <div class="searchInput">
-                <input type="text" placeholder="搜索当月最热活动"/>
-                <a href="tip.html">
-                    <img src="__IMG__/index/xiaoxi.png">
-                    <b></b>
+
+<header>
+    <div class="search">
+        <div class="searchInput">
+            <input type="text" placeholder="搜索当月最热活动"/>
+            <a href="tip">
+                <img src="__IMG__/index/xiaoxi.png">
+                <b>3</b>
+            </a>
+        </div>
+    </div>
+</header>
+<section>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="__IMG__/index/img_1.jpg"></div>
+            <div class="swiper-slide"><img src="__IMG__/index/img_1.jpg"></div>
+            <div class="swiper-slide"><img src="__IMG__/index/img_1.jpg"></div>
+            <div class="swiper-slide"><img src="__IMG__/index/img_1.jpg"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="headlines">
+        <img src="__IMG__/index/toutiao.png">
+        <i>最新</i>
+        <a href="headlines" class="ellipsis">温州，一座有温度的城市，应该是现代化，但也不乏人情味的。这是瓯海区构建“城市15分钟党群服务圈”的最初心和落脚点。</a>
+    </div>
+
+    <div class="review">
+        <div class="title"><b></b>精选活动</div>
+         <div style="overflow: hidden;padding-bottom: 10px;">
+          <div class="swiper-container1">
+            <div class="swiper-wrapper">
+                <a class="swiper-slide" href="article">
+                    <img src="__IMG__/index/img_2.jpg">
+                    <p class="ellipsis">同志们辛苦了，为人民服务</p>
+                    <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
+                </a>
+                <a class="swiper-slide" href="article">
+                    <img src="__IMG__/index/img_2.jpg">
+                    <p class="ellipsis">同志们辛苦了，为人民服务</p>
+                    <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
+                </a>
+                <a class="swiper-slide" href="article">
+                    <img src="__IMG__/index/img_2.jpg">
+                    <p class="ellipsis">同志们辛苦了，为人民服务</p>
+                    <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
+                </a>
+                <a class="swiper-slide" href="article">
+                    <img src="__IMG__/index/img_2.jpg">
+                    <p class="ellipsis">同志们辛苦了，为人民服务</p>
+                    <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
                 </a>
             </div>
-        </div>
-    </header>
-    <section>
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="__IMG__/index/img_1.jpg"></div>
-                <div class="swiper-slide"><img src="__IMG__/index/img_1.jpg"></div>
-                <div class="swiper-slide"><img src="__IMG__/index/img_1.jpg"></div>
-                <div class="swiper-slide"><img src="__IMG__/index/img_1.jpg"></div>
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-        <div class="headlines">
-            <img src="__IMG__/index/toutiao.png">
-            <i>最新</i>
-            <a href="partyHeadlines.html" class="ellipsis">温州，一座有温度的城市，应该是现代化，但也不乏人情味的。这是瓯海区构建“城市15分钟党群服务圈”的最初心和落脚点。</a>
-        </div>
+          </div>
+          </div>
+    </div>
 
-        <div class="review">
-            <div class="title"><b></b>精选活动</div>
-             <div style="overflow: hidden;padding-bottom: 10px;">
-              <div class="swiper-container1">
-                <div class="swiper-wrapper">
-                    <a class="swiper-slide" href="article.html">
-                        <img src="__IMG__/index/img_2.jpg">
-                        <p class="ellipsis">同志们辛苦了，为人民服务</p>
-                        <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
-                    </a>
-                    <a class="swiper-slide" href="article.html">
-                        <img src="__IMG__/index/img_2.jpg">
-                        <p class="ellipsis">同志们辛苦了，为人民服务</p>
-                        <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
-                    </a>
-                    <a class="swiper-slide" href="article.html">
-                        <img src="__IMG__/index/img_2.jpg">
-                        <p class="ellipsis">同志们辛苦了，为人民服务</p>
-                        <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
-                    </a>
-                    <a class="swiper-slide" href="article.html">
-                        <img src="__IMG__/index/img_2.jpg">
-                        <p class="ellipsis">同志们辛苦了，为人民服务</p>
-                        <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
-                    </a>
-                </div>
-              </div>
-              </div>
-        </div>
-
-        <div class="item">
-            <div class="title"><b></b>最新活动</div>
-            <ul>
-                <li>
-                    <a href="article.html">
-                    <div class="images">
-                        <div class="infoTwo">
-                            <p class="titleLeft">温州，一座有温度的城市，应该是现代化，但也不乏人情味的。这是瓯海区构建“城市15分钟党群服务圈”的最初心和落脚点。</p>
-                            <div class="from">
-                                <span>2017年4月22日</span>
-                                <span>立即参与</span>
+    <div class="item">
+        <div class="title"><b></b>最新活动</div>
+        <ul>
+            <li>
+                <a href="article">
+                <div class="images">
+                    <div class="infoTwo">
+                        <p class="titleLeft">温州，一座有温度的城市，应该是现代化，但也不乏人情味的。这是瓯海区构建“城市15分钟党群服务圈”的最初心和落脚点。</p>
+                        <div class="from">
+                            <span>2017年4月22日</span>
+                            <span>立即参与</span>
                             </div>
                         </div>
                         <div class="infoTwo"><span class="img lazy" data-original="__IMG__/index/img_3.jpg"></span></div>
@@ -89,7 +80,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="article.html">
+                    <a href="article">
                     <div class="images">
                         <div class="infoTwo">
                             <p class="titleLeft">温州，一座有温度的城市，应该是现代化，但也不乏人情味的。这是瓯海区构建“城市15分钟党群服务圈”的最初心和落脚点。</p>
@@ -106,26 +97,8 @@
 
         </div>
     </section>
-    <div id="cover" style="display: none;"></div>
-    <ul class="m_nav">
-        <li><a href="partyHeadlines.html"><div class="img"></div></a></li>
-        <li><a href="goods.html"><div class="img"></div></a></li>
-        <li><a href="activeList.html"><div class="img"></div></a></li>
-        <p></p>
-    </ul>
-    <footer>
-        <div style="padding:0 10px;">
-            <a href="{:Url('index/Index/index')}" class="cur"><i></i></a>
-            <a href="publicWelfare.html"><i></i></a>
-            <a class="midle"><i></i></a>
-            <a href="active.html"><i></i></a>
-            <a href="my.html"><i></i></a>
-        </div>
-    </footer>
 </body>
-<script src="__JS__/jquery-1.8.3.min.js"></script>
-<script src="__JS__/jquery.lazyload.js"></script>
-<script src="__JS__/swiper.min.js"></script>
+{include file="layouts/__footer" /}
 <script>
     var Swiper1 = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
@@ -143,22 +116,6 @@
             el: '.swiper-pagination',
             clickable: true,
         },
-    });
-
-    //图片懒加载
-    $(".lazy").lazyload({
-        placeholder : "",
-        effect: "fadeIn",
-        threshold : 200
-    }).removeClass('lazy').addClass('lazyloaded');
-
-    $('footer .midle i').click(function(){
-        $('.m_nav').animate({bottom: '0'}, 200);
-        $("#cover").show();
-        $('.m_nav p').click(function(){
-            $('.m_nav').stop().animate({bottom: '-140px'}, 200);
-            $("#cover").hide();
-        });
     });
 </script>
 </html>

@@ -17,7 +17,7 @@ input::-webkit-input-placeholder {color: #cacacc;}
 .upload li:last-child{margin-right: 0;}
 .upload li img{width: 100%;height: 100%}
 .upload li>input{width: 100%;height: 100%;opacity:0;}
-.upload li.file{background: url(../images/file.png) no-repeat;background-size: 100px auto;}
-.upload li.add_img{background: url(../images/add_img.png) no-repeat;background-size: 100px auto;}
+.upload li.file{background: url(../image/file.png) no-repeat;background-size: 100px auto;}
+.upload li.add_img{background: url(../image/add_img.png) no-repeat;background-size: 100px auto;}
 
 a.btn{width: 150px;height: 30px;background-color: #e0431b;margin:50px auto;display:block;color: #fff;text-align: center;font-size: 16px;line-height: 30px;border-radius: 30px;}
