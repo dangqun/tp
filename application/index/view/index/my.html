@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,minimal-ui">
-    <meta name="format-detection" content="telephone=no" searchtype="map">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" type="text/css" href="css/my.css">
+{include file="layouts/__header" /}
+    <link rel="stylesheet" type="text/css" href="__CSS__/my.css">
     <title>个人中心</title>
 </head>
 <body>
@@ -17,62 +7,27 @@
         <div style="width: 100%; padding: 0 15px;box-sizing: border-box;position: absolute;left: 0;top: 80px;">
             <div class="top">
                 <div class="img">
-                    <img src="images/my/head.png">
+                    <img src="__IMG__/my/head.png">
                     <p><b>小凡</b></p>
                 </div>
                 <ul>
-                    <li><a href="myConcern.html"><b>8</b><br/>关注</a></li>
-                    <li><a href="myFans.html"><b>10000</b><br/>粉丝</a></li>
-                    <li><a href="pioneerIndex.html"><b>1000000</b><br/>先锋指数</a></li>
+                    <li><a href="myConcern"><b>8</b><br/>关注</a></li>
+                    <li><a href="myFans"><b>10000</b><br/>粉丝</a></li>
+                    <li><a href="pioneerIndex"><b>1000000</b><br/>先锋指数</a></li>
                 </ul>
             </div>
         </div>
     </header>
     <section>
         <ul class="userlink" style="padding-top: 65px;">
-            <li><a href="myCollection.html">我的收藏</a></li>
-            <li><a href="ranking.html">排行榜</a></li>
-            <li><a href="information.html">党员信息查询</a></li> 
+            <li><a href="myCollection">我的收藏</a></li>
+            <li><a href="ranking">排行榜</a></li>
+            <li><a href="information">党员信息查询</a></li>
         </ul>
         <ul class="userlink">
-            <li><a href="get.html">采集提报</a></li>
-            <li><a href="conferenceRecords.html">会议记录</a></li>
+            <li><a href="get">采集提报</a></li>
+            <li><a href="conferenceRecords">会议记录</a></li>
         </ul>
     </section>
-    <div id="cover" style="display: none;"></div>
-    <ul class="m_nav">
-        <li><a href="partyHeadlines.html"><div class="img"></div></a></li>
-        <li><a href="goods.html"><div class="img"></div></a></li>
-        <li><a href="activeList.html"><div class="img"></div></a></li>
-        <p></p>
-    </ul>
-    <footer>
-        <div style="padding:0 10px;">
-            <a href="index.html"><i></i></a>
-            <a href="publicWelfare.html"><i></i></a>
-            <a class="midle"><i></i></a>
-            <a href="active.html"><i></i></a>
-            <a href="my.html" class="cur"><i></i></a>
-        </div>
-    </footer>
-</body>
-<script src="js/jquery-1.8.3.min.js"></script>
-<script src="js/lazyload/jquery.lazyload.js"></script>
-<script>
-//图片懒加载
-    $(".lazy").lazyload({
-        placeholder : "",
-        effect: "fadeIn",
-        threshold : 200
-    }).removeClass('lazy').addClass('lazyloaded');
-
-    $('footer .midle i').click(function(){
-        $('.m_nav').animate({bottom: '0'}, 200);
-        $("#cover").show();
-        $('.m_nav p').click(function(){
-            $('.m_nav').stop().animate({bottom: '-140px'}, 200);
-            $("#cover").hide();
-        });
-    });
-</script>
+{include file="layouts/__footer" /}
 </html>
