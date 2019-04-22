@@ -1,9 +1,9 @@
-header{width: 100%;height: 60px;background: url(/tp/public/static/image/index/top.jpg) no-repeat; background-size: 100% 100%;}
+header{width: 100%;height: 60px;background: url(/public/static/image/index/top.jpg) no-repeat; background-size: 100% 100%;}
 .search{padding: 18px 50px 18px 20px;}
 .searchInput{position: relative;height: 24px;padding: 0 10px 0 30px;border-radius: 10px;background-color: #fff;}
 .searchInput input::-webkit-input-placeholder{ color: #ccc; font-size: 12px;}
 .searchInput input{ border-style: none; display: block; width: 100%; height: 22px; line-height: 12px; font-size: 12px; color: #626262;}
-.searchInput:before{content: "";display: block;height: 22px;width: 22px;position: absolute;left: 3px;top: 0;background: url(/tp/public/static/image/index/sousuo.png) no-repeat center;background-size: 15px auto; }
+.searchInput:before{content: "";display: block;height: 22px;width: 22px;position: absolute;left: 3px;top: 0;background: url(/public/static/image/index/sousuo.png) no-repeat center;background-size: 15px auto; }
 .searchInput img{width: 20px;height: 25px;position: absolute;right:-25px;top: 0px;}
 .searchInput b{width: 10px;height: 10px;border-radius: 10px; background-color: #fdbe5f;font-size: 10px;color: #f0f0f0;position: absolute;right:-28px;top: -3px;text-align: center;line-height: 10px;}
 
@@ -24,7 +24,7 @@ header{width: 100%;height: 60px;background: url(/tp/public/static/image/index/to
 .swiper-container1 p{font-size: 10px;text-align: justify;padding: 2px; color: #000;}
 .swiper-container1 p.bottom{color: #616161;}
 .swiper-container1 p.bottom span:nth-child(2){float:right;padding-left: 12px;position: relative;}
-.swiper-container1 p.bottom span:nth-child(2):before{content: "";display: block;height: 10px;width: 12px;position: absolute;left: 0px;top:2px;background: url(/tp/public/static/image/index/yanjing.png) no-repeat center;background-size: 10px auto; }
+.swiper-container1 p.bottom span:nth-child(2):before{content: "";display: block;height: 10px;width: 12px;position: absolute;left: 0px;top:2px;background: url(/public/static/image/index/yanjing.png) no-repeat center;background-size: 10px auto; }
 .swiper-container1 p.bottom span:nth-child(2):after{content: "人";}
 .swiper-container1 .swiper-slide{box-shadow: 1px 2px 3px #ccc;}
 .review{background-color: #fff;margin-top: 10px;padding: 10px 0 0 10px;}
@@ -55,25 +55,25 @@ header{width: 100%;height: 60px;background: url(/tp/public/static/image/index/to
 ul.m_nav{width: 100%;height: 140px;background-color: #fff;position: fixed;left:0; bottom:-140px; z-index:600;}
 ul.m_nav li{width: 33.33%;float: left;display: block;}
 ul.m_nav li .img{width: 100%;height:100px}
-ul.m_nav li:nth-child(1) .img{background: url(/tp/public/static/image/index/m_nav1.png) center no-repeat;background-size:auto 75px;}
-ul.m_nav li:nth-child(2) .img{background: url(/tp/public/static/image/index/m_nav2.png) center no-repeat;background-size:auto 75px;}
-ul.m_nav li:nth-child(3) .img{background: url(/tp/public/static/image/index/m_nav3.png) center no-repeat;background-size:auto 75px;}
-ul.m_nav p{width: 30px;height: 30px;position: absolute;left: 50%;bottom: 10px;margin-left: -15px; background: url(/tp/public/static/image/index/close.png) center no-repeat;background-size:auto 18px;}
+ul.m_nav li:nth-child(1) .img{background: url(/public/static/image/index/m_nav1.png) center no-repeat;background-size:auto 75px;}
+ul.m_nav li:nth-child(2) .img{background: url(/public/static/image/index/m_nav2.png) center no-repeat;background-size:auto 75px;}
+ul.m_nav li:nth-child(3) .img{background: url(/public/static/image/index/m_nav3.png) center no-repeat;background-size:auto 75px;}
+ul.m_nav p{width: 30px;height: 30px;position: absolute;left: 50%;bottom: 10px;margin-left: -15px; background: url(/public/static/image/index/close.png) center no-repeat;background-size:auto 18px;}
 #cover{width: 100%;height: 100%;position:fixed;left:0;top:0;background-color:rgba(0,0,0,0.7);z-index: 510;}
 
 /*底部导航*/
 footer{height: 42px;padding-top:8px;width: 100%;min-width:320px; background: #fff; position:fixed; left:0; bottom:0; z-index:500}
 footer a{ display: block; width: 20%; float: left;position: relative;}
 footer a i{ display: block; width: 28px; height: 34px; margin: 0 auto;}
-footer a:first-child i{background: url(/tp/public/static/image/index/foot_1.png) center no-repeat;background-size: 28px auto;}
-footer a:nth-child(2) i{background: url(/tp/public/static/image/index/foot_2.png) center no-repeat;background-size: 28px auto;}
-footer a:nth-child(4) i{background: url(/tp/public/static/image/index/foot_3.png) center no-repeat;background-size: 28px auto;}
-footer a:last-child i{background: url(/tp/public/static/image/index/foot_4.png) center no-repeat;background-size: 28px auto;}
+footer a:first-child i{background: url(/public/static/image/index/foot_1.png) center no-repeat;background-size: 28px auto;}
+footer a:nth-child(2) i{background: url(/public/static/image/index/foot_2.png) center no-repeat;background-size: 28px auto;}
+footer a:nth-child(4) i{background: url(/public/static/image/index/foot_3.png) center no-repeat;background-size: 28px auto;}
+footer a:last-child i{background: url(/public/static/image/index/foot_4.png) center no-repeat;background-size: 28px auto;}
 footer a.midle{margin-top:-30px; }
-footer a.midle i{width: 60px; height:60px; background: url(/tp/public/static/image/index/dang.png) center no-repeat;background-size: 60px auto;}
+footer a.midle i{width: 60px; height:60px; background: url(/public/static/image/index/dang.png) center no-repeat;background-size: 60px auto;}
 
-footer a:first-child.cur i{background: url(/tp/public/static/image/index/foot_1_c.png) center no-repeat;background-size: 28px auto;}
-footer a:nth-child(2).cur i{background: url(/tp/public/static/image/index/foot_2_c.png) center no-repeat;background-size: 28px auto;}
-footer a:nth-child(4).cur i{background: url(/tp/public/static/image/index/foot_3_c.png) center no-repeat;background-size: 28px auto;}
-footer a:last-child.cur i{background: url(/tp/public/static/image/index/foot_4_c.png) center no-repeat;background-size: 28px auto;}
+footer a:first-child.cur i{background: url(/public/static/image/index/foot_1_c.png) center no-repeat;background-size: 28px auto;}
+footer a:nth-child(2).cur i{background: url(/public/static/image/index/foot_2_c.png) center no-repeat;background-size: 28px auto;}
+footer a:nth-child(4).cur i{background: url(/public/static/image/index/foot_3_c.png) center no-repeat;background-size: 28px auto;}
+footer a:last-child.cur i{background: url(/public/static/image/index/foot_4_c.png) center no-repeat;background-size: 28px auto;}
 /*end-底部导航*/
