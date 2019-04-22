@@ -149,6 +149,14 @@ class Base extends Controller
         }
     }
 
+    /**
+     * 清楚登录信息并跳转登录
+     */
+    protected function logOut(){
+        Session::delete('user');//清除缓存
+        $this->redirect('Sessions/login');
+    }
+
 
     /**
      * 输出
@@ -161,6 +169,49 @@ class Base extends Controller
                 $this->result['msg'] = isset($this->status[$this->result['error_code']]) ? $this->status[$this->result['error_code']] : '请求成功';
             }
         }
+        return json($this->result)->send();
+    }
+
+    /**
+     * 输出-带参数
+     * @param string $msg
+     * @param array $data
+     * @param int $error_code
+     * @return mixed
+     */
+    protected function outputData($msg = '请求失败', $data = [], $error_code = 0){
+        $this->result['code'] = 400;
+        if(empty($error_code)){
+            $this->result['msg'] = $msg;
+        }else{
+            $this->result['msg'] = $this->status[$error_code];
+        }
+        if(!empty($data)){
+            $this->result['data'] = $data;
+        }
+        return json($this->result)->send();
+    }
+
+    /**
+     * 请求成功
+     * @param string $msg
+     * @param array $data
+     * @return mixed
+     */
+    protected function successR($msg = '请求成功',$data = []){
+        $this->result['code'] = 200;
+        $this->result['msg'] = $msg;
+        $this->result['data'] = $data;
+        return json($this->result)->send();
+    }
+
+    /**
+     * 请求失败
+     * @param string $msg
+     * @return mixed
+     */
+    protected function errorR($msg = '请求失败'){
+        $this->result['msg'] = $msg;
         return json($this->result)->send();
     }
 

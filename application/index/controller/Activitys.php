@@ -29,6 +29,16 @@ class Activitys extends Base
     }
 
     /**
+     * 详情
+     */
+    public function show(){
+        $data = [
+            'id'=>$this->request->param('id')
+        ];
+        return $this->fetch('show',$data);
+    }
+
+    /**
      * 发起活动
      * @return mixed
      */
@@ -44,25 +54,13 @@ class Activitys extends Base
     }
 
     /************************************************ api分割线 *******************************************************/
-
-
-    public function test(){
-        if (!$this->isLogin(true)) return;
-        $this->sign($this->request->param('id'));
-    }
-    public function test1(){
-        if (!$this->isLogin(true)) return;
-        $this->signOut($this->request->param('id'));
-    }
-
-
     /**
      * 获取活动列表
      */
     public function apiGetList()
     {
         $model = Loader::model('Activity');
-        $list = $model->field('id,oid,uid,title,img')->with('org')->where('status', '=', '1')->page($this->page)->limit($this->size)->select();
+        $list = $model->field('id,oid,uid,title,img,create_time')->with('org')->where('status', '=', '1')->order('create_time DESC')->page($this->page)->limit($this->size)->select();
         if (empty($list)) {
             $this->result['error_code'] = 3001;
             $this->output();
@@ -74,6 +72,13 @@ class Activitys extends Base
         $this->result['code'] = 200;
         $this->result['data'] = $list;
         $this->output();
+    }
+
+    /**
+     * 精品活动
+     */
+    public function apiGetSelectedList(){
+        $this->errorR('没有更多数据了');
     }
 
     /**
@@ -104,8 +109,6 @@ class Activitys extends Base
         $this->result['code'] = 200;
         $this->result['data'] = $info;
         $this->output();
-
-
     }
 
     /**
@@ -334,5 +337,7 @@ class Activitys extends Base
         $this->result['code'] = 200;
         $this->output();
     }
+
+    /***************************************************  内部方法  *********************************************************************/
 
 }

@@ -1,7 +1,7 @@
 {include file="layouts/__header" /}
-    <link rel="stylesheet" href="__CSS__/swiper.min.css">
-    <link rel="stylesheet" type="text/css" href="__CSS__/index.css">
-    <title>党群</title>
+<link rel="stylesheet" href="__CSS__/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<title>党群</title>
 </head>
 <body>
 
@@ -19,10 +19,9 @@
 <section>
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="__IMG__/index/img_1.jpg"></div>
-            <div class="swiper-slide"><img src="__IMG__/index/img_1.jpg"></div>
-            <div class="swiper-slide"><img src="__IMG__/index/img_1.jpg"></div>
-            <div class="swiper-slide"><img src="__IMG__/index/img_1.jpg"></div>
+            {volist name="slide" id="vo"}
+            <div class="swiper-slide" data-url="{$vo.url}"><img src="__PUBLIC__/{$vo.img}"></div>
+            {/volist}
         </div>
         <div class="swiper-pagination"></div>
     </div>
@@ -34,69 +33,58 @@
 
     <div class="review">
         <div class="title"><b></b>精选活动</div>
-         <div style="overflow: hidden;padding-bottom: 10px;">
-          <div class="swiper-container1">
-            <div class="swiper-wrapper">
-                <a class="swiper-slide" href="article">
-                    <img src="__IMG__/index/img_2.jpg">
-                    <p class="ellipsis">同志们辛苦了，为人民服务</p>
-                    <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
-                </a>
-                <a class="swiper-slide" href="article">
-                    <img src="__IMG__/index/img_2.jpg">
-                    <p class="ellipsis">同志们辛苦了，为人民服务</p>
-                    <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
-                </a>
-                <a class="swiper-slide" href="article">
-                    <img src="__IMG__/index/img_2.jpg">
-                    <p class="ellipsis">同志们辛苦了，为人民服务</p>
-                    <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
-                </a>
-                <a class="swiper-slide" href="article">
-                    <img src="__IMG__/index/img_2.jpg">
-                    <p class="ellipsis">同志们辛苦了，为人民服务</p>
-                    <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
-                </a>
+        <div style="overflow: hidden;padding-bottom: 10px;">
+            <div class="swiper-container1">
+                <div class="swiper-wrapper">
+                    <a class="swiper-slide" href="{:Url('/index/news/showInfo',['id'=>'id'])}">
+                        <img src="__IMG__/index/img_2.jpg">
+                        <p class="ellipsis">同志们辛苦了，为人民服务</p>
+                        <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
+                    </a>
+                    <a class="swiper-slide" href="{:Url('/index/news/showInfo')}">
+                        <img src="__IMG__/index/img_2.jpg">
+                        <p class="ellipsis">同志们辛苦了，为人民服务</p>
+                        <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
+                    </a>
+                    <a class="swiper-slide" href="article">
+                        <img src="__IMG__/index/img_2.jpg">
+                        <p class="ellipsis">同志们辛苦了，为人民服务</p>
+                        <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
+                    </a>
+                    <a class="swiper-slide" href="article">
+                        <img src="__IMG__/index/img_2.jpg">
+                        <p class="ellipsis">同志们辛苦了，为人民服务</p>
+                        <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
+                    </a>
+                </div>
             </div>
-          </div>
-          </div>
+        </div>
     </div>
 
     <div class="item">
         <div class="title"><b></b>最新活动</div>
         <ul>
+            {volist name="activity" id="vo"}
             <li>
-                <a href="article">
-                <div class="images">
-                    <div class="infoTwo">
-                        <p class="titleLeft">温州，一座有温度的城市，应该是现代化，但也不乏人情味的。这是瓯海区构建“城市15分钟党群服务圈”的最初心和落脚点。</p>
-                        <div class="from">
-                            <span>2017年4月22日</span>
-                            <span>立即参与</span>
-                            </div>
-                        </div>
-                        <div class="infoTwo"><span class="img lazy" data-original="__IMG__/index/img_3.jpg"></span></div>
-                    </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="article">
+                <a href="{:Url('/index/activitys/show',['id'=>$vo.id])}">
                     <div class="images">
                         <div class="infoTwo">
-                            <p class="titleLeft">温州，一座有温度的城市，应该是现代化，但也不乏人情味的。这是瓯海区构建“城市15分钟党群服务圈”的最初心和落脚点。</p>
+                            <p class="titleLeft">{$vo.title}</p>
                             <div class="from">
-                                <span>2017年4月22日</span>
+                                <span>{$vo.create_time}(转日期)</span>
                                 <span>立即参与</span>
                             </div>
                         </div>
-                        <div class="infoTwo"><span class="img lazy" data-original="__IMG__/index/img_4.jpg"></span></div>
+                        <div class="infoTwo"><span class="img lazy" data-original="__PUBLIC__/{$vo.img}"></span>
+                        </div>
                     </div>
-                    </a>
-                </li>
-            </ul>
+                </a>
+            </li>
+            {/volist}
+        </ul>
 
-        </div>
-    </section>
+    </div>
+</section>
 </body>
 {include file="layouts/__footer" /}
 <script>

@@ -8,6 +8,7 @@ namespace app\index\controller;
  * Time: 19:42
  */
 use app\index\controller\Base;
+use app\index\model\User;
 use think\Db;
 use think\Loader;
 class Users extends Base
@@ -21,7 +22,24 @@ class Users extends Base
      */
     public function index()
     {
-        return view('index');
+        $id = 2;
+        $user = Loader::model('User');
+        $user = $user->find($id);
+        if($user == null){
+            $this->logOut();
+        }
+        if($user->img == null){
+            $user->img = 'static/image/my/head.png';
+        }
+        $col = $user->collection()->where('del','0')->select();
+        $fans = $user->fans()->where(['del'=>0])->select();
+        $user = $user->toArray();
+        $user['col'] = count($col);
+        $user['fans'] = count($fans);
+        $data = [
+            'user'=>$user
+        ];
+        return view('index',$data);
     }
 
     public function score(){

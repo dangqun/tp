@@ -7,26 +7,26 @@
     <div style="width: 100%; padding: 0 15px;box-sizing: border-box;position: absolute;left: 0;top: 80px;">
         <div class="top">
             <div class="img">
-                <img src="__IMG__/my/head.png">
-                <p><b>小凡</b></p>
+                <img src="__PUBLIC__/{$user.img}">
+                <p><b>{$user.user_name}</b></p>
             </div>
             <ul>
-                <li><a href="myConcern"><b>8</b><br/>关注</a></li>
-                <li><a href="myFans"><b>10000</b><br/>粉丝</a></li>
-                <li><a href="pioneerIndex"><b>1000000</b><br/>先锋指数</a></li>
+                <li><a href="myConcern"><b>{$user.col}</b><br/>关注</a></li>
+                <li><a href="myFans"><b>{$user.fans}</b><br/>粉丝</a></li>
+                <li><a href="pioneerIndex"><b>{$user.score}</b><br/>先锋指数</a></li>
             </ul>
         </div>
     </div>
 </header>
 <section>
     <ul class="userlink" style="padding-top: 65px;">
-        <li><a href="myCollection">我的收藏</a></li>
-        <li><a href="ranking">排行榜</a></li>
-        <li><a href="information">党员信息查询</a></li>
+        <li><a href="{:Url('/index/users/collection')}">我的收藏</a></li>
+        <li><a href="{:Url('/index/rankings/index')}">排行榜</a></li>
+        <li><a href="{:Url('/index/users/info')}">党员信息查询</a></li>
     </ul>
     <ul class="userlink">
         <li><a href="get">采集提报</a></li>
-        <li><a href="conferenceRecords">会议记录</a></li>
+        <li><a href="{:Url('/index/meeting/index')}">会议记录</a></li>
     </ul>
 </section>
 {include file="layouts/__footer" /}
