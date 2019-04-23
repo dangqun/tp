@@ -17,8 +17,8 @@ trait WeChat
             $this->redirect("{$url}?code=bin");
         }
         $code = $this->request->param('code');
-        echo "code:".$code;
-        echo "<br/>\r\n";
+//        echo "code:".$code;
+//        echo "<br/>\r\n";
         //TODO 这里写授权逻辑
         return true;
     }

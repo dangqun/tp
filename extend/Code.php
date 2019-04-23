@@ -68,6 +68,12 @@ trait Code
         return true;
     }
 
+    /**
+     * 保存验证码
+     * @param $mobile
+     * @param $code
+     * @return int|string
+     */
     private function save($mobile,$code){
         $data = [];
         $data['mobile'] = $mobile;
