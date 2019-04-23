@@ -62,7 +62,8 @@ class Index extends Base
     private function getList()
     {
         $model = Loader::model('Activity');
-        $list = $model->field('id,oid,uid,title,img,create_time')->with('org')->where('status', '=', '1')->order('create_time DESC')->page($this->page)->limit($this->size)->select();
+        $list = $model->field('id,oid,uid,title,img,create_time')->
+        with('org')->where('status', '=', '1')->order('create_time DESC')->page($this->page)->limit($this->size)->select();
         return $list;
     }
 }

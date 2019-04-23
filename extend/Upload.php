@@ -42,7 +42,6 @@ trait Upload
      */
     protected function uploadBase64()
     {
-        // $file = base64_decode(request()->file('image'));//图片
         $param = input('param.');
         $up_dir = ROOT_PATH . 'public' . DS . 'uploads / ';//存放在当前目录的upload文件夹下
         $base64_img = trim($param['image']);
