@@ -16,7 +16,7 @@ section{padding-top: 50px;}
 .item .title{margin-left: 10px;}
 .item ul li{border-bottom: #f1f1f1 1px solid;padding: 0 10px;}
 .item ul li:nth-child(1) .images{padding-top:0;}
-.titleLeft{position: absolute;left: 0;top: 0;text-align: justify;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2; height: 37px;overflow: hidden;font-size: 14px;color: #000;font-weight: 600;}
+.titleLeft{position: absolute;left: 0;top: 0;text-align: justify;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2; height: 36px;overflow: hidden;font-size: 14px;color: #000;font-weight: 600;line-height: 18px;}
 
 
 
