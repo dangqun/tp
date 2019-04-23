@@ -1,2 +1,55 @@
-{layout name="layouts/default" /}
-这里是活动详情！！传入的参数:{$id}
+
+{include file="layouts/__header" /}
+<link rel="stylesheet" type="text/css" href="__CSS__/article.css">
+<title>活动详情</title>
+</head>
+<body>
+<header>
+    <a href="javascript:history.back(-1)"><i></i></a>
+    <h1>{$id}</h1>
+</header>
+<div class="item" style="padding-top: 50px;">
+    <h1 class="title">{$title}</h1>
+    <name>
+        <i></i>
+        <img src="__IMG__/my/head.png">
+        <span>
+                <span class="text">小凡</span>
+                <em>2019年4月16号<span>13:26</span></em>
+            </span>
+        <a class="gz"><b>+</b><span>关注</span></a>
+    </name>
+    <div class="infoOne">
+        <span class="img lazy" data-original="__IMG__/publicWelfare/1.jpg"></span>
+    </div>
+    <div class="content">
+        <p>温州，一座有温度的城市，应该是现代化，但也不乏人情味的。这是瓯海区构建“城市15分钟党群服务圈”的最初心和落脚点。<p>
+    </div>
+</div>
+</body>
+{include file="layouts/foot" /}
+<script>
+    $(".gz").click(function(){
+        if($(this).hasClass("cur")){
+            $(".gz").removeClass("cur");
+            $(".gz").html("<b>+</b><span>关注</span>")
+        }else{
+            $(".gz").addClass("cur");
+            $(".gz").html("<span>已关注</span>")
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '__URL__/index/Comments/apiList',
+        data: {id: {$id}},
+        dataType: 'json',
+        timeout: 10000,
+        success: function(data){
+            console.log(data);
+        },
+        error: function(xhr, type){
+            console.log("失败");
+        }
+    });
+</script>
+</html>

@@ -9,7 +9,7 @@
     <div class="search">
         <div class="searchInput">
             <input type="text" placeholder="搜索当月最热活动"/>
-            <a href="tip">
+            <a href="{:Url('/index/messages/index')}">
                 <img src="__IMG__/index/xiaoxi.png">
                 <b>3</b>
             </a>
@@ -28,7 +28,7 @@
     <div class="headlines">
         <img src="__IMG__/index/toutiao.png">
         <i>最新</i>
-        <a href="headlines" class="ellipsis">温州，一座有温度的城市，应该是现代化，但也不乏人情味的。这是瓯海区构建“城市15分钟党群服务圈”的最初心和落脚点。</a>
+        <a href="{:Url('/index/news/show')}" class="ellipsis">温州，一座有温度的城市，应该是现代化，但也不乏人情味的。这是瓯海区构建“城市15分钟党群服务圈”的最初心和落脚点。</a>
     </div>
 
     <div class="review">
@@ -71,7 +71,7 @@
                         <div class="infoTwo">
                             <p class="titleLeft">{$vo.title}</p>
                             <div class="from">
-                                <span>{$vo.create_time}(转日期)</span>
+                                <span>{$vo.create_time}</span>
                                 <span>立即参与</span>
                             </div>
                         </div>

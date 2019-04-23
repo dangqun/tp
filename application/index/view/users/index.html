@@ -11,9 +11,9 @@
                 <p><b>{$user.user_name}</b></p>
             </div>
             <ul>
-                <li><a href="myConcern"><b>{$user.col}</b><br/>关注</a></li>
-                <li><a href="myFans"><b>{$user.fans}</b><br/>粉丝</a></li>
-                <li><a href="pioneerIndex"><b>{$user.score}</b><br/>先锋指数</a></li>
+                <li><a href="{:Url('/index/users/follow')}"><b>{$user.col}</b><br/>关注</a></li>
+                <li><a href="{:Url('/index/users/fans')}"><b>{$user.fans}</b><br/>粉丝</a></li>
+                <li><a href="{:Url('/index/users/score')}"><b>{$user.score}</b><br/>先锋指数</a></li>
             </ul>
         </div>
     </div>
