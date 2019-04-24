@@ -8,19 +8,24 @@ use think\Db;
 trait Assessment
 {
 
+    //用户ID
     public $uid;
-
+    //考核分
     public $score;
-
+    //类型【加或减】
     public $type;
-
+    //项目，比如meeting:党员会议，daily_activities：日常活动
     public $typeStr;
-
+    //我也不知道为什么设置这个，暂时也没用
     public $parent = false;
-
+    //规则数组
     protected $rule;
 
 
+    /**
+     * 新增
+     * @return bool|string
+     */
     public function add(){
         if(!$this->check()){
             return '参数错误';
@@ -70,6 +75,10 @@ trait Assessment
     }
 
 
+    /**
+     * 减少
+     * @return bool|string
+     */
     public function reduce(){
         if(!$this->check()){
             return '参数错误';
