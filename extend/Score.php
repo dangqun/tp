@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * 党员计分
+ * 党员先锋指数
  * Created by PhpStorm.
  * User: bin
  * Date: 2019/3/27
@@ -15,7 +15,7 @@ trait Score
      * 增加
      */
     public function add(){
-
+        
     }
 
 

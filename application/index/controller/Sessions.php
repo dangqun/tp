@@ -24,7 +24,10 @@ class sessions extends Base
      * @var array
      */
     protected $beforeActionList = [
-        'isLogin'=>['only'=>'']
+        'isLogin'=>[
+            'only'=>'',//只有这些需要登录
+//            'except'=>''//这些方法不用登录
+        ]
     ];
 
     /**
