@@ -103,9 +103,7 @@ class Activitys extends Base
         $info->user;
         $info = $info->toArray();
         $join = $this->getJoinUser($id);
-        if ($join != false) {
-            $info['join'] = collection($join)->toArray();
-        }
+        $info['join'] = $join == false ? [] : collection($join)->toArray();
         $this->result['code'] = 200;
         $this->result['data'] = $info;
         $this->output();
