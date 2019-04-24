@@ -17,7 +17,7 @@ section{padding-top: 50px;}
 .items li a{display: block;width: 100%;box-shadow: 0 2px 3px #ccc;}
 .items li a .text{padding:0 5px;font-size: 12px;height: 97px;}
 .items li a .text>p{}
-.items li a .text>p:nth-of-type(1){color: #000;font-weight: 600;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;height: 32px;overflow: hidden;padding-top: 5px;}
+.items li a .text>p:nth-of-type(1){color: #000;font-weight: 600;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;height: 30px;overflow: hidden;padding-top: 5px;line-height: 16px;}
 .items li a .text>p:nth-of-type(2){color: #828181;font-size: 10px;line-height: 15px;padding-top: 5px;}
 .items li a .text>p:nth-of-type(3){color: #828181;font-size: 10px;}
 .items li a .text>p:nth-of-type(4){color: #e0431b;padding:5px 0;text-decoration:underline;}
