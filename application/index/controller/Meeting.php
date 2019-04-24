@@ -7,6 +7,8 @@
 namespace app\index\controller;
 
 
+use think\Loader;
+
 class Meeting extends Base
 {
 
@@ -47,7 +49,15 @@ class Meeting extends Base
      * 新增会议记录
      */
     public function apiAddMeetingRecord(){
-
+//        $validate = Loader::validate('Meeting');
+//        if (!$validate->check($this->request->param())) {
+//            $this->result['error_code'] = 4001;
+//            $this->result['msg'] = $validate->getError();
+//            $this->output();
+//            return;
+//        }
+        $data = $this->setData();
+        print_r($data);exit;
     }
 
     /**
@@ -62,6 +72,24 @@ class Meeting extends Base
      */
     public function apiDelMeetingRecord(){
 
+    }
+
+
+    private function setData(){
+        $data = [];
+        $param = $this->request->param();
+        foreach($param as $k=>$v){
+            if(is_numeric($v)){
+                $data[$k] = intval($v);
+                continue;
+            }
+            if(is_string($v)){
+                $data[$k] = trim($v);
+                continue;
+            }
+            $data[$k] = $v;
+        }
+        return $data;
     }
 
 }

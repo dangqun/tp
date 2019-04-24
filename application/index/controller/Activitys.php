@@ -239,31 +239,6 @@ class Activitys extends Base
         }
         $this->result['code'] = 200;
         $this->output();
-
-//        $map = [
-//            'aid' => $this->request->param('aid'),
-//            'uid' => $this->userInfo['id'],
-//            'del' => 0
-//        ];
-//        $is = Db::name('activity_collection')->where($map)->find();
-//        if (!empty($is)) {
-//            $this->result['error_code'] = 5004;
-//            $this->output();
-//            return;
-//        }
-//        $data = [
-//            'aid' => $this->request->param('aid'),
-//            'uid' => $this->userInfo['id'],
-//            'create_time' => NOW_TIME
-//        ];
-//        $result = Db::name('activity_collection')->insert($data);
-//        if (empty($result)) {
-//            $this->result['error_code'] = 5003;
-//            $this->output();
-//            return;
-//        }
-//        $this->result['code'] = 200;
-//        $this->output();
     }
 
     /**
@@ -291,29 +266,6 @@ class Activitys extends Base
         }
         $this->result['code'] = 200;
         $this->output();
-
-//        $map = [
-//            'aid' => $this->request->param('aid'),
-//            'uid' => $this->userInfo['id'],
-//            'del' => 0
-//        ];
-//        $is = Db::name('activity_collection')->field('id')->where($map)->find();
-//        if (empty($is)) {
-//            $this->result['error_code'] = 5005;
-//            $this->output();
-//            return;
-//        }
-//        $data = [
-//            'del' => NOW_TIME
-//        ];
-//        $result = Db::name('activity_collection')->where("id", '=', $is['id'])->update($data);
-//        if (empty($result)) {
-//            $this->result['error_code'] = 5006;
-//            $this->output();
-//            return;
-//        }
-//        $this->result['code'] = 200;
-//        $this->output();
     }
 
     /**
