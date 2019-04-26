@@ -29,13 +29,13 @@
             <p>本次会议应到正式党员<input type="text">人，实到<input type="text">人</p>
             <div class="list">
                 <ul class="voteList clearfix">
-                    <li>表决事项一：<input type="text"></li>
+                    <li>表决事项一：<input type="text" class="title"></li>
                     <li>
-                        <span>同意票数<input type="text"></span>
-                        <span>不同意票数<input type="text"></span>
-                        <span>弃权票数<input type="text"></span>
+                        <span>同意票数<input type="text" class="agree"></span>
+                        <span>不同意票数<input type="text" class="disagree"></span>
+                        <span>弃权票数<input type="text" class="waiver"></span>
                     </li>
-                    <li>表决结果：<input type="text" placeholder="通过或不通过"></li>
+                    <li>表决结果：<input type="text" placeholder="通过或不通过" class="voting"></li>
                 </ul>
             </div>
         </div>
@@ -44,10 +44,29 @@
 </body>
 <script src="__JS__/jquery-1.8.3.min.js"></script>
 <script>
-    
+
     ini();
     //初始方法
     function ini(){
+        $(".btn").click(function(){
+            var items=attr();
+            //console.log(items);//返回所有数据
+            $.ajax({
+                type: 'POST',
+                url: '__URL__/index/',
+                data: items,
+                dataType: 'json',
+                timeout: 10000,
+                success: function(data){
+                    console.log(data);
+                    $(".btn").hide();
+                },
+                error: function(xhr, type){
+                    console.log("失败");
+                    $(".btn").show();
+                }
+            });
+        });
         //title名
         var type=getQueryString("list");
         if(type=="1"){
@@ -69,13 +88,13 @@
             if(l<10){
                 var num=["一","二","三","四","五","六","七","八","九","十"];
                 var item='<ul class="voteList clearfix">'
-                        +'<li>表决事项'+num[l]+'：<input type="text"></li>'
+                        +'<li>表决事项'+num[l]+'：<input type="text" class="title"></li>'
                         +'<li>'
-                        +'<span>同意票数<input type="text"></span>'
-                        +'<span>不同意票数<input type="text"></span>'
-                        +'<span>弃权票数<input type="text"></span>'
+                        +'<span>同意票数<input type="text" class="agree"></span>'
+                        +'<span>不同意票数<input type="text" class="disagree"></span>'
+                        +'<span>弃权票数<input type="text" class="waiver"></span>'
                         +'</li>'
-                        +'<li>表决结果：<input type="text" placeholder="通过或不通过"></li>'
+                        +'<li>表决结果：<input type="text" placeholder="通过或不通过" class="voting"></li>'
                         +'</ul>';
                 $(".list").append(item);
             }else{
@@ -83,10 +102,47 @@
             } 
         });
     }
-
-
+    function attr(){
+        var item=[{}];
+        var host=$(".table li").eq(0).children("input").val(),
+            allNum=$(".table li").eq(1).children("input").val(),
+            noteTaker=$(".table li").eq(2).children("input").val(),
+            actualNum=$(".table li").eq(3).children("input").val(),
+            address=$(".address a").text(),
+            address=$(".content").val(),
+            allPartyNum=$(".vote>p>input").eq(0).val(),
+            actualPartyNum=$(".vote>p>input").eq(1).val();
+        item=[{
+            host:host,
+            allNum:allNum,
+            noteTaker:noteTaker,
+            actualNum:actualNum,
+            address:address,
+            address:address,
+            allPartyNum:allPartyNum,
+            actualPartyNum:actualPartyNum
+        }];
+        var voteList=[{}];
+        var l=$(".voteList").length;
+        for(var i=0;i<l;i++){
+            var title=$(".voteList").eq(i).find(".title").val(),
+                agreeNum=$(".voteList").eq(i).find(".agree").val(),
+                disagreeNum=$(".voteList").eq(i).find(".disagree").val(),
+                waiverNum=$(".voteList").eq(i).find(".waiver").val(),
+                voting=$(".voteList").eq(i).find(".voting").val();
+            voteList=[{
+                title:title,
+                agreeNum:agreeNum,
+                disagreeNum:disagreeNum,
+                waiverNum:waiverNum,
+                voting:voting
+            }]
+            item.push(voteList);
+        }
+        return item;
+    }
     //获取url参数
-    console.log(getQueryString("type"));
+    //console.log(getQueryString("type"));
     function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");

@@ -38,9 +38,10 @@
             $(".gz").html("<span>已关注</span>")
         }
     });
+
     $.ajax({
         type: 'POST',
-        url: '__URL__/index/Comments/apiList',
+        url: '__URL__/index/Activitys/apiGetContent',
         data: {id: {$id}},
         dataType: 'json',
         timeout: 10000,

@@ -30,10 +30,10 @@ input::-webkit-input-placeholder {color: #cacacc;}
 .vote{padding-top:10px;margin-top: 10px;color: #000;font-size: 12px;position: relative;}
 .vote ul{background-color: #fff;margin-bottom: 10px;}
 .vote>p{padding:0 15px; height: 40px;line-height: 40px;border-bottom: 1px #d2d2d2 solid;background-color: #fff;}
-.vote>p input{width: 35px;border:none;border-bottom: 1px #d2d2d2 solid;}
+.vote>p input{width: 35px;border:none;border-bottom: 1px #d2d2d2 solid;text-align: center;}
 .voteList li{padding:0 15px;height: 40px;line-height: 40px;border-bottom: 1px #d2d2d2 solid;}
 .voteList li:nth-child(1) input{width: 190px;border:none;}
-.voteList li:nth-child(2) input{width: 30px;padding-left:2px;border:none;border-bottom: 1px #d2d2d2 solid;}
+.voteList li:nth-child(2) input{width: 30px;padding-left:2px;border:none;border-bottom: 1px #d2d2d2 solid;text-align: center;}
 .voteList li:nth-child(2) span{padding-right: 10px;}
 .voteList li:nth-child(2) span:last-child{padding-right: 0;}
 .voteList li:nth-child(3) input{width: 190px;border:none;}
