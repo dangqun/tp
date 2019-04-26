@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="__PUBLIC__/admin/plugin/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/public.css" media="all" />
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/actAdd.css" />
+
+</head>
+<body class="childrenBody">
+    <form class="layui-form layui-row layui-col-space10">
+        <div class="layui-col-md9 layui-col-xs12">
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md9 layui-col-xs7">
+                    <div class="layui-form-item magt3">
+                        <label class="layui-form-label">活动名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input newsName" lay-verify="newsName" placeholder="请输入活动名称">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">项目简介</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入项目简介" class="layui-textarea abstract"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3 layui-col-xs5">
+                    <div class="layui-upload-list thumbBox mag0 magt3" id="uploadImg">
+                        <img class="layui-upload-img thumbImg">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">活动详情</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="news_content"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">定位地址</label>
+                <div class="" id="allmap">
+
+                </div>
+                <!--<div>-->
+                    <!--<input type="text" id="search_address" style="width:300px" />-->
+                    <!--<input type="button" id="search" value="搜索地点" />-->
+                    <!--<input type="button" id="confirm" value="确定" />-->
+                <!--</div>-->
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-inline" style="width: 200px;">
+                    <input type="text" name="title" required lay-verify="required" placeholder="请输入地址" autocomplete="off" class="layui-input" id="search_address">
+                </div>
+                <input type="button" class="layui-btn" id="search" value="搜索地点"/>
+                <input type="button" class="layui-btn" id="confirm" value="确定"/>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">多点地址栏</label>
+      
+
+                <div class="dotUl"></div>
+            </div>
+        </div>
+        <div class="layui-col-md3 layui-col-xs12">
+            <blockquote class="layui-elem-quote title"><i class="seraph icon-caidan"></i> 活动类型</blockquote>
+            <div class="border category">
+
+                <div class="layui-input-block newsStatus">
+
+                    <select name="status" lay-verify="required">
+                        <option value="0">民俗文化遗产</option>
+                        <option value="1">夏季支教</option>
+                        <option value="2">社会救助</option>
+                        <option value="3">网络文明</option>
+                        <option value="4">文明宣教</option>
+                        <option value="5">交通劝导</option>
+                        <option value="6">环保宣传</option>
+                        <option value="7">动物保护</option>
+                        <option value="8">新居民关爱</option>
+                        <option value="9">扶贫</option>
+                        <option value="10">助困</option>
+                        <option value="11">助残</option>
+                        <option value="12">医疗救助</option>
+                        <option value="13">应急救援</option>
+                        <option value="14">心理援助</option>
+                        <option value="15">社区服务</option>
+                        <option value="16">就业支持</option>
+                        <option value="17">文体活动</option>
+                        <option value="18">助老</option>
+                        <option value="19">暑期支教</option>
+                        <option value="20">灾后重建</option>
+                        <option value="21">问政监督</option>
+                        <option value="22">帮教助学</option>
+                        <option value="23">赛会服务</option>
+                        <option value="24">助善</option>
+                    </select>
+
+                </div>
+
+            </div>
+            <blockquote class="layui-elem-quote title magt10"><i class="layui-icon">&#xe609;</i> 发布</blockquote>
+            <div class="border">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="layui-icon">&#xe609;</i> 签到方式</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="release" title="按钮签到" lay-skin="primary" lay-filter="release" checked />
+                        <input type="radio" name="release" title="扫码签到" lay-skin="primary" lay-filter="release" />
+                    </div>
+                </div>
+                <div class="layui-form-item layui-hide releaseDate">
+                    <label class="layui-form-label"></label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" id="release" placeholder="请选择日期和时间" readonly />
+                    </div>
+                </div>
+                <div class="layui-form-item openness">
+                    <label class="layui-form-label"><i class="seraph icon-look"></i> 公开度</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="openness" title="开放浏览" lay-skin="primary" checked />
+                        <input type="radio" name="openness" title="私密浏览" lay-skin="primary" />
+                    </div>
+                </div>
+                <div class="layui-form-item newsTop">
+                    <label class="layui-form-label"><i class="seraph icon-zhiding"></i> 置　顶</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="newsTop" lay-skin="switch" lay-text="是|否">
+                    </div>
+                </div>
+                <hr class="layui-bg-gray" />
+                <div class="layui-right">
+                    <a class="layui-btn layui-btn-sm" lay-filter="addNews" lay-submit><i class="layui-icon">&#xe609;</i>发布</a>
+                    <a class="layui-btn layui-btn-primary layui-btn-sm" lay-filter="look" lay-submit>预览</a>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="lng" name="lng" value="0.000000" />
+        <input type="hidden" id="lat" name="lat" value="0.000000" />
+        <input type="hidden" id="dots" name="dots" value='[{"id":"69","aid":"1579","lng":"120.656054","lat":"27.998312","radius":"500","address":"温州市瓯海区","type":"0","del":"0","create_time":"1543290088"}]'/>
+    </form>
+
+    {include file="index/public"}
+    <script type="text/javascript" src="__PUBLIC__/admin/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/admin/plugin/layui/layui.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/admin/js/actAdd.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=2.0&ak=533ece61c421fcb1f97cdca30d3cb6e9"></script>
+    <script type="text/javascript" src="__PUBLIC__/admin/js/baidumap.js?1" charset="gbk"></script>
+</body>
+</html>

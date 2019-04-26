@@ -1,0 +1,18 @@
+﻿.border .layui-form-label {
+    width: 70px;
+}
+.border .layui-input-block {
+     margin-left: 0; 
+}
+@media screen and (max-width:450px) {
+
+    .border .layui-form-label {
+        width: 80px;
+        padding-left: 0;
+    }
+
+}
+#allmap {
+    min-height: 500px;
+    height: auto;
+}

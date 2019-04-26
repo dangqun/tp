@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>首页--layui后台管理模板 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__PUBLIC__/admin/plugin/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="__PUBLIC__/admin/css/public.css" media="all" />
+
+</head>
+<body class="childrenBody">
+    <blockquote class="layui-elem-quote layui-bg-green">
+        <div id="nowTime"></div>
+    </blockquote>
+    <div class="layui-row layui-col-space10 panel_box">
+        <div class="panel layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg2">
+            <a href="javascript:;"  data-url="activeList" data-action="activitys">
+                <div class="panel_icon layui-bg-green">
+                    <i class="layui-anim seraph icon-icon10" data-icon="icon-icon10"></i>
+                </div>
+                <div class="panel_word">
+                    <span>222</span>
+                    <cite>活动总数</cite>
+                </div>
+            </a>
+        </div>
+        <div class="panel layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg2">
+            <a href="javascript:;" data-url="online" data-action="project">
+                <div class="panel_icon layui-bg-black">
+                    <i class="layui-anim layui-icon" data-icon="&#xe656;">&#xe656;</i>
+                </div>
+                <div class="panel_word">
+                    <span>5000</span>
+                    <cite>项目总数</cite>
+                </div>
+            </a>
+        </div>
+        <div class="panel layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg2">
+            <a href="javascript:;" data-url="actList" data-action="vol">
+                <div class="panel_icon layui-bg-red">
+                    <i class="layui-anim seraph icon-mokuai"></i>
+                </div>
+                <div class="panel_word">
+                    <span>504202</span>
+                    <cite>党员总数</cite>
+                </div>
+            </a>
+        </div>
+        <div class="panel layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg2">
+            <a href="javascript:;" data-url="userList" data-action="user">
+                <div class="panel_icon layui-bg-orange">
+                    <i class="layui-anim layui-icon" data-icon="&#xe770;">&#xe770;</i>
+                </div>
+                <div class="panel_word userAll">
+                    <span>240424</span>
+                    <em>会员总数</em>
+                    <cite class="layui-hide">会员总数</cite>
+                </div>
+            </a>
+        </div>
+        <div class="panel layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg2">
+            <a href="javascript:;">
+                <div class="panel_icon layui-bg-cyan">
+                    <i class="layui-anim layui-icon" data-icon="&#xe63a;">&#xe63a;</i>
+                </div>
+                <div class="panel_word outIcons">
+                    <span></span>
+                    <em>资讯总数</em>
+                    <cite class="layui-hide">资讯总数</cite>
+                </div>
+            </a>
+        </div>
+        <div class="panel layui-col-xs12 layui-col-sm6 layui-col-md4 layui-col-lg2">
+            <a href="javascript:;">
+                <div class="panel_icon layui-bg-blue">
+                    <i class="layui-anim seraph icon-clock"></i>
+                </div>
+                <div class="panel_word">
+                    <span class="loginTime"></span>
+                    <cite>上次登录时间</cite>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-lg6 layui-col-md12">
+            <blockquote class="layui-elem-quote title">义工数据汇总</blockquote>
+            <table class="layui-table magt0">
+                <colgroup>
+                    <col width="150">
+                    <col>
+                    <col>
+                    <col>
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>活动数量</td>
+                        <td>活动人数</td>
+                        <td>活动计时</td>
+                    </tr>
+                    <tr>
+                        <td>日/活动</td>
+                        <td class="dayamount"></td>
+                        <td class="daypnum"></td>
+                        <td class="daytime"></td>
+
+                    </tr>
+                    <tr>
+                        <td>周/活动</td>
+                        <td class="weekamount"></td>
+                        <td class="weekpnum"></td>
+                        <td class="weektime"></td>
+
+                    </tr>
+                    <tr>
+                        <td>月/活动</td>
+                        <td class="monthamount"></td>
+                        <td class="monthpnum"></td>
+                        <td class="monthtime"></td>
+
+                    </tr>
+                    <tr>
+                        <td>2018年/活动</td>
+                        <td class="y2018amount"></td>
+                        <td class="y2018pnum"></td>
+                        <td class="y2018time"></td>
+
+                    </tr>
+                    <tr>
+                        <td>2017年/活动</td>
+                        <td class="y2017amount"></td>
+                        <td class="y2017pnum"></td>
+                        <td class="y2017time"></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <blockquote class="layui-elem-quote title">最新活动 <i class="layui-icon layui-red">&#xe756;</i></blockquote>
+            <table class="layui-table mag0" lay-skin="line">
+                <colgroup>
+                    <col>
+                    <col width="110">
+                </colgroup>
+                <tbody class="hot_act"></tbody>
+            </table>
+        </div>
+        <div class="layui-col-lg6 layui-col-md12">
+            <blockquote class="layui-elem-quote title">信息展示</blockquote>
+            <div class=" chart_box magb0">
+                <div id="chart"></div>
+             
+            </div>
+
+        </div>
+    </div>
+
+    {include file="index/public"}
+    <script type="text/javascript" src="__PUBLIC__/admin/plugin/layui/layui.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/admin/js/echarts.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/admin/js/main.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/admin/js/mainChart.js?11"></script>
+
+</body>
+</html>
