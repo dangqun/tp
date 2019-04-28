@@ -1,6 +1,9 @@
 {include file="layouts/__header" /}
     <link rel="stylesheet" type="text/css" href="__CSS__/volunteer.css">
     <title></title>
+    <style>
+        .layui-m-layercont{padding: 10px 20px;}
+    </style>
 </head>
 <body>
     <header>
@@ -9,23 +12,31 @@
     </header>
     <section>
         <div class="top">
-            <div class="img"><img src="__IMG__/add_img.jpg" id="img"></div>
+            <div class="img"><img src="__IMG__/add_img.jpg" id="img" data-name="招募图片"></div>
             <input type="file" id="add_img">
         </div>
         <ul class="userlink">
-            <li class="title"><a><input type="text" placeholder="请输入活动标题"></a></li>
-            <li class="content"><a><input type="text" placeholder="请输入活动详情"></a></li>
+            <li class="title"><a><input type="text" placeholder="请输入活动标题" data-name="活动"></a></li>
+            <li class="content"><a><input type="text" placeholder="请输入活动详情" data-name="活动详情"></a></li>
             <li class="center"><a>温州市瓯海党群服务中心</a></li>
-            <li class="num"><a><input type="text" placeholder="请输入招募人数"></a></li>
+            <li class="num"><a><input type="text" placeholder="请输入招募人数" data-name="招募人数"></a></li>
         </ul>
         <ul class="userlink">
-            <li class="begin"><a>活动开始时间<span>2019年4月17日14点00分</span></a></li>
-            <li class="end"><a>活动结束时间<span>2019年4月17日17点00分</span></a></li>
+            <li class="begin"><a>活动开始时间<input type="text"  id="dateBegin" data-name="活动开始时间"></a></li>
+            <li class="end"><a>活动结束时间<input type="text"  id="dateEnd" data-name="活动结束时间"></a></li>
             <li class="address jt_r"><a>活动区域</a></li>
             <li class="range jt_r"><a>签到范围</a></li>
             <div class="sign">
                 <li><a><i></i>选取签到点</a></li>
-                <li><a>签到范围</a></li>
+                <li class="sel_addr"><a>签到范围</a><span class="length">500米内</span><span class="sign">仅可签到</span></li>
+            </div>
+            <div class="sign">
+                <li><a><i></i>选取签到点</a></li>
+                <li class="sel_addr"><a>签到范围</a><span class="length">500米内</span><span class="sign">仅可签到</span></li>
+            </div>
+            <div class="sign">
+                <li><a><i></i>选取签到点</a></li>
+                <li class="sel_addr"><a>签到范围</a><span class="length">500米内</span><span class="sign">仅可签到</span></li>
             </div>
             <li class="address"><a>新增签到点</a><i class="add"></i></li>
         </ul>
@@ -51,130 +62,215 @@
         </div>
         <a class="btn">提交申请</a>
     </section>
+
+    <aside>
+    <a id="timeMb" class="hide" href="javascript:void(0);"></a>
+        <div id="selectTime" >
+            <h3><a class="fl">取消</a><a class="fr">确定</a></h3>
+            <div class="timeFloat">
+                <div class="dateWrap" id="dateSelect">
+                    <ul>
+                        <li>200米</li>
+                        <li>500米</li>
+                        <li>800米</li>
+                        <li>1000米</li>
+                        <li>1500米</li>
+                    </ul>
+                </div>
+                <div class="timeWrap" id="timeSelect">
+                    <ul>
+                        <li value="9">可签到签退</li>
+                        <li value="10">仅可签到</li>
+                        <li value="11">仅可签退</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </aside>
 </body>
 {include file="layouts/foot" /}
+<script src="__JS__/common.js"></script>
+<script src="__JS__/layer.js"></script>
+<script src="__JS__/rolldate.js"></script>
+<script src="__JS__/swiper.js"></script>
 <script>
+$(function() {
+    $("#dateBegin").val($.fn.time.dade_time);
+    $("#dateEnd").val($.fn.time.dade_time);
+    new rolldate.Date({
+        el:'#dateBegin',
+        format:'YYYY-MM-DD hh:mm',
+        beginYear:2000,
+        endYear:2100,
+    });
+    new rolldate.Date({
+        el:'#dateEnd',
+        format:'YYYY-MM-DD hh:mm',
+        beginYear:2000,
+        endYear:2100
+    });
+
 
     ini();
     //初始方法
-    function ini(){
+    function ini() {
         //复选按钮
         var x = $(".setDefault");
         x.on("click tap",
-            function() {
+            function () {
                 var a = $(this);
-                a.hasClass("locked") ? (a.removeClass("locked"),$("#setDefault").val(1)): (a.addClass("locked"),$("#setDefault").val(0))
+                a.hasClass("locked") ? (a.removeClass("locked"), $("#setDefault").val(1)) : (a.addClass("locked"), $("#setDefault").val(0))
             });
-
-        var type=getQueryString("type");
-        if(type=="1"){
+        var type = $.fn.getQueryString("type");
+        if (type == "1") {
             $("title").text("志愿服务");
             $("header h1").text("志愿服务");
-        }else if(type=="2"){
+        } else if (type == "2") {
             $("title").text("红色细胞");
             $("header h1").text("红色细胞");
-        }else if(type=="3"){
+        } else if (type == "3") {
             $("title").text("微心愿");
             $("header h1").text("微心愿");
         }
-
-        //图片上传
-        $("#img").click(function(){
-            $("#add_img").click();
-        })
-        $("#add_img").change(function(){
-
-            var file=$(this)[0].files[0];    //获取文件信息
-            if(!/image\/\w+/.test(file.type)){
-                alert("请确保文件为图像类型");
-                return false;
-            }else{
-                var fileSize = file.size;
-                var size = fileSize / 1024;
-                //这里限制大小(1000为1M)
-                if(size>10000){
-                    alert("附件不能大于10M");
-                    return false;
-                }
-            }
-            if(file)
-            {
-                var reader=new FileReader();  //调用FileReader
-                reader.onload=function(evt){   //读取操作完成时触发。
-                    $(".img img").attr('src',evt.target.result)  //将img标签的src绑定为DataURL
-                }
-                reader.readAsDataURL(file); //将文件读取为 DataURL(base64)
-            }
-            else{
-                alert("上传失败");
-            }
-        });
-
-
-        $(".agreement input").click(function(){
-            if(this.checked==true){
-                $(".btn").addClass("cur");
-                $(".btn").click(function(){
-                    var file=document.getElementById("add_img").files[0];
-                    var title=$(".title input").val();
-                    var type="1";
-                    var address=$(".center a").text();
-                    var start_time=$(".begin a span").text();
-                    var end_time=$(".end a span").text();
-                    var content=$(".content input").val();
-                    var details="活动详情";
-
-                    var item={
-                        title:title,
-                        img:file,
-                        type:type,
-                        address:address,
-                        start_time:start_time,
-                        end_time:end_time,
-                        content:content,
-                        details:details
-                    };
-                    $.ajax({
-                        type: 'POST',
-                        url: '__URL__/index/Activitys/apiAdd',
-                        data: item,
-                        dataType: 'json',
-                        timeout: 10000,
-                        success: function (data) {
-                            alert("上传成功");
-                            $(".btn").hide();
-                        },
-                        error: function (data) {
-                            alert("上传失败");
-                        }
-                    });
-                });
-            }else{
-                $(".btn").removeClass("cur");
-            }
-        });
     }
 
+    //Swiper滑动函数----begin
+    $("#selectTime").css("opacity", "0");
+    $(".sel_addr").click(function(){
+        var i=$(".sel_addr").index(this);
+        setTimeout(function() {
+            B();
+            //滑动
+            L(i,$(".sel_addr"),$("#timeMb"),$("#selectTime"));
+        },300);
+        return false;
+    });
 
-    //获取url参数
-    //console.log(getQueryString("type"));
-    function getQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-        var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
-        var r = window.location.search.substr(1).match(reg);
-        var q = window.location.pathname.substr(1).match(reg_rewrite);
-        if(r != null){
-            return unescape(r[2]);
-        }else if(q != null){
-            return unescape(q[2]);
-        }else{
-            return null;
+    function B() {
+        var d = $("#timeMb"),
+            e = $("#selectTime");
+        d.removeClass("hide");
+        e.removeClass("hide");
+        e.css("-webkit-transform", "translate3d(0, -" + e.height() + "px, 0)");
+        e.css("opacity", "1");
+    }
+
+    function L(i,sel_addr,coverId,selectId) {
+
+        var n = coverId,
+            e = selectId,
+            g = document.querySelector("#timeSelect"),
+            m = document.querySelector("#dateSelect"),
+            p = e.find(".fl"),
+            l = e.find(".fr");
+        x = new Swiper(g, {
+            callback: function (b, e, d) {
+                b = $("#timeSelect").find("li").eq(e);
+                b.parent().children().removeClass("active");
+                b.addClass("active");
+                b.hasClass("timeout") || b.hasClass("booked") ? l.addClass("not") : l.removeClass("not")
+            }
+        });
+        t = new Swiper(m, {
+            callback: function (b, e, d) {
+                b = $("#selectTime").find("li").eq(e);
+                b.parent().children().removeClass("active");
+                b.addClass("active");
+                b.hasClass("timeout") || b.hasClass("booked") ? l.addClass("not") : l.removeClass("not")
+            }
+        });
+        p.unbind('click').unbind("click").click(function(){
+            e.css("-webkit-transform", "translate3d(0, -" + 0 + "px, 0)");
+            e.css("opacity", "1");
+            n.addClass("hide");
+            return false;
+        });
+        l.unbind('click').click(function(){
+            console.log(i);
+            var o=$("#timeSelect").find(".active").text();
+            var f=$("#dateSelect").find(".active").text();
+            sel_addr.eq(i).find(".length").text(f);
+            sel_addr.eq(i).find(".sign").text(o);
+            e.css("-webkit-transform", "translate3d(0, -" + 0 + "px, 0)");
+            e.css("opacity", "1");
+            n.addClass("hide");
+            return false;
+        });
+        return false;
+    }
+    //滑动函数----end
+
+
+    //图片上传预览
+    $("#img").click(function () {
+        $("#add_img").click();
+    });
+    $("#add_img").change(function () {
+        var files = $(this)[0].files[0];    //获取文件信息
+        var imgId=$("#img");
+        $.fn.upload_img(files,imgId);
+    });
+
+    $(".agreement input").click(function () {
+        if (this.checked == true) {
+            $(".btn").addClass("cur");
+            $(".btn").click(function () {
+                var file = document.getElementById("add_img").files[0];
+                var title = $(".title input").val();
+                var type = "1";
+                var address = $(".center a").text();
+                var start_time = $("#dateBegin").val();
+                var end_time = $("#dateEnd").val();
+                var content = $(".content input").val();
+                var details = "活动详情";
+
+                var item = {
+                    title: title,
+                    img: file,
+                    type: type,
+                    address: address,
+                    start_time: start_time,
+                    end_time: end_time,
+                    content: content,
+                    details: details
+                };
+
+                var s=$("input[data-name]").length;
+                for(var i=0;i<s;i++){
+                    var v=$("input[data-name]").eq(i).val();
+                    if(v==""|| v==null || v==undefined){
+                        var attr =v=$("input[data-name]").eq(i).attr("data-name");
+                        //alert(attr+"不能为空");
+                        layer.open({
+                            style: 'border:none; background-color:#e0431b; color:#fff;width:auto;',
+                            content: attr+"不能为空",
+                            time: 1 //1秒关闭
+                        });
+                        return false;
+                    }
+                }
+
+                // $.ajax({
+                //     type: 'POST',
+                //     url: '',
+                //     data: item,
+                //     dataType: 'json',
+                //     success: function (data) {
+                //         alert("上传成功");
+                //         $(".btn").hide();
+                //     },
+                //     error: function (data) {
+                //         alert("上传失败");
+                //     }
+                // });
+            });
+        } else {
+            $(".btn").removeClass("cur");
         }
-    }
+    });
 
 
-
-
+});
 
 </script>
 </html>

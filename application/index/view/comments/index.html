@@ -27,42 +27,23 @@
     <!-- end-轮播图 -->
 
     <ul class="item">
-        <li>
-            <a href="article.html">
-                <div class="title"><img src="__IMG__/publicWelfare/touxiang.png"><span>温州市瓯海区服务中心</span></div>
-                <div class="infoOne"><span class="img lazy" data-original="__IMG__/publicWelfare/1.jpg"></span></div>
-                <p class="ellipsis">中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>
-                <div class="liBottom">
-                    <span class="ellipsis"><i></i>2019/4/15</span>
-                    <span class="ellipsis" class="ellipsis"><i></i>温州市瓯海党群</span>
-                    <span class="ellipsis"><i></i>20/30人</span>
-                </div>
-            </a>
-        </li>
-        <li>
-            <div class="title"><img src="__IMG__/publicWelfare/touxiang.png"><span>温州市瓯海区服务中心</span></div>
-            <div class="infoOne"><span class="img lazy" data-original="__IMG__/publicWelfare/1.jpg"></span></div>
-            <p class="ellipsis">中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>
-            <div class="liBottom">
-                <span class="ellipsis"><i></i>2019/4/15</span>
-                <span class="ellipsis" class="ellipsis"><i></i>温州市瓯海党群</span>
-                <span class="ellipsis"><i></i>20/30人</span>
-            </div>
-        </li>
-        <li>
-            <div class="title"><img src="__IMG__/publicWelfare/touxiang.png"><span>温州市瓯海区服务中心</span></div>
-            <div class="infoOne"><span class="img lazy" data-original="__IMG__/publicWelfare/1.jpg"></span></div>
-            <p class="ellipsis">中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>
-            <div class="liBottom">
-                <span class="ellipsis"><i></i>2019/4/15</span>
-                <span class="ellipsis" class="ellipsis"><i></i>温州市瓯海党群</span>
-                <span class="ellipsis"><i></i>20/30人</span>
-            </div>
-        </li>
+        <!--<li>-->
+            <!--<a href="article.html">-->
+                <!--<div class="title"><img src="__IMG__/publicWelfare/touxiang.png"><span>温州市瓯海区服务中心</span></div>-->
+                <!--<div class="infoOne"><span class="img lazy" data-original="__IMG__/publicWelfare/1.jpg"></span></div>-->
+                <!--<p class="ellipsis">中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>-->
+                <!--<div class="liBottom">-->
+                    <!--<span class="ellipsis"><i></i>2019/4/15</span>-->
+                    <!--<span class="ellipsis" class="ellipsis"><i></i>温州市瓯海党群</span>-->
+                    <!--<span class="ellipsis"><i></i>20/30人</span>-->
+                <!--</div>-->
+            <!--</a>-->
+        <!--</li>-->
     </ul>
 </section>
 {include file="layouts/__footer" /}
 <script>
+$(function() {
     var Swiper1 = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         paginationClickable: true,
@@ -72,5 +53,52 @@
         autoplayDisableOnInteraction: false,
         loop: true
     });
+
+    var loading="";
+    $.ajax({
+        type: 'POST',
+        url: '__PUBLIC__/json/comments.json',
+        data: '',
+        dataType: 'json',
+        beforeSend: function(){
+            loading=layer.open({type: 2,content: '加载中'});
+        },
+        success: function (data) {
+            if(data.code==200){
+
+                $('.item').empty();
+                var html = '';
+                $.each(data.data,function(i,item){
+                    html += '<li>'
+                        + '<a href="'+item.url+'">'
+                        + '<div class="title"><img src="'+item.head+'"><span>'+item.title+'</span></div>'
+                        + '<div class="infoOne"><span class="img lazy" data-original="'+item.img+'"></span></div>'
+                        + '<p class="ellipsis">'+item.content+'</p>'
+                        + '<div class="liBottom">'
+                        + '<span class="ellipsis"><i></i>'+item.time+'</span>'
+                        + '<span class="ellipsis" class="ellipsis"><i></i>'+item.dqName+'</span>'
+                        + '<span class="ellipsis"><i></i>'+item.num+'/'+item.allNum+'人</span>'
+                        + '</div>'
+                        + '</a>'
+                        + '</li>';
+                });
+            }else {
+                console.log("获取数据失败");
+            }
+            $('.item').html(html);
+            layer.close(loading);
+            //图片懒加载
+            $(".lazy").lazyload({
+                placeholder : "",
+                effect: "fadeIn",
+                threshold : 200
+            }).removeClass('lazy').addClass('lazyloaded');
+        },
+        error: function (xhr, type) {
+            layer.close(index);
+            console.log("交互失败");
+        }
+    });
+});
 </script>
 </html>
