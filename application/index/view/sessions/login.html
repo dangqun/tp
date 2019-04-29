@@ -50,19 +50,12 @@
         var that = $(this);
         if(!that.hasClass('time')){
             if(!cellReg.test(tel.val())){
-                layer.open({
-                    style: 'border:none; background-color:#e0431b; color:#fff;width:auto;',
-                    content: "请正确输入手机号码！",
-                    time: 2
-                });
+                layer.open({content: "请正确输入手机号码！",time: 2});
                 tel.val('');
                 tel.focus();
             }else{
                 that.addClass('time').html('60s').data('time', 60);
-                var fs=layer.open({
-                    style: 'border:none; background-color:#e0431b; color:#fff;width:auto;',
-                    content: "正在发送..."
-                });
+                var fs=layer.open({content: "正在发送..."});
 
                 var timer = setInterval(function(){
                     var left = parseInt(that.data('time'));
@@ -92,11 +85,7 @@
                         },1500);
                     },
                     error: function(xhr, type){
-                        layer.open({
-                            style: 'border:none; background-color:#e0431b; color:#fff;width:auto;',
-                            content: "发送失败！请检查网络",
-                            time: 3
-                        });
+                        layer.open({content: "发送失败！请检查网络",time: 3});
                         clearInterval(timer);
                         that.html('获取验证码').removeClass('time');
                         rePost.addClass('hide');

@@ -83,12 +83,7 @@
             var v=b.eq(i).val();
             if(v==""|| v==null || v==undefined){
                 var attr =v=b.eq(i).attr("data-name");
-                //alert(attr+"不能为空");
-                layer.open({
-                    style: 'border:none; background-color:#e0431b; color:#fff;width:auto;',
-                    content: attr+"不能为空",
-                    time: 1 //1秒关闭
-                });
+                layer.open({content: attr+"不能为空",time: 1});
                 return false;
             }
         }
