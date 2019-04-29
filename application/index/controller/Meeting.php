@@ -37,6 +37,14 @@ class Meeting extends Base
     }
 
     /**
+     * 我的/会议记录
+     */
+    public function conferenceRecords(){
+
+       return $this->fetch('conferenceRecords');
+    }
+
+    /**
      * 列表
      */
     public function show(){
