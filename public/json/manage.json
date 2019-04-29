@@ -1,0 +1,42 @@
+{
+  "code": 200,
+  "msg": "",
+  "data": [
+    {
+      "url": "icon-vip1",
+      "head": "http://39.97.107.107/public/static/image/publicWelfare/touxiang.png",
+      "title": "中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心",
+      "img": "http://39.97.107.107/public/static/image/publicWelfare/1.jpg",
+      "beginTime": "2019年4月17日",
+      "endTime": "2019年4月30日",
+      "type": "志愿服务"
+    },
+    {
+      "url": "icon-vip1",
+      "head": "http://39.97.107.107/public/static/image/publicWelfare/touxiang.png",
+      "title": "中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心",
+      "img": "http://39.97.107.107/public/static/image/publicWelfare/1.jpg",
+      "beginTime": "2019年4月17日",
+      "endTime": "2019年4月30日",
+      "type": "红色细胞"
+    },
+    {
+      "url": "icon-vip1",
+      "head": "http://39.97.107.107/public/static/image/publicWelfare/touxiang.png",
+      "title": "中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心",
+      "img": "http://39.97.107.107/public/static/image/publicWelfare/1.jpg",
+      "beginTime": "2019年4月17日",
+      "endTime": "2019年4月30日",
+      "type": "志愿服务"
+    },
+    {
+      "url": "icon-vip1",
+      "head": "http://39.97.107.107/public/static/image/publicWelfare/touxiang.png",
+      "title": "中国共产党",
+      "img": "http://39.97.107.107/public/static/image/publicWelfare/1.jpg",
+      "beginTime": "2019年4月17日",
+      "endTime": "2019年4月30日",
+      "type": "志愿服务"
+    }
+  ]
+}

@@ -15,6 +15,7 @@ ul.table li input{width: 60px;padding-left: 5px;border:none;line-height: 26px;}
 .items li{padding: 0 15px;height: 40px;border-bottom: 1px #d2d2d2 solid;line-height: 40px;position: relative;}
 .items li a{padding-left: 20px;}
 .items li a span{float: right;}
+.items li a b,.items li a em{font-style: normal}
 .items li a i{display: block;width: 15px;height: 40px;position: absolute;left: 15px;top: 0;}
 .items li.time a i{background:url(../image/ic_1.png) no-repeat center;background-size:12px auto;}
 .items li.address a i{background:url(../image/ic_2.png) no-repeat center;background-size:12px auto;}
@@ -40,6 +41,9 @@ input::-webkit-input-placeholder {color: #cacacc;}
 i.add{width: 18px;height: 18px;display: block;background:url(../image/add.png) no-repeat center;background-size:18px auto;position: absolute;right: 15px;top: 60px;}
 
 a.btn{width: 150px;height: 30px;background-color: #e0431b;margin:30px auto;display:block;color: #fff;text-align: center;font-size: 16px;line-height: 30px;border-radius: 30px;}
+
+#map_address{width: 100%;height: 100%;display: block;position: fixed;top: 0;left: 0;background: #fff;z-index: 999;transition:all 0.3s;}
+#btnMap{position: fixed;top: 5px;right: 12px;z-index: 1000;font-size: 28px;color: #000;}
 
 @media(min-width:375px){
 	.voteList li:nth-child(2) span{padding-right: 30px;}

@@ -1,74 +1,61 @@
 {include file="layouts/__header" /}
-    <link rel="stylesheet" type="text/css" href="__CSS__/conferenceList.css">
-    <title></title>
+<link rel="stylesheet" type="text/css" href="__CSS__/conferenceList.css">
+<title></title>
 </head>
 <body>
-    <header>
-        <a href="javascript:history.back(-1)"><i></i></a>
-        <h1></h1>
-    </header>
-    <section>
-        <ul class="table clearfix">
-            <li>主持人<input type="text"></li>
-            <li>应到会人数<input type="text"></li>
-            <li>记录人<input type="text"></li>
-            <li>实到会人数<input type="text"></li>
-        </ul>
-        <ul class="items clearfix">
-            <li class="time"><a><i></i>会议时间<span>2019年4月16日10点00分</span></a></li>
-            <li class="address"><a><i></i>浙江省温州市瓯海区</a></li>
-            <li class="detailed jt_r"><a><i></i><input type="text" placeholder="请输入详细地址"></a></li>
-        </ul>
-        <div class="record">
-            <h1>会议记录</h1>
-            <textarea placeholder="输入会议内容" class="content"></textarea>
+<header>
+    <a href="javascript:history.back(-1)"><i></i></a>
+    <h1></h1>
+</header>
+<section>
+    <ul class="table clearfix">
+        <li>主持人<input type="text" data-name="主持人"></li>
+        <li>应到会人数<input type="text" data-name="应到会人数"></li>
+        <li>记录人<input type="text" data-name="记录人"></li>
+        <li>实到会人数<input type="text" data-name="实到会人数"></li>
+    </ul>
+    <ul class="items clearfix">
+        <li class="time"><a><i></i>会议时间<span><input type="text"  id="dateBegin" data-name="活动时间" style="text-align:right"></span></a></li>
+        <li class="address"><a><i></i><input type="text" placeholder="请输入地址" data-name="地址"></a></li>
+        <li class="detailed jt_r"><a><i></i><input type="text" placeholder="请输入详细地址"></a></li>
+    </ul>
+    <div class="record">
+        <h1>会议记录</h1>
+        <textarea placeholder="输入会议内容" class="content" data-name="会议记录"></textarea>
+    </div>
+    <div class="vote">
+        <h1>本次会议如有表决请记录</h1>
+        <i class="add"></i>
+        <p>本次会议应到正式党员<input type="text" data-name="应到正式党员">人，实到<input type="text" data-name="实到正式党员"/>人</p>
+        <div class="list">
+            <ul class="voteList clearfix">
+                <li>表决事项一：<input type="text" class="title" data-name="表决事项一"></li>
+                <li>
+                    <span>同意票数<input type="text" class="agree"  data-name="同意票数"/></span>
+                    <span>不同意票数<input type="text" class="disagree" data-name="不同意票数"/></span>
+                    <span>弃权票数<input type="text" class="waiver" data-name="弃权票数"/></span>
+                </li>
+                <li>表决结果：<input type="text" placeholder="通过或不通过" class="voting" data-name="表决结果"/></li>
+            </ul>
         </div>
-        <div class="vote">
-            <h1>本次会议如有表决请记录</h1>
-            <i class="add"></i>
-            <p>本次会议应到正式党员<input type="text">人，实到<input type="text">人</p>
-            <div class="list">
-                <ul class="voteList clearfix">
-                    <li>表决事项一：<input type="text" class="title"></li>
-                    <li>
-                        <span>同意票数<input type="text" class="agree"></span>
-                        <span>不同意票数<input type="text" class="disagree"></span>
-                        <span>弃权票数<input type="text" class="waiver"></span>
-                    </li>
-                    <li>表决结果：<input type="text" placeholder="通过或不通过" class="voting"></li>
-                </ul>
-            </div>
-        </div>
-        <a class="btn">记录完毕</a>
-    </section>
+    </div>
+    <a class="btn">记录完毕</a>
+</section>
+<!--引入地图-->
+<iframe src="{:Url('/index/index/address')}" id="map_address" name="iframe_name" data-address="" data-lng=""  data-lat="" style="display: none"></iframe>
+<a id="btnMap" style="display: none">×</a>
 </body>
 <script src="__JS__/jquery-1.8.3.min.js"></script>
+<script src="__JS__/layer.js"></script>
+<script src="__JS__/common.js"></script>
+<script src="__JS__/rolldate.js"></script>
 <script>
 
     ini();
     //初始方法
     function ini(){
-        $(".btn").click(function(){
-            var items=attr();
-            //console.log(items);//返回所有数据
-            $.ajax({
-                type: 'POST',
-                url: '__URL__/index/meeting/apiAddMeetingRecord',
-                data: items,
-                dataType: 'json',
-                timeout: 10000,
-                success: function(data){
-                    console.log(data);
-                    $(".btn").hide();
-                },
-                error: function(xhr, type){
-                    console.log("失败");
-                    $(".btn").show();
-                }
-            });
-        });
         //title名
-        var type=getQueryString("list");
+        var type=$.fn.getQueryString("list");
         if(type=="1"){
             $("title").text("村（社区）支部委员会会议");
             $("header h1").text("村（社区）支部委员会会议");
@@ -88,40 +75,79 @@
             if(l<10){
                 var num=["一","二","三","四","五","六","七","八","九","十"];
                 var item='<ul class="voteList clearfix">'
-                        +'<li>表决事项'+num[l]+'：<input type="text" class="title"></li>'
-                        +'<li>'
-                        +'<span>同意票数<input type="text" class="agree"></span>'
-                        +'<span>不同意票数<input type="text" class="disagree"></span>'
-                        +'<span>弃权票数<input type="text" class="waiver"></span>'
-                        +'</li>'
-                        +'<li>表决结果：<input type="text" placeholder="通过或不通过" class="voting"></li>'
-                        +'</ul>';
+                    +'<li>表决事项'+num[l]+'：<input type="text" class="title" data-name="表决事项'+num[l]+'"/></li>'
+                    +'<li>'
+                    +'<span>同意票数<input type="text" class="agree" data-name="同意票数"/></span>'
+                    +'<span>不同意票数<input type="text" class="disagree" data-name="不同意票数"/></span>'
+                    +'<span>弃权票数<input type="text" class="waiver" data-name="弃权票数"/></span>'
+                    +'</li>'
+                    +'<li>表决结果：<input type="text" placeholder="通过或不通过" class="voting" data-name="表决结果"/></li>'
+                    +'</ul>';
                 $(".list").append(item);
             }else{
                 alert("表决事项最多十条");
-            } 
+            }
         });
     }
+
+    $("#dateBegin").val($.fn.time.dade_time);
+    new rolldate.Date({
+        el:'#dateBegin',
+        format:'YYYY-MM-DD hh:mm',
+        beginYear:2000,
+        endYear:2100,
+    });
+
+    //获取地图传来的参数
+    $(".address").click(function () {
+        $("#btnMap").show();
+        $("#map_address").show();
+    });
+    $("#btnMap").click(function () {
+        $("#btnMap").hide();
+        $("#map_address").hide();
+        var iframeObj=$(window.frames["iframe_name"].document);
+        var data_address=iframeObj.find("#mapData").attr("data-address");//地址
+        var lng=iframeObj.find("#mapData").attr("data-lng");//经度
+        var lat=iframeObj.find("#mapData").attr("data-lat");//纬度
+        $("#map_address").attr("data-address",data_address);
+        $(".address input").val(data_address);
+        $("#map_address").attr("data-lng",lng);
+        $("#map_address").attr("data-lat",lat);
+    });
+
+    //获取所有会议的值
     function attr(){
         var item=[{}];
         var host=$(".table li").eq(0).children("input").val(),
             allNum=$(".table li").eq(1).children("input").val(),
             noteTaker=$(".table li").eq(2).children("input").val(),
             actualNum=$(".table li").eq(3).children("input").val(),
-            address=$(".address a").text(),
-            address=$(".content").val(),
+            time=$("#dateBegin").val(),
+            address=$(".address input").val(),
+            detailed=$(".detailed input").val(),
+            record=$(".content").val(),
             allPartyNum=$(".vote>p>input").eq(0).val(),
-            actualPartyNum=$(".vote>p>input").eq(1).val();
+            actualPartyNum=$(".vote>p>input").eq(1).val(),
+            lng=$("#map_address").attr("data-lng"),
+            lat=$("#map_address").attr("data-lat");
+
         item=[{
-            host:host,
-            allNum:allNum,
-            noteTaker:noteTaker,
-            actualNum:actualNum,
-            address:address,
-            address:address,
-            allPartyNum:allPartyNum,
-            actualPartyNum:actualPartyNum
+            host:host,               //主持人
+            allNum:allNum,           //应到会人数
+            noteTaker:noteTaker,     //记录人
+            actualNum:actualNum,     //实到会人数
+            time:time,               //会议开始时间
+            address:address,         //地址
+            detailed:detailed,       //详细地址
+            lnt:lng,                 //经度
+            lat:lat,                 //纬度
+            record:record,           //会议记录内容
+            allPartyNum:allPartyNum, //应到正式党员
+            actualPartyNum:actualPartyNum//实到正式党员
         }];
+
+        //获取所有表决事项的值
         var voteList=[{}];
         var l=$(".voteList").length;
         for(var i=0;i<l;i++){
@@ -131,30 +157,43 @@
                 waiverNum=$(".voteList").eq(i).find(".waiver").val(),
                 voting=$(".voteList").eq(i).find(".voting").val();
             voteList=[{
-                title:title,
-                agreeNum:agreeNum,
-                disagreeNum:disagreeNum,
-                waiverNum:waiverNum,
-                voting:voting
-            }]
+                title:title,             //事项表决
+                agreeNum:agreeNum,       //同意
+                disagreeNum:disagreeNum, //不同意
+                waiverNum:waiverNum,     //弃权
+                voting:voting            //结果
+            }];
             item.push(voteList);
         }
         return item;
     }
-    //获取url参数
-    //console.log(getQueryString("type"));
-    function getQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-        var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
-        var r = window.location.search.substr(1).match(reg);
-        var q = window.location.pathname.substr(1).match(reg_rewrite);
-        if(r != null){
-            return unescape(r[2]);
-        }else if(q != null){
-            return unescape(q[2]);
-        }else{
-            return null;
-        }
-    }
+
+    $(".btn").click(function () {
+        //json数据
+        var items=attr();
+        //判断是否有数据为空
+        $.fn.dataName();
+
+        // $.ajax({
+        //     type: 'POST',
+        //     url: '',
+        //     data: items,
+        //     dataType: 'json',
+        //     success: function (data) {
+        //         //console.log(data);
+        //         layer.open({
+        //             style: 'border:none; background-color:#e0431b; color:#fff;width:auto;',
+        //             content: "提交成功",
+        //             time: 2 //2秒关闭
+        //         });
+        //         $(".btn").hide();
+        //     },
+        //     error: function (data) {
+        //         alert("上传失败");
+        //         $(".btn").show();
+        //     }
+        // });
+    });
+
 </script>
 </html>

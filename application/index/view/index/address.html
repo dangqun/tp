@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no" searchtype="map">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>百度API地图获取位置</title>
+    <style>
+        .case{width: 100%!important;padding:30px 10px;box-sizing: border-box;}
+        #Map_input_map{text-indent: 10px;}
+        pre{background:#eee;border:1px solid #ddd;border-left:4px solid #f60;padding:15px;margin-top: 15px;}
+        .bMap{position: relative;}
+        .bMap .map-warp{position: absolute;left:0;width:100%;height:400px;top:34px;display: none;}
+        .bMap input{width:100%;height:30px;line-height: 30px;border:1px solid #d7d7d7;}
+        #tangram-suggestion--TANGRAM__1c-main{z-index: 999}
+    </style>
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=EZPCgQ6zGu6hZSmXlRrUMTpr"></script>
+    <script src="__JS__/jquery-1.8.3.min.js"></script>
+    <script src="__JS__/map.jquery.min.js"></script>
+</head>
+<body>
+<div class="case">
+    <div class="bMap" id='case'></div>
+</div>
+<input type="hidden" id="mapData" data-address="" data-lng=""  data-lat="">
+</body>
+</html>
+
+<script type="text/javascript">
+    $(function(){
+        $("#case").bMap({
+            // address:"温州市",  //默认地址，如果为空则通过解析默认坐标获取
+            // location:[120.706479,28.001086],  //默认坐标，如果为空则通过解析默认地址获取
+            // name:"address", //提交表单的NAME,默认为map
+            callback:function(address,point) //回调函数，返回地址数组与坐标
+            {
+                $("#Map_input_map").blur();
+                $("#Map_map").attr("style","display: block;\n" +
+                                    "z-index: 0;\n" +
+                                    "overflow: hidden;\n" +
+                                    "background-color: rgb(243, 241, 236);\n" +
+                                    "color: rgb(0, 0, 0);\n" +
+                                    "text-align: left;");
+                // console.log(address);
+                // console.log(point);
+                var data_address=$("#Map_input_map").val();
+                $("#mapData").attr("data-address",data_address);
+                $("#mapData").attr("data-lng",point.lng);
+                $("#mapData").attr("data-lat",point.lat);
+            }
+        });
+    })
+</script>

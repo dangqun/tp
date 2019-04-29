@@ -24,10 +24,13 @@
         dade_time:dade_time
     };
 
-    //上传图片预览
-    //var files = $(this)[0].files[0];    //获取文件信息（this为上传图片input的id）
-    //var imgId=$("#img");                //图片id
-    $.fn.upload_img = function (files,imgId) {
+    /*
+     *上传图片预览
+     * var files = $(this)[0].files[0];    //获取文件信息（this为上传图片input的id）
+     * var imgId=$("#img");                //图片id
+     * inputId                             //传值DataURL(base64)给input的val
+     */
+    $.fn.upload_img = function (files,imgId,inputId) {
         var file = files;    //获取文件信息
         if (!/image\/\w+/.test(file.type)) {
             layer.open({content: '请确保文件为图像类型',time: 2});
@@ -45,6 +48,7 @@
             var reader = new FileReader();  //调用FileReader
             reader.onload = function (evt) {   //读取操作完成时触发。
                 imgId.attr('src', evt.target.result)  //将img标签的src绑定为DataURL
+                inputId.val(evt.target.result)  //将input的值绑定为DataURL
             }
             reader.readAsDataURL(file); //将文件读取为 DataURL(base64)
         } else {
@@ -52,8 +56,10 @@
         }
     }
 
-    //获取url参数
-    //console.log(getQueryString("type"));
+    /*
+     *获取url参数
+     * console.log(getQueryString("type"));
+     */
     $.fn.getQueryString = function (name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
@@ -67,5 +73,24 @@
             return null;
         }
     }
-
+    /*
+     * 判断是否有数据为空；必须是input中。而且加入data-name属性，data-name内容为提示的名称
+     */
+    $.fn.dataName = function () {
+        var b=$("*[data-name]");
+        var s=b.length;
+        for(var i=0;i<s;i++){
+            var v=b.eq(i).val();
+            if(v==""|| v==null || v==undefined){
+                var attr =v=b.eq(i).attr("data-name");
+                //alert(attr+"不能为空");
+                layer.open({
+                    style: 'border:none; background-color:#e0431b; color:#fff;width:auto;',
+                    content: attr+"不能为空",
+                    time: 1 //1秒关闭
+                });
+                return false;
+            }
+        }
+    }
 })(jQuery);

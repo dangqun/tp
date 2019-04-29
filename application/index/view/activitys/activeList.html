@@ -16,50 +16,17 @@
             <li><a>无 效</a></li>
         </ul>
         <ul class="items clearfix list">
-            <li>
-                <a href="article.html">
-                    <div class="infoOne"><span class="img lazy" data-original="__IMG__/index/img_1.jpg"></span></div>
-                    <div class="text">
-                        <p>中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>
-                        <p>开始时间：2019年4月17日</p>
-                        <p>结束时间：2019年4月30日</p>
-                        <p>志愿服务</p>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a href="article.html">
-                    <div class="infoOne"><span class="img lazy" data-original="__IMG__/index/img_2.jpg"></span></div>
-                    <div class="text">
-                        <p>中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>
-                        <p>开始时间：2019年4月17日</p>
-                        <p>结束时间：2019年4月30日</p>
-                        <p>红色细胞</p>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a>
-                    <div class="infoOne"><span class="img lazy" data-original="__IMG__/index/img_3.jpg"></span></div>
-                    <div class="text">
-                        <p>中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>
-                        <p>开始时间：2019年4月17日</p>
-                        <p>结束时间：2019年4月30日</p>
-                        <p>志愿服务</p>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a>
-                    <div class="infoOne"><span class="img lazy" data-original="__IMG__/index/img_4.jpg"></span></div>
-                    <div class="text">
-                        <p>中国共产党</p>
-                        <p>开始时间：2019年4月17日</p>
-                        <p>结束时间：2019年4月30日</p>
-                        <p>红色细胞</p>
-                    </div>
-                </a>
-            </li>
+            <!--<li>-->
+                <!--<a href="article.html">-->
+                    <!--<div class="infoOne"><span class="img lazy" data-original="__IMG__/index/img_1.jpg"></span></div>-->
+                    <!--<div class="text">-->
+                        <!--<p>中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>-->
+                        <!--<p>开始时间：2019年4月17日</p>-->
+                        <!--<p>结束时间：2019年4月30日</p>-->
+                        <!--<p>志愿服务</p>-->
+                    <!--</div>-->
+                <!--</a>-->
+            <!--</li>-->
         </ul>
         <div class="list" style="display: none;"></div>
         <div class="list" style="display: none;">3</div>
@@ -81,5 +48,55 @@
             $(".null").hide()
         }
     });
+
+    f(0);
+    function f(index) {
+        var loading="";
+        var i=index;
+        $.ajax({
+            type: 'POST',
+            url: '__PUBLIC__/json/manage.json',
+            data: '',
+            dataType: 'json',
+            beforeSend: function(){
+                loading=layer.open({type: 2,content: '加载中'});
+            },
+            success: function (data) {
+                if(data.code==200){
+
+                    $('.list').eq(i).empty();
+                    var html = '';
+                    $.each(data.data,function(i,item){
+                        html += '<li>'
+                            + '<a href="'+item.url+'">'
+                            + '<div class="infoOne"><span class="img lazy" data-original="'+item.img+'"></span></div>'
+                            + '<div class="text">'
+                            + '<p>'+item.title+'</p>'
+                            + '<p>开始时间：'+item.beginTime+'</p>'
+                            + '<p>结束时间：'+item.endTime+'</p>'
+                            + '<p>'+item.type+'</p>'
+                            + '</div>'
+                            + '</a>'
+                            + '</li>';
+                    });
+                }else {
+                    console.log("获取数据失败");
+                }
+                $('.list').eq(i).html(html);
+                layer.close(loading);
+                //图片懒加载
+                $(".lazy").lazyload({
+                    placeholder : "",
+                    effect: "fadeIn",
+                    threshold : 200
+                }).removeClass('lazy').addClass('lazyloaded');
+            },
+            error: function (xhr, type) {
+                layer.close(index);
+                console.log("交互失败");
+            }
+        });
+    }
+
 </script>
 </html>

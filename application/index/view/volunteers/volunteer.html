@@ -1,9 +1,6 @@
 {include file="layouts/__header" /}
     <link rel="stylesheet" type="text/css" href="__CSS__/volunteer.css">
     <title></title>
-    <style>
-        .layui-m-layercont{padding: 10px 20px;}
-    </style>
 </head>
 <body>
     <header>
@@ -12,8 +9,8 @@
     </header>
     <section>
         <div class="top">
-            <div class="img"><img src="__IMG__/add_img.jpg" id="img" data-name="招募图片"></div>
-            <input type="file" id="add_img">
+            <div class="img"><img src="__IMG__/add_img.jpg" id="img"></div>
+            <input type="file" id="add_img" data-name="招募图片">
         </div>
         <ul class="userlink">
             <li class="title"><a><input type="text" placeholder="请输入活动标题" data-name="活动"></a></li>
@@ -89,8 +86,8 @@
     </aside>
 </body>
 {include file="layouts/foot" /}
-<script src="__JS__/common.js"></script>
 <script src="__JS__/layer.js"></script>
+<script src="__JS__/common.js"></script>
 <script src="__JS__/rolldate.js"></script>
 <script src="__JS__/swiper.js"></script>
 <script>
@@ -208,7 +205,8 @@ $(function() {
     $("#add_img").change(function () {
         var files = $(this)[0].files[0];    //获取文件信息
         var imgId=$("#img");
-        $.fn.upload_img(files,imgId);
+        var inputId=$("#add_img");
+        $.fn.upload_img(files,imgId,inputId);
     });
 
     $(".agreement input").click(function () {
@@ -235,20 +233,8 @@ $(function() {
                     details: details
                 };
 
-                var s=$("input[data-name]").length;
-                for(var i=0;i<s;i++){
-                    var v=$("input[data-name]").eq(i).val();
-                    if(v==""|| v==null || v==undefined){
-                        var attr =v=$("input[data-name]").eq(i).attr("data-name");
-                        //alert(attr+"不能为空");
-                        layer.open({
-                            style: 'border:none; background-color:#e0431b; color:#fff;width:auto;',
-                            content: attr+"不能为空",
-                            time: 1 //1秒关闭
-                        });
-                        return false;
-                    }
-                }
+                //判断是否有数据为空
+                $.fn.dataName();
 
                 // $.ajax({
                 //     type: 'POST',
