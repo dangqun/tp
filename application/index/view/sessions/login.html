@@ -1,193 +1,109 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <title>登录</title>
-    <link rel="stylesheet" href="__PUBLIC__/static/plugin/iconfont/iconfont.css">
-    <link rel="stylesheet" href="__PUBLIC__/static/css/style.css">
+{include file="layouts/__header" /}
+    <link rel="stylesheet" type="text/css" href="__CSS__/login.css">
+    <style>
+        .voice{ color:#666666; font-size:14px; padding:0 20px 10px }
+    </style>
+    <title>党群登陆</title>
 </head>
 <body>
-<div class="box login j-flex j-flex-vtc ">
-    <div class="close" onclick="location.href='./'">+</div>
-    <div class="text-center" style="margin:.2rem 0 .4rem 0">
-        <div class="font-26 color-fff margin-bottom1">欢迎登录</div>
-        <div class="font-16 color-fff">一起为爱行动</div>
-    </div>
-    <div>
-        <div class="border-0"><input type="number" placeholder="请输入手机号" name="login-phone"></div>
-        <div class="border-0"><input type="password" placeholder="请输入密码" name="login-password"><span
-                class="iconfont iconyanjing look" onclick="LoginApp.change()"></span><span
-                class="iconfont iconbukejian none look" onclick="LoginApp.change()"></span></div>
-    </div>
-    <div class="btn" onclick="LoginApp.login()">登录</div>
-    <div class="j-flex margin-bottom1">
-        <div class="color-fff" onclick="LoginApp.turnRegister()">我要注册</div>
-        <div class="flex"></div>
-        <div class="color-fff">忘记密码</div>
-    </div>
-    <div class="text-center " style="margin-top: .5rem">
-        <div class="color-ccc small-size">你还可以选择以下方式登录</div>
-        <div>
-            <span class="iconfont iconzhifubao font-40" style="color: #0ae;margin-right: .2rem"></span>
-            <span class="iconfont iconweixin1 font-40 " style="color: #2aa144;"></span>
+
+<header>
+    <a href="javascript:history.back(-1)"><i></i></a>
+    <h1>登陆</h1>
+</header>
+
+<section>
+    <p class="voice"></p>
+    <div class="bind">
+        <div class="bindInput">
+            <input type="tel" name="phone" placeholder="手机号" id="tel" value="" />
+            <a class="post" href="javascript:void(0);" id="post">获取验证码</a>
+        </div>
+        <div class="verify">
+            <input type="tel" name="Verification" placeholder="验证码" id="Verification" value=""  />
+            <a class="rePost hide" href="javascript:void(0);" id="rePost">没收到?</a>
         </div>
     </div>
-    <script type="text/html" id="register-tpl">
-        <div class="register j-flex j-flex-vtc ">
-            <div><span class="iconfont iconarrow-up font-16" onclick="LoginApp.turnLogin()"></span></div>
-            <div class="text-center" style="margin:.2rem 0 .4rem 0">
-                <div class="font-26 margin-bottom1">立刻注册</div>
-                <div class="font-16 ">一起为爱行动</div>
-            </div>
-            <div class="margin-bottom1">
-                <div class="border-0"><input type="number" placeholder="请输入手机号" name="register-phone"></div>
-                <div class="border-0 j-flex">
-                    <div class="flex"><input type="number" placeholder="请输入验证码" name="register-code"></div>
-                    <div class="j-flex j-flex-center code" onclick="LoginApp.getCode(this)">获取验证码</div>
-                </div>
-                <div class="border-0"><input type="number" placeholder="请输入密码" name="register-password"></div>
-            </div>
-            <div class="j-flex color-999">
-                <div class="radio-box">
-                    <span class="iconfont icondagou font-16" id="agree-sign"></span>
-                    <input type="checkbox" name="agree" onchange="LoginApp.agree()">
-                </div>
-                <div>我同意<span class="green">《注册协议》</span></div>
-            </div>
-            <div class="btn" onclick="LoginApp.register()">注册</div>
-            <div class="j-flex">
-                <div class="green" onclick="LoginApp.turnLogin()">马上登录</div>
-            </div>
-        </div>
-    </script>
-    <script src="__PUBLIC__/static/plugin/layer_mobile/layer.js"></script>
-    <script src="__PUBLIC__/static/plugin/zepto/zepto.min.js"></script>
-    <script src="__PUBLIC__/static/js/base.js"></script>
 
-    <script type="text/javascript">
+    <a id="bind" href="" style=" clear:both">登录</a>
+    <div class="agreement">
+        <input id="agreement" type="checkbox" checked="ckecked" disabled="true">
+        <a href="">我已同意，并已阅读《红色细胞项目发布者须知》</a>
+    </div>
+</section>
 
-        var LoginApp = {};
-        LoginApp.agree = function () {
-            if ($("input[name='agree']").is(":checked")) {
-                $("#agree-sign").addClass("green");
-            } else {
-                $("#agree-sign").removeClass("green");
-            }
-        };
-        // 获取验证码
-        LoginApp.getCode = function (obj) {
-            if (/^1[34578]\d{9}$/.test($("input[name='register-phone']").val())) {
-                if ($(obj).html() == "获取验证码") {
-                    Fnajax("{:url('index/Sessions/apiGetCode')}", {mobile: $("input[name='register-phone']").val()}, function (json) {
-                        LoginApp.code = json.data;
-                        $(obj).css({"pointer-events": "none", "color": "#ccc"});
-                        var time = 60;
-                        $(obj).html(time + "s");
-                        var countDown = setInterval(function () {
-                            if ($(obj).html() == ('0s')) {
-                                clearInterval(countDown);
-                                $(obj).html("获取验证码");
-                                $(obj).css({"pointer-events": "auto", "color": "#000"});
-                            } else {
-                                time--;
-                                $(obj).html(time + "s")
-                            }
-                        }, 1000);
-                        if (json.code == 200) {
-                            layer.open({content: LoginApp.code, skin: 'msg', time: 2});
-                        } else {
-                            layer.open({content: json.msg, skin: 'msg', time: 2});
-                        }
-                    })
-                } else {
-                    $(obj).css({"pointer-events": "auto", "color": "#000"});
-                    clearInterval(countDown);
-                }
-            } else {
-                layer.open({content: "请输入正确的手机号", skin: 'msg', time: 2});
-            }
-        }
-        // 跳转登录
-        LoginApp.turnLogin = function () {
-            layer.closeAll()
-        }
-        // 跳转注册
-        LoginApp.turnRegister = function () {
-            layer.open({
-                type: 1
-                ,
-                content: $("#register-tpl").html()
-                // ,anim: 'up'
-                ,
-                style: 'position:fixed; bottom:0; left:0; right:0;top:0; padding:.1rem; border:none;box-sizing:border-box;-webkit-overflow-scrolling : touch;overflow-y: auto;overflow-x: hidden;'
-            });
-        }
-        //登录
-        LoginApp.login = function () {
-            if ($("input[name='login-phone']").val() != "" && $("input[name='login-password']").val() != "") {
-                Fnajax("?ctl=api&act=login", {
-                    user_name: $("input[name='login-phone']").val(),
-                    pwd: $("input[name='login-password']").val()
-                }, function (json) {
-                    if (json.code == 200) {
-                        location.href = "./"
-                    } else {
-                        layer.open({content: "密码不正确", skin: 'msg', time: 2});
-                    }
-                })
-            } else if ($("input[name='login-phone']").val() == "") {
-                layer.open({content: "请输入正确的手机号", skin: 'msg', time: 2});
-            } else {
-                layer.open({content: "密码不正确", skin: 'msg', time: 2});
-            }
-        }
-        //注册
-        LoginApp.register = function () {
-            if ($("input[name='register-phone']").val()) {
-                if ($("input[name='register-code']").val() == LoginApp.code) {
-                    if ($("input[name='register-password']").val()) {
-                        if ($("input[name='agree']").is(":checked")) {
-                            Fnajax("?ctl=api&act=register", {
-                                mobile: $("input[name='register-phone']").val(),
-                                code: $("input[name='register-code']").val(),
-                                pwd: $("input[name='register-password']").val()
-                            }, function (json) {
-                                layer.open({content: json.msg, skin: 'msg', time: 2});
-                                if (json.code == 200) {
-                                    setTimeout(function () {
-                                        location.href = "./";
-                                    }, 500)
-                                }
-                            })
-                        } else {
-                            layer.open({content: "请阅读并同意《注册协议》", skin: 'msg', time: 2});
-                        }
-                    } else {
-                        layer.open({content: "密码不正确", skin: 'msg', time: 2});
-                    }
-                } else {
-                    layer.open({content: "验证码不正确", skin: 'msg', time: 2});
-                }
-            } else {
-                layer.open({content: "手机号不正确", skin: 'msg', time: 2});
-            }
-
-
-        }
-        LoginApp.change = function () {
-            if ($("input[name='login-password']").attr("type") == "password") {
-                $("input[name='login-password']").attr("type", "text");
-                $(".iconbukejian").show();
-                $(".iconyanjing").hide();
-            } else {
-                $("input[name='login-password']").attr("type", "password");
-                $(".iconyanjing").show();
-                $(".iconbukejian").hide();
-            }
-
-        }
-    </script>
-</div>
 </body>
 </html>
+
+<script src="__JS__/jquery-1.8.3.min.js"></script>
+<script src="__JS__/layer.js"></script>
+<script >
+    var tel = $('#tel'),
+        post = $('#post'),
+        verify = $('#Verification'),
+        rePost = $('#rePost'),
+        smt = $('#bind'),
+        cellReg = /^1\d{10}$/i,
+        veriReg = /\d{4}/i;
+
+    post.on('click tap', function(){
+        var that = $(this);
+        if(!that.hasClass('time')){
+            if(!cellReg.test(tel.val())){
+                layer.open({
+                    style: 'border:none; background-color:#e0431b; color:#fff;width:auto;',
+                    content: "请正确输入手机号码！",
+                    time: 2
+                });
+                tel.val('');
+                tel.focus();
+            }else{
+                that.addClass('time').html('60s').data('time', 60);
+                var fs=layer.open({
+                    style: 'border:none; background-color:#e0431b; color:#fff;width:auto;',
+                    content: "正在发送..."
+                });
+
+                var timer = setInterval(function(){
+                    var left = parseInt(that.data('time'));
+                    if(left > 0){
+                        left--;
+                        that.html(left + 's').data('time', left);
+                    }else{
+                        clearInterval(timer);
+                        that.html('获取验证码').removeClass('time');
+                    }
+                },1000);
+                $.ajax({
+                    type: 'POST',
+                    url: '',
+                    data: {phone: tel.val(), asd:asd},
+                    dataType: 'json',
+                    timeout: 10000,
+                    success: function(data){
+                        if (data.code == 200) {
+                            alert('发送成功！');
+                        }
+                        else{
+                            alert('失败！');
+                        }
+                        setTimeout(function(){
+                            layer.close(fs);
+                        },1500);
+                    },
+                    error: function(xhr, type){
+                        layer.open({
+                            style: 'border:none; background-color:#e0431b; color:#fff;width:auto;',
+                            content: "发送失败！请检查网络",
+                            time: 3
+                        });
+                        clearInterval(timer);
+                        that.html('获取验证码').removeClass('time');
+                        rePost.addClass('hide');
+                    }
+                });
+            }
+        }
+    });
+
+</script>
