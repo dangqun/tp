@@ -11,9 +11,7 @@ namespace app\index\controller;
 
 use think\Controller;
 use think\Debug;
-use think\exception\HttpResponseException;
 use think\Request;
-use think\Response;
 use think\Session;
 class Base extends Controller
 {
@@ -77,8 +75,7 @@ class Base extends Controller
      */
     protected $beforeActionList = [
         'init',
-        'initLogin',
-        //'isLogin'
+        'initLogin'
     ];
 
     public function __construct(Request $request = null)
@@ -91,17 +88,11 @@ class Base extends Controller
      * 初始化
      */
     protected function init(){
-
-        $this->isApi = $this->request->isAjax();//判断是否为AJAX请求
-
         Session::prefix('dangqun');//设置session作用域
-
+        $this->isApi = $this->request->isAjax();//判断是否为AJAX请求
         $status = require_once (APP_PATH.DS.'status.php');//引入状态码文件
-
         $this->setStatus($status);//初始化状态码
-
         $this->assign('title','党群');//全局标题设置=
-
         $this->setPageSize();//设置页码和请求量
     }
 
@@ -120,11 +111,19 @@ class Base extends Controller
         }
     }
 
+    /**
+     * 记录运行开始时间
+     * @param $msg
+     */
     protected function begin($msg){
         $this->s($msg);
         Debug::remark('begin');
     }
 
+    /**
+     * 记录运行结束时间
+     * @param $msg
+     */
     protected function end($msg){
         Debug::remark('end');
         $this->s($msg);
@@ -231,8 +230,7 @@ class Base extends Controller
      * 是否为微信
      * @return bool
      */
-    protected function isWeiXinBrowser()
-    {
+    protected function isWeiXinBrowser(){
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
         if (strpos($user_agent, 'MicroMessenger') === false) {
             return false;
@@ -243,14 +241,21 @@ class Base extends Controller
 
     /**
      * 输出内容
+     * @param null $content
      */
     protected function s($content = null){
         echo $content . "<br/>\r\n";
     }
 
+    /**
+     * 输出执行时间
+     */
     protected function f(){
         echo "执行时间：".Debug::getRangeTime('begin','end')."s<br/>\r\n";
     }
+
+
+    /**************************************** set get方法 ********************************************************************/
 
     /**
      * @return array

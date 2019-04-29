@@ -12,5 +12,5 @@ use think\Model;
 class Meeting extends Model
 {
     //设置只读字段
-    protected $readonly = ['name','email'];
+    protected $readonly = ['type','create_time'];
 }

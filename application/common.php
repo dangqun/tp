@@ -10,12 +10,39 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+
+/**
+ * 获取图片格式化路径
+ * @param $img
+ * @return string
+ */
 function getImgUrl($img){
     if(empty($img)){
         return '';
     }
     $url = request()->domain(). '/public/'.$img;
     return $url;
+}
+
+/**
+ * 获取默认图片
+ * @param int $type 1:用户,2:活动
+ * @return string
+ */
+function getDefaultImg($type = 1){
+    $img = request()->domain(). '/public/';
+    switch ($type){
+        case 1:
+            $img .= 'static/image/my/head.png';
+            break;
+        case 2:
+            $img .= 'static/image/my/head.png';
+            break;
+        default:
+            $img .= 'static/image/my/head.png';
+            break;
+    }
+    return $img;
 }
 
 //获取一天的开始时间

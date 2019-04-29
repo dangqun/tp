@@ -9,39 +9,16 @@
     </header>
     <section>
         <div class="item">
+            {volist name="data" id="vo"}
             <a>
                 <i></i>
-                <img src="__IMG__/my/head.png">
+                <img src="{$vo.img}">
                 <span>
-                    <span class="text">小凡</span>
+                    <span class="text">{$vo.user_name}</span>
                 </span>
                 <div class="cancel">取消关注</div>
             </a>
-            <a>
-                <i></i>
-                <img src="__IMG__/my/head.png">
-                <span>
-                    <span class="text">小凡</span>
-                </span>
-                <div class="cancel">取消关注</div>
-            </a>
-            <a>
-                <i></i>
-                <img src="__IMG__/my/head.png">
-                <span>
-                    <span class="text">小凡</span>
-                </span>
-                <div class="cancel">取消关注</div>
-            </a>
-            <a>
-                <i></i>
-                <img src="__IMG__/my/head.png">
-                <span>
-                    <span class="text">小凡</span>
-                </span>
-                <div class="cancel">取消关注</div>
-            </a>
-            
+            {/volist}
         </div>
     </section>
 </body>

@@ -11,10 +11,24 @@ use app\index\controller\Base;
 use app\index\model\User;
 use think\Db;
 use think\Loader;
+use think\Request;
+
 class Users extends Base
 {
 
     use \Upload,\Code;
+
+    /**
+     * 前置操作
+     * @var array
+     */
+    protected $beforeActionList = [
+        'init',
+        'initLogin',
+        'isLogin'=>[
+            'except'=>'apiRegister,register'
+        ]
+    ];
 
     /**
      * 用户中心首页
@@ -31,7 +45,7 @@ class Users extends Base
         if($user->img == null){
             $user->img = 'static/image/my/head.png';
         }
-        $col = $user->collection()->where('del','0')->select();
+        $col = $user->follow()->where('del','0')->select();
         $fans = $user->fans()->where(['del'=>0])->select();
         $user = $user->toArray();
         $user['col'] = count($col);
@@ -67,14 +81,41 @@ class Users extends Base
      * 关注
      */
     public function follow(){
-        return $this->fetch('myConcern');
+        $user = Loader::model('User');
+        $content = $user->find($this->userInfo['id']);
+        $list = $content->follow;
+        $data = [];
+        if(!empty($list)){
+            $uids = [];
+            foreach($list as $k=>$v){
+                $uids[] = $v->uid;
+            }
+            $map = [
+                'id'=>['in',$uids]
+            ];
+            $userList = $user->field('id,user_name,img')->where($map)->select();
+            if(!empty($userList)){
+                foreach($userList as $k=>$v){
+                    $userList[$k]['img'] = empty($v['img']) ? getDefaultImg() : $v['img'];
+                }
+            }
+            $data = $userList;
+        }
+        return $this->fetch('myConcern',['data'=>$data]);
     }
 
     /**
      * 收藏
      */
     public function collection(){
-        return $this->fetch('myCollection');
+        $user = Loader::model('User');
+        $content = $user->find($this->userInfo['id']);
+        $list = $content->collection()->where('del',0)->select();
+        $data = [];
+        if(!empty($list)){
+            $obj_id = [];
+        }
+        return $this->fetch('myCollection',['data'=>$data]);
     }
 
     /**
@@ -82,7 +123,7 @@ class Users extends Base
      */
     public function fans(){
         return $this->fetch('myFans');
-    }
+    }   
 
     /**
      * 注册
@@ -153,10 +194,10 @@ class Users extends Base
      * 用户关注
      */
     public function apiGetCollection(){
-        if(!$this->isLogin(true)) return;
         $user = Loader::model('User');
         $content = $user->find($this->userInfo['id']);
-        $list = $content->collection;
+        $list = $content->hasWhere('collection',['del'=>0]);
+        print_r($list);exit;
         if(empty($list)){
             $this->result['error_code'] = '3001';
             $this->output();
@@ -184,7 +225,6 @@ class Users extends Base
      * 用户粉丝
      */
     public function apiGetFans(){
-        if(!$this->isLogin(true)) return;
         $user = Loader::model('User');
         $content = $user->find($this->userInfo['id']);
         $list = $content->fans;
@@ -237,7 +277,7 @@ class Users extends Base
      * 用户收藏
      */
     public function apiGetUserCollection(){
-
+        $user = Loader::model('User');
     }
 
     /**

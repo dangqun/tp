@@ -13,7 +13,7 @@ class Meeting extends Base
 {
 
     /**
-     * 首页
+     * 选择会议类型
      */
     public function index(){
         $type = $this->request->has('type') ? intval($this->request->param('type')) : 0;
@@ -49,15 +49,23 @@ class Meeting extends Base
      * 新增会议记录
      */
     public function apiAddMeetingRecord(){
-//        $validate = Loader::validate('Meeting');
-//        if (!$validate->check($this->request->param())) {
-//            $this->result['error_code'] = 4001;
-//            $this->result['msg'] = $validate->getError();
-//            $this->output();
-//            return;
-//        }
+        $validate = Loader::validate('Meeting');
+        if (!$validate->check($this->request->param())) {
+            $this->result['error_code'] = 4001;
+            $this->result['msg'] = $validate->getError();
+            $this->output();
+            return;
+        }
         $data = $this->setData();
-        print_r($data);exit;
+        $model = Loader::model('Meeting');
+        $result = $model->insert($data);
+        if(empty($result)){
+            $this->result['error_code'] = '3005';
+            $this->result['msg'] = $validate->getError();
+            $this->output();
+            return;
+        }
+        $this->successR();
     }
 
     /**
@@ -74,7 +82,10 @@ class Meeting extends Base
 
     }
 
-
+    /**
+     * 过滤参数
+     * @return array
+     */
     private function setData(){
         $data = [];
         $param = $this->request->param();

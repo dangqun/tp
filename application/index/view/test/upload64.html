@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no" searchtype="map">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+<title>简单的html5 File测试 for pic2base64</title>
+<style>
+    input{display: block}
+    body{margin: 50px 20px;}
+    form{margin-top: 100px;display: block}
+</style>
+<script>
+    window.onload = function(){
+        var input = document.getElementById("demo_input_base64");
+        var result= document.getElementById("result");
+        var img_area = document.getElementById("img_area");
+        if ( typeof(FileReader) === 'undefined' ){
+            result.innerHTML = "抱歉，你的浏览器不支持 FileReader，请使用现代浏览器操作！";
+            input.setAttribute('disabled','disabled');
+        }else{
+            input.addEventListener('change',readFileBase64,false);
+        }
+    }
+    function readFileBase64(){
+        var file = this.files[0];
+        //这里我们判断下类型如果不是图片就返回 去掉就可以上传任意文件
+        if(!/image\/\w+/.test(file.type)){
+            alert("请确保文件为图像类型");
+            return false;
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        console.log();
+        reader.onload = function(e){
+            result.innerHTML = this.result;
+            img_area.innerHTML = '<div class="sitetip">图片img标签展示：</div><img src="'+this.result+'" alt=""/>';
+        }
+
+    }
+</script>
+</head>
+<body>
+<form action="{:Url('/index/test/uploadBase64')}" method="post">
+    <input type="file" value="sdgsdg" id="demo_input_base64" />
+    <input type="hidden" value="api" name="api" />
+    <textarea name="image" id="result" style="display: none"></textarea>
+    <p id="img_area"></p>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
