@@ -95,8 +95,7 @@ $(function() {
             }).removeClass('lazy').addClass('lazyloaded');
         },
         error: function (xhr, type) {
-            layer.close(index);
-            console.log("交互失败");
+            layer.open({content: "发送失败！请检查网络",skin: 'msg',time: 2});
         }
     });
 });

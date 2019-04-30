@@ -47,8 +47,8 @@
         if (file) {
             var reader = new FileReader();  //调用FileReader
             reader.onload = function (evt) {   //读取操作完成时触发。
-                imgId.attr('src', evt.target.result)  //将img标签的src绑定为DataURL
-                inputId.val(evt.target.result)  //将input的值绑定为DataURL
+                imgId.attr('src', evt.target.result); //将img标签的src绑定为DataURL
+                inputId.value = evt.target.result;  //将input的值绑定为DataURL
             }
             reader.readAsDataURL(file); //将文件读取为 DataURL(base64)
         } else {
@@ -83,7 +83,7 @@
             var v=b.eq(i).val();
             if(v==""|| v==null || v==undefined){
                 var attr =v=b.eq(i).attr("data-name");
-                layer.open({content: attr+"不能为空",time: 1});
+                layer.open({content: attr+"不能为空",skin: 'msg',time: 1});
                 return false;
             }
         }

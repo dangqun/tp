@@ -46,7 +46,7 @@
 <a id="btnMap" style="display: none">×</a>
 </body>
 <script src="__JS__/jquery-1.8.3.min.js"></script>
-<script src="__JS__/layer.js"></script>
+<script src="__PUBLIC__/static/plugin/layer/mobile/layer.js"></script>
 <script src="__JS__/common.js"></script>
 <script src="__JS__/rolldate.js"></script>
 <script>
@@ -180,15 +180,11 @@
         //     data: items,
         //     dataType: 'json',
         //     success: function (data) {
-        //         //console.log(data);
-        //         layer.open({
-        //             content: "提交成功",
-        //             time: 2 //2秒关闭
-        //         });
+        //         layer.open({content: "提交成功",skin: 'msg',time: 2});
         //         $(".btn").hide();
         //     },
         //     error: function (data) {
-        //         alert("上传失败");
+        //         layer.open({content: "发送失败！请检查网络",skin: 'msg',time: 2});
         //         $(".btn").show();
         //     }
         // });

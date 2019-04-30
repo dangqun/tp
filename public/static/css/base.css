@@ -26,6 +26,4 @@ img{vertical-align:middle;font-size:0;border:0;-ms-interpolation-mode:bicubic}
 a,input,textarea{-webkit-tap-highlight-color:rgba(0,0,0,0);tap-highlight-color:rgba(0,0,0,0);outline:0}
 .ellipsis{text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}/*超出指定宽度隐藏*/
 
-/*layer中样式更改*/
-.layui-m-layerchild.layui-m-anim-scale{border:none; background-color:#e0431b; color:#fff;width:auto!important;}
-.layui-m-layercont{padding: 10px 20px!important;}
+body .layui-m-layer .layui-m-layer-msg{bottom: 0!important;}
