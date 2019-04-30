@@ -32,3 +32,6 @@ section{padding-top: 50px;}
 .images .from span:nth-of-type(2){position: relative;float: right;padding-left: 13px;}
 .images .from span:nth-of-type(2):before{content: "";display: block;height: 16px;width: 12px;position: absolute;left: 0;top:0;background: url(../image/index/yanjing.png) no-repeat center;background-size: 10px auto; }
 .images .from span:nth-of-type(2):after{content: "人";}
+
+.null{width: 100px;height: 130px;margin: 0 auto;padding: 100px 0;}
+.null img{width: 100%;}

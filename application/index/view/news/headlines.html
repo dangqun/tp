@@ -16,45 +16,101 @@
             <li><a>早 期</a></li>
         </ul>
         <div class="item">
-            <ul>
-                <li>
-                    <a href="article.html">
-                    <div class="images">
-                        <div class="infoTwo">
-                            <p class="titleLeft">这里是图文左右分布这里是图文左右分布这里是图文左右分布这里是图文左右分布</p>
-                            <div class="from">
-                                <span>2017年4月22日</span>
-                                <span>1000</span>
-                            </div>
-                        </div>
-                        <div class="infoTwo"><span class="img lazy" data-original="__IMG__/index/img_3.jpg"></span></div>
-                    </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                    <div class="images">
-                        <div class="infoTwo">
-                            <p class="titleLeft">这里是图文左右分布这里是图文左右分布这里是图文左右分布这里是图文左右分布</p>
-                            <div class="from">
-                                <span>2017年4月22日</span>
-                                <span>10000</span>
-                            </div>
-                        </div>
-                        <div class="infoTwo"><span class="img lazy" data-original="__IMG__/index/img_4.jpg"></span></div>
-                    </div>
-                    </a>
-                </li>
+            <ul class="list">
             </ul>
-
+            <ul class="list" style="display: none;"></ul>
+            <ul class="list" style="display: none;"></ul>
+            <ul class="list" style="display: none;"></ul>
+            <ul class="list" style="display: none;"></ul>
+            <ul class="null" style="display: none;"><img src="__IMG__/null.png"></ul>
         </div>
     </section>
 </body>
 {include file="layouts/foot"/}
 <script>
-$(".nav li").click(function(){
+
+    $(".nav li").click(function(){
         var e=$(this).index();
         $(".nav li").eq(e).addClass("cur").siblings().removeClass("cur");
+        $(".list").eq(e).show().siblings(".list").hide();
+        var url="",//对应的接口
+            flag=false;//判断不重复加载
+        if(e==0){
+            url='__PUBLIC__/json/manage.json';
+        }else if(e==1){
+            url='__PUBLIC__/json/manage.json';
+        }else if(e==2){
+            url='__PUBLIC__/json/manage.json';
+        }else if(e==3){
+            url='__PUBLIC__/json/manage.json';
+        }else if(e==4){
+            url='__PUBLIC__/json/manage.json';
+        }
+        var h=$(".list").eq(e).html();
+        if(h==""){
+            flag=true;
+            tabs(e,url,flag);
+        }else{
+            $(".null").hide();
+        }
     });
+
+    tabs(0,'__PUBLIC__/json/manage.json',true);//初始加载
+    function tabs(index,url,flag) {
+        if(flag){
+            var loading="";
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'json',
+                beforeSend: function(){
+                    loading=layer.open({content: "加载中...",skin: 'msg'});
+                },
+                success: function (data) {
+                    layer.close(loading);
+                    if(data.code==200){
+                        var html = '';
+                        $.each(data.data,function(i,item){
+                            html += '<li>'
+                                + '<a href="'+item.url+'">'
+                                + '<div class="images">'
+                                + '<div class="infoTwo">'
+                                + '<p class="titleLeft">'+item.content+'</p>'
+                                + '<div class="from">'
+                                + '<span>'+item.time+'</span>'
+                                + '<span>'+item.num+'</span>'
+                                + '</div>'
+                                + '</div>'
+                                + '<div class="infoTwo"><span class="img lazy" data-original="'+item.img+'"></span></div>'
+                                + '</div>'
+                                + '</a>'
+                                + '</li>';
+                        });
+                    }else {
+                        layer.open({content: "获取数据失败",skin: 'msg',time: 2});
+                    }
+                    $('.list').eq(index).append(html);
+                    //图片懒加载
+                    $(".lazy").lazyload({
+                        placeholder : "",
+                        effect: "fadeIn",
+                        threshold : 200
+                    }).removeClass('lazy').addClass('lazyloaded');
+
+                    //判断是否有数据
+                    var h=$(".list").eq(index).html();
+                    if(h==""){
+                        $(".null").show();
+                    }else{
+                        $(".null").hide();
+                    }
+                },
+                error: function (xhr, type) {
+                    layer.open({content: "发送失败！请检查网络",skin: 'msg',time: 2});
+                }
+            });
+        }
+    }
+
 </script>
 </html>

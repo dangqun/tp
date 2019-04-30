@@ -15,24 +15,12 @@
             <li><a>已完成</a></li>
             <li><a>无 效</a></li>
         </ul>
-        <ul class="items clearfix list">
-            <!--<li>-->
-                <!--<a href="article.html">-->
-                    <!--<div class="infoOne"><span class="img lazy" data-original="__IMG__/index/img_1.jpg"></span></div>-->
-                    <!--<div class="text">-->
-                        <!--<p>中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队，是中国特色社会主义事业的领导核心</p>-->
-                        <!--<p>开始时间：2019年4月17日</p>-->
-                        <!--<p>结束时间：2019年4月30日</p>-->
-                        <!--<p>志愿服务</p>-->
-                    <!--</div>-->
-                <!--</a>-->
-            <!--</li>-->
-        </ul>
-        <div class="list" style="display: none;"></div>
-        <div class="list" style="display: none;">3</div>
-        <div class="list" style="display: none;">4</div>
-        <div class="list" style="display: none;">5</div>
-        <div class="null" style="display: none;"><img src="__IMG__/null.png"></div>
+        <ul class="items clearfix"></ul>
+        <ul class="items clearfix" style="display: none;"></ul>
+        <ul class="items clearfix" style="display: none;"></ul>
+        <ul class="items clearfix" style="display: none;"></ul>
+        <ul class="items clearfix" style="display: none;"></ul>
+        <ul class="null" style="display: none;"><img src="__IMG__/null.png"></ul>
     </section>
 </body>
 {include file="layouts/foot" /}
@@ -40,62 +28,81 @@
     $(".nav li").click(function(){
         var e=$(this).index();
         $(".nav li").eq(e).addClass("cur").siblings().removeClass("cur");
-        $(".list").eq(e).show().siblings(".list").hide();
-        var h=$(".list").eq(e).html();
+        $(".items").eq(e).show().siblings(".items").hide();
+        var url="",//对应的接口
+            flag=false;//判断不重复加载
+        if(e==0){
+            url='__PUBLIC__/json/manage.json';
+        }else if(e==1){
+            url='__PUBLIC__/json/manage.json';
+        }else if(e==2){
+            url='__PUBLIC__/json/manage.json';
+        }else if(e==3){
+            url='__PUBLIC__/json/manage.json';
+        }else if(e==4){
+            url='__PUBLIC__/json/manage.json';
+        }
+        var h=$(".items").eq(e).html();
         if(h==""){
-            $(".null").show()
+            flag=true;
+            tabs(e,url,flag);
         }else{
-            $(".null").hide()
+            $(".null").hide();
         }
     });
 
-    f(0);
-    function f(index) {
-        var loading="";
-        var i=index;
-        $.ajax({
-            type: 'POST',
-            url: '__PUBLIC__/json/manage.json',
-            data: '',
-            dataType: 'json',
-            beforeSend: function(){
-                loading=layer.open({type: 2,content: '加载中'});
-            },
-            success: function (data) {
-                if(data.code==200){
+    tabs(0,'__PUBLIC__/json/manage.json',true);//初始加载
+    function tabs(index,url,flag) {
+        if(flag){
+            var loading="";
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'json',
+                beforeSend: function(){
+                    loading=layer.open({content: "加载中...",skin: 'msg'});
+                },
+                success: function (data) {
+                    layer.close(loading);
+                    if(data.code==200){
+                        var html = '';
+                        $.each(data.data,function(i,item){
+                            html += '<li>'
+                                + '<a href="'+item.url+'">'
+                                + '<div class="infoOne"><span class="img lazy" data-original="'+item.img+'"></span></div>'
+                                + '<div class="text">'
+                                + '<p>'+item.title+'</p>'
+                                + '<p>开始时间：'+item.beginTime+'</p>'
+                                + '<p>结束时间：'+item.endTime+'</p>'
+                                + '<p>'+item.type+'</p>'
+                                + '</div>'
+                                + '</a>'
+                                + '</li>';
+                        });
+                    }else {
+                        layer.open({content: "获取数据失败",skin: 'msg',time: 2});
+                    }
+                    $('.items').eq(index).append(html);
+                    //图片懒加载
+                    $(".lazy").lazyload({
+                        placeholder : "",
+                        effect: "fadeIn",
+                        threshold : 200
+                    }).removeClass('lazy').addClass('lazyloaded');
 
-                    $('.list').eq(i).empty();
-                    var html = '';
-                    $.each(data.data,function(i,item){
-                        html += '<li>'
-                            + '<a href="'+item.url+'">'
-                            + '<div class="infoOne"><span class="img lazy" data-original="'+item.img+'"></span></div>'
-                            + '<div class="text">'
-                            + '<p>'+item.title+'</p>'
-                            + '<p>开始时间：'+item.beginTime+'</p>'
-                            + '<p>结束时间：'+item.endTime+'</p>'
-                            + '<p>'+item.type+'</p>'
-                            + '</div>'
-                            + '</a>'
-                            + '</li>';
-                    });
-                }else {
-                    console.log("获取数据失败");
+                    //判断是否有数据
+                    var h=$(".items").eq(index).html();
+                    if(h==""){
+                        $(".null").show();
+                    }else{
+                        $(".null").hide();
+                    }
+                },
+                error: function (xhr, type) {
+                    layer.open({content: "发送失败！请检查网络",skin: 'msg',time: 2});
                 }
-                $('.list').eq(i).html(html);
-                layer.close(loading);
-                //图片懒加载
-                $(".lazy").lazyload({
-                    placeholder : "",
-                    effect: "fadeIn",
-                    threshold : 200
-                }).removeClass('lazy').addClass('lazyloaded');
-            },
-            error: function (xhr, type) {
-                layer.close(index);
-                console.log("交互失败");
-            }
-        });
+            });
+        }
     }
 
 </script>
