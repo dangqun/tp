@@ -15,13 +15,15 @@ header{width: 100%;height: 60px;background: url(../image/index/top.jpg) no-repea
 .swiper-pagination-bullet{background-color: #fff;opacity:.4;}
 .swiper-container .swiper-pagination-bullet-active{ background:#fff !important;opacity:1;}
 /*end-轮播图*/
+.infoOne{display: block;-webkit-margin-before: 0em;-webkit-margin-after: 0em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;}
+.infoOne .img{width: 100%;padding-top:50%;position: relative;display: block;background-size: cover;background-position: 50% 50%;background-color: #eee;}
 
 .headlines{height: 22px;background-color: #fff;padding: 3px 10px 3px 110px;color: #666;position: relative;font-size: 12px;}
 .headlines img{width: 65px;height:16px;position: absolute;left: 10px; top: 6px;}
 .headlines i{font-style: normal;width: 22px;height: 12px;border:1px #fdbe5f solid; position: absolute;left: 78px; top: 6px; text-align: center;color:#fdbe5f;line-height: 14px;border-radius: 2px;font-size: 10px;}
 .headlines a{line-height: 22px;display: block;color: #393939;}
 
-.swiper-container1 p{font-size: 10px;text-align: justify;color: #000;height: 18px;line-height: 18px;}
+.swiper-container1 p{font-size: 10px;text-align: justify;color: #000;height: 18px;line-height: 18px;padding: 0 2px;}
 .swiper-container1 p.bottom{color: #616161;height: 14px;}
 .swiper-container1 p.bottom span:nth-child(2){float:right;padding-left: 12px;position: relative;}
 .swiper-container1 p.bottom span:nth-child(2):before{content: "";display: block;height: 14px;width: 12px;position: absolute;left: 0;top:0;background: url(../image/index/yanjing.png) no-repeat center;background-size: 10px auto; }

@@ -19,7 +19,7 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             {volist name="slide" id="vo"}
-            <div class="swiper-slide" data-url="{$vo.url}"><img src="__PUBLIC__/{$vo.img}"></div>
+                <div class="swiper-slide infoOne" data-url="{$vo.url}"><span class="img" style='display: block; background-image: url("__PUBLIC__/{$vo.img}")'></span></div>
             {/volist}
         </div>
         <div class="swiper-pagination"></div>
@@ -36,22 +36,22 @@
             <div class="swiper-container1">
                 <div class="swiper-wrapper">
                     <a class="swiper-slide" href="{:Url('/index/news/showInfo',['id'=>'id'])}">
-                        <img src="__IMG__/index/img_2.jpg">
+                        <div class="infoOne"><span class="img lazy" data-original="__IMG__/index/img_1.jpg"></span></div>
                         <p class="ellipsis">同志们辛苦了，为人民服务</p>
                         <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
                     </a>
                     <a class="swiper-slide" href="{:Url('/index/news/showInfo')}">
-                        <img src="__IMG__/index/img_2.jpg">
+                        <div class="infoOne"><span class="img lazy" data-original="__IMG__/index/img_2.jpg"></span></div>
                         <p class="ellipsis">同志们辛苦了，为人民服务</p>
                         <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
                     </a>
                     <a class="swiper-slide" href="article">
-                        <img src="__IMG__/index/img_2.jpg">
+                        <div class="infoOne"><span class="img lazy" data-original="__IMG__/index/img_3.jpg"></span></div>
                         <p class="ellipsis">同志们辛苦了，为人民服务</p>
                         <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
                     </a>
                     <a class="swiper-slide" href="article">
-                        <img src="__IMG__/index/img_2.jpg">
+                        <div class="infoOne"><span class="img lazy" data-original="__IMG__/index/img_4.jpg"></span></div>
                         <p class="ellipsis">同志们辛苦了，为人民服务</p>
                         <p class="bottom"><span>2017年4月22日</span><span>1000</span></p>
                     </a>
@@ -94,7 +94,8 @@
         centeredSlides: true,
         autoplay: 2500,
         autoplayDisableOnInteraction: false,
-        loop: true
+        loop: true,
+        lazyLoading : true
     });
     var swiper = new Swiper('.swiper-container1', {
         slidesPerView: 2.4,
