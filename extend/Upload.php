@@ -81,10 +81,16 @@ trait Upload
         $this->imgPathChmode($up_dir);//设置文件夹和权限
         $imgName = md5(NOW_TIME."_dangqun_".rand(0,10000)).".".$type;//文件名
         $newFile = $up_dir . $imgName;//组合成完整路径
-        $this->isImgSize($img);exit;
+        $this->isImgSize($img);
         $base64Img = str_replace($result[1], '', $img);
         if (file_put_contents($newFile, base64_decode($base64Img))) {
-            $img_path = Request::instance()->domain()."/public/uploads/".$dir.'/'.$imgName;
+            $url = $this->isImgExits($newFile);
+            if($url !== true){//已存在相同图片，则删除
+                $img_path = Request::instance()->domain()."/public/".$url;
+                unlink($newFile);
+            }else{
+                $img_path = Request::instance()->domain()."/public/uploads/".$dir.'/'.$imgName;
+            }
             if($request->has('api')){//api参数存在，则返回JSON数据
                 $data = [
                     'code'=>200,
@@ -106,6 +112,29 @@ trait Upload
                 return '图片上传失败';
             }
         }
+    }
+
+    /**
+     * 判断图片是否存在
+     */
+    private function isImgExits($file){
+        if($file == null){
+            return true;
+        }
+        $dir = ROOT_PATH . 'public' . DS ;
+        $str = md5_file($file);//获取图片的MD5值
+        $info = \think\Db::name('img')->where('str',$str)->find();
+        if(empty($info)){
+            $data = [
+                'str'=>$str,
+                'path'=>str_replace($dir,'',$file),
+                'type'=>'md5',
+                'create_time'=>NOW_TIME
+            ];
+            \think\Db::name('img')->insert($data);
+            return true;
+        }
+        return $info['path'];
     }
 
     /**
